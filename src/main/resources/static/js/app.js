@@ -17,7 +17,7 @@ angular
     function ($routeProvider) {
       $routeProvider
         .when("/", {
-          templateUrl: "landing.html",
+          templateUrl: "/landing.html",
           /* resolve: {
             auth: function (AuthService) {
               return AuthService.Auth();
@@ -25,7 +25,7 @@ angular
           }, */
         })
         .when("/login", {
-          templateUrl: "login.html",
+          templateUrl: "/login.html",
           /* controller: "LoginCtrl",
           controllerAs: "ctrlLogin",
           resolve: {
