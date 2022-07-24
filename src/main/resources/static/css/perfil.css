@@ -1,0 +1,68 @@
+.container-fluid{
+    padding: 20px 30px;
+    min-height: calc(100vh - 180px);
+    width: 75%;
+    padding-right: var(--bs-gutter-x,15px);
+    padding-left: var(--bs-gutter-x,15px);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.rounded-circle{
+    border-radius: 50%!important;
+}
+
+img, svg{
+    vertical-align: middle;
+}
+
+.card .card-subtitle{
+    margin-bottom: 10px;
+    font-weight: 300;
+    color: #90a4ae;
+}
+
+.profiletimeline{
+    position: relative;
+    margin: 10px 10px 0 0px;
+    border-left: 1px solid #e9ecef;
+}
+
+.profiletimeline .sl-item{
+    margin-top: 8px;
+    display: flex;
+    margin-bottom: 30px;
+}
+.align-items-start{
+    align-items: flex-start!important;
+}
+
+.profiletimeline .sl-left img{
+    max-width: 40px;
+}
+
+.rounded-circle{
+    border-radius: 50%!important;
+}
+
+.nav-pills.custom-pills .nav-link.active{
+    color: #009efb;
+    background-color: transparent;
+    border-bottom: 2px solid #009efb;
+    opacity: 1;
+}
+
+a.link{
+    color: #54667a;
+}
+a{
+    text-decoration: none;
+    color: #009efb; 
+}
+
+.icon-people:before{
+    content: "\e001";
+}
+.icon-picture:before{
+    content: "\e032";
+}
