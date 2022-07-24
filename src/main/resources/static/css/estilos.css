@@ -128,7 +128,7 @@ header .textos-header a{
 }
 
 .jobseeker-area {
-   /* background-color: #d81b89;*/
+    background: linear-gradient(90deg,#048abf,#2cc1fc);
     box-sizing: border-box;
 }
 
@@ -630,4 +630,5 @@ h1, h2, h3, h4, h5, h6 {
         width: 300px;
     }
 }
+
 
