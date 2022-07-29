@@ -1,4 +1,4 @@
-/* const sign_in_btn = document.querySelector("#sign-in-btn");
+/*const sign_in_btn = document.querySelector("#sign-in-btn");
 const sign_up_btn = document.querySelector("#sign-up-btn");
 const container = document.querySelector(".container");
 
@@ -9,6 +9,7 @@ sign_up_btn.addEventListener("click", () => {
 sign_in_btn.addEventListener("click", () => {
   container.classList.remove("sign-up-mode");
 });
+
  */
 angular
   .module("routingApp", ["ngRoute", "ngSanitize"])
@@ -17,7 +18,7 @@ angular
     function ($routeProvider) {
       $routeProvider
         .when("/", {
-          templateUrl: "landing.html",
+          templateUrl: "/landing.html",
           /* resolve: {
             auth: function (AuthService) {
               return AuthService.Auth();
@@ -25,7 +26,7 @@ angular
           }, */
         })
         .when("/login", {
-          templateUrl: "login.html",
+          templateUrl: "/login.html",
           /* controller: "LoginCtrl",
           controllerAs: "ctrlLogin",
           resolve: {

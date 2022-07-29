@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Landing</title>
-  <link rel="stylesheet" href="./css/estilos.css">
+  <link rel="stylesheet" href="/src/main/resources/static/css/estilos.css">
 
-  <!--Angular js
+   <!--Angular js
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 
     <script
@@ -28,14 +27,13 @@
 
 <body>
   <div id="root">
-    <!-- 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
           aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <img src="./img/logoempleo.png" width="100px">
+        <img src="./static/img/logoempleo.png" width="100px">
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
@@ -70,127 +68,6 @@
         </div>
       </div>
     </nav>
-  -->
-
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <!-- Container wrapper -->
-      <div class="container">
-
-        <!-- Navbar brand -->
-        <a class="navbar-brand me-2" href="./landing.html">
-          <!--   <img src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.webp" height="16" alt="" loading="lazy"
-            style="margin-top: -1px;" />-->
-
-          <img src="./img/image 1.png" width="10%"><b>POETA</b>
-        </a>
-
-
-        <!-- Toggle button -->
-        <button class="navbar-toggler" type="button" (click)="buttonsNav.toggle()" aria-expanded="false"
-          aria-label="Toggle navigation">
-          <i class="fas fa-bars"></i>
-        </button>
-
-
-        <!-- Collapsible wrapper -->
-        <div class="collapse navbar-collapse" id="navbarButtonsExample" mdbCollapse #buttonsNav="mdbCollapse">
-          <!-- Left links -->
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-
-            <!--     
-               <nav class="navbar navbar-dark bg-dark navbar-expand-sm">
-              <a class="navbar-brand" href="#">
-                <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/logo_white.png" width="30" height="30" alt="logo">
-                BootstrapBay
-              </a>
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbar-list-4">
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="40" height="40" class="rounded-circle">
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                      <a class="dropdown-item" href="#">Dashboard</a>
-                      <a class="dropdown-item" href="#">Edit Profile</a>
-                      <a class="dropdown-item" href="#">Log Out</a>
-                    </div>
-                  </li>   
-                </ul>
-              </div>
-            </nav> 
-           -->
-
-
-          </ul>
-
-
-          <!-- Left links -->
-
-          <div class="d-flex align-items-center">
-            <button type="button" class="btn btn-primary px-3 me-2">
-              Ingresar
-            </button>
-            <button type="button" class="btn btn-warning me-3">
-              Registrarme </button>
-          </div>
-
-          <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Buscar</button>
-          </form>
-          <div class="dropdown">
-
-            <img id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"
-              src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="40"
-              height="40" class="rounded-circle">
-
-
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <div class="user-dd animated flipInY show " data-bs-popper="none" style="width: 300px; height: 200px;">
-                <div class="d-flex align-items-center p-3 bg-info text-white">
-                  <div class="">
-                    <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg"
-                      alt="user" class="rounded-circle" width="40">
-                  </div>
-                  <div class="ms-2">
-                    <h4 class="mb-0 text-white">Foxy Alviter</h4>
-                    <p class="mb-0">angeelu23@gmail.com</p>
-                  </div>
-                </div>
-                <a class="dropdown-item" href="#"> <i class="fa-solid fa-xmark">Mi Perfil</i></a>
-
-                <div class="dropdown-divider"></div>
-                <i class="fa-solid fa-facebook"></i>
-                <a class="dropdown-item" href="#">Salir</a>
-              </div>
-            </ul>
-          </div>
-        </div>
-        <!-- Collapsible wrapper -->
-
-      </div>
-
-      <!--Container wrapper -->
-
-
-    </nav>
-    <!-- Navbar -->
     <header>
       <div class="contenido">
         <div class="textos-header">
@@ -200,8 +77,8 @@
         </div>
         <div class="imagen-header">
           <div class="animation-2"></div>
-          <img src="img/img-header.png" alt="" class="moveimage">
-
+          <img src="recursos/img-header.png" alt="" class="moveimage">
+         
         </div>
       </div>
       <!-- <div class="absolute"></div> -->
@@ -247,9 +124,9 @@
         </div>
         <div _ngcontent-srn-c17="" class="row">
           <div _ngcontent-srn-c17="" class="col-sm-4 col-lg-3">
-            <div _ngcontent-srn-c17="" data-wow-delay=".3s" class="category-item wow fadeInUp animated animated"><i
-                _ngcontent-srn-c17="" class="fa-solid fa-headset"></i><a _ngcontent-srn-c17="" routerlink="/"
-                ng-reflect-router-link="/" href="/">Soporte Técnico en Plataformas</a></div>
+            <div _ngcontent-srn-c17="" data-wow-delay=".3s" class="category-item wow fadeInUp animated animated"><i _ngcontent-srn-c17=""
+                class="fa-solid fa-headset"></i><a _ngcontent-srn-c17="" routerlink="/" ng-reflect-router-link="/"
+                href="/">Soporte Técnico en Plataformas</a></div>
           </div>
           <div _ngcontent-srn-c17="" class="col-sm-4 col-lg-3">
             <div _ngcontent-srn-c17="" data-wow-delay=".4s"
@@ -283,15 +160,15 @@
             <div _ngcontent-srn-c17="" data-wow-delay=".3s"
               class="category-item category-six wow fadeInUp animated animated"
               style="visibility: visible; animation-delay: 0.3s;"><i _ngcontent-srn-c17=""
-                class="fa-solid fa-chalkboard-user"></i><a _ngcontent-srn-c17="" routerlink="/"
-                ng-reflect-router-link="/" href="/">Director de Gestión de Proyectos</a></div>
+                class="fa-solid fa-chalkboard-user"></i><a _ngcontent-srn-c17="" routerlink="/" ng-reflect-router-link="/"
+                href="/">Director de Gestión de Proyectos</a></div>
           </div>
           <div _ngcontent-srn-c17="" class="col-sm-4 col-lg-3">
             <div _ngcontent-srn-c17="" data-wow-delay=".4s"
               class="category-item category-seven wow fadeInUp animated animated"
               style="visibility: visible; animation-delay: 0.4s;"><i _ngcontent-srn-c17=""
-                class="fa-solid fa-diagram-project"></i><a _ngcontent-srn-c17="" routerlink="/"
-                ng-reflect-router-link="/" href="/">IT &amp; Networing Sevicios</a></div>
+                class="fa-solid fa-diagram-project"></i><a _ngcontent-srn-c17="" routerlink="/" ng-reflect-router-link="/"
+                href="/">IT &amp; Networing Sevicios</a></div>
           </div>
           <div _ngcontent-srn-c17="" class="col-sm-4 col-lg-3">
             <div _ngcontent-srn-c17="" data-wow-delay=".5s"
@@ -311,8 +188,8 @@
             <div _ngcontent-srn-c17="" data-wow-delay=".7s"
               class="category-item category-ten wow fadeInUp animated animated"
               style="visibility: visible; animation-delay: 0.7s;"><i _ngcontent-srn-c17=""
-                class="fa-solid fa-magnifying-glass-chart"></i><a _ngcontent-srn-c17="" routerlink="/"
-                ng-reflect-router-link="/" href="/">Gestor y Análista de Datos</a>
+                class="fa-solid fa-magnifying-glass-chart"></i><a _ngcontent-srn-c17="" routerlink="/" ng-reflect-router-link="/"
+                href="/">Gestor y Análista de Datos</a>
             </div>
           </div>
         </div>
@@ -321,7 +198,7 @@
     <section _ngcontent-tln-c17="" class="job-area pt-100 pb-70">
       <div _ngcontent-tln-c17="" class="container">
         <div _ngcontent-tln-c17="" class="section-title">
-          <h2 _ngcontent-tln-c17="">Más solicitados</h2>
+          <h2 _ngcontent-tln-c17="" >Más solicitados</h2>
         </div>
         <div _ngcontent-tln-c17="" class="sorting-menu">
           <ul _ngcontent-tln-c17="">
@@ -334,13 +211,12 @@
         <div _ngcontent-tln-c17="" id="container">
           <div _ngcontent-tln-c17="" class="row">
             <div _ngcontent-tln-c17="" class="col-lg-6 mix web ui">
-              <div _ngcontent-tln-c17="" class="job-item"><img _ngcontent-tln-c17="" src="img/deve.jpg" width="40px"
-                  alt="Job">
+              <div _ngcontent-tln-c17="" class="job-item"><img _ngcontent-tln-c17=""
+                  src="recursos/deve.jpg" width="40px" alt="Job">
                 <div _ngcontent-tln-c17="" class="job-inner align-items-center">
                   <div _ngcontent-tln-c17="" class="job-inner-left">
-                    <h3 _ngcontent-tln-c17=""> Diseñador UI/UX</h3><a _ngcontent-tln-c17=""
-                      routerlink="/company-details" ng-reflect-router-link="/company-details"
-                      href="/company-details">Winbrans.com</a>
+                    <h3 _ngcontent-tln-c17=""> Diseñador UI/UX</h3><a _ngcontent-tln-c17="" routerlink="/company-details"
+                      ng-reflect-router-link="/company-details" href="/company-details">Winbrans.com</a>
                     <ul _ngcontent-tln-c17="">
                       <li _ngcontent-tln-c17=""><i _ngcontent-tln-c17="" class="icofont-money-bag"></i> $20k - $25k</li>
                       <li _ngcontent-tln-c17=""><i _ngcontent-tln-c17="" class="icofont-location-pin"></i> Ubicación
@@ -359,7 +235,7 @@
             </div>
             <div _ngcontent-tln-c17="" class="col-lg-6 mix ui web">
               <div _ngcontent-tln-c17="" class="job-item"><img _ngcontent-tln-c17=""
-                  src="./img/Republica-Dominicana (1).png" width="40px" alt="Job">
+                src="./img/Republica-Dominicana (1).png" width="40px" alt="Job">
                 <div _ngcontent-tln-c17="" class="job-inner align-items-center">
                   <div _ngcontent-tln-c17="" class="job-inner-left">
                     <h3 _ngcontent-tln-c17="">Desarrollador Android</h3><a _ngcontent-tln-c17=""
@@ -383,7 +259,7 @@
             </div>
             <div _ngcontent-tln-c17="" class="col-lg-6 mix branding wp">
               <div _ngcontent-tln-c17="" class="job-item"><img _ngcontent-tln-c17=""
-                  src="img/Republica-Dominicana (1).png" alt="Job" width="40px">
+                src="recursos/Republica-Dominicana (1).png" alt="Job" width="40px">
                 <div _ngcontent-tln-c17="" class="job-inner align-items-center">
                   <div _ngcontent-tln-c17="" class="job-inner-left">
                     <h3 _ngcontent-tln-c17="">Manager</h3><a _ngcontent-tln-c17="" routerlink="/company-details"
@@ -406,11 +282,12 @@
             </div>
             <div _ngcontent-tln-c17="" class="col-lg-6 mix ux branding">
               <div _ngcontent-tln-c17="" class="job-item"><img _ngcontent-tln-c17=""
-                  src="img/Republica-Dominicana (1).png" alt="Job" width="40px">
+                src="recursos/Republica-Dominicana (1).png" alt="Job" width="40px">
                 <div _ngcontent-tln-c17="" class="job-inner align-items-center">
                   <div _ngcontent-tln-c17="" class="job-inner-left">
-                    <h3 _ngcontent-tln-c17="">Scrum Master</h3><a _ngcontent-tln-c17="" routerlink="/company-details"
-                      ng-reflect-router-link="/company-details" href="/company-details">Bizotic.com</a>
+                    <h3 _ngcontent-tln-c17="">Scrum Master</h3><a _ngcontent-tln-c17=""
+                      routerlink="/company-details" ng-reflect-router-link="/company-details"
+                      href="/company-details">Bizotic.com</a>
                     <ul _ngcontent-tln-c17="">
                       <li _ngcontent-tln-c17=""><i _ngcontent-tln-c17="" class="icofont-money-bag"></i> $20k - $25k</li>
                       <li _ngcontent-tln-c17=""><i _ngcontent-tln-c17="" class="icofont-location-pin"></i> Ubicación
@@ -440,24 +317,22 @@
         </div>
         <div _ngcontent-geu-c17="" class="row account-wrap">
           <div _ngcontent-geu-c17="" class="col-sm-6 col-lg-4">
-            <div _ngcontent-geu-c17="" class="account-item"><i _ngcontent-geu-c17="" class="fa-solid fa-user"></i><span
-                _ngcontent-geu-c17="">Registra tu Cuenta</span></div>
+            <div _ngcontent-geu-c17="" class="account-item"><i _ngcontent-geu-c17=""
+                class="fa-solid fa-user"></i><span _ngcontent-geu-c17="">Registra tu Cuenta</span></div>
           </div>
           <div _ngcontent-geu-c17="" class="col-sm-6 col-lg-4">
             <div _ngcontent-geu-c17="" class="account-item"><i _ngcontent-geu-c17=""
-                class="fa-solid fa-user-group"></i><span _ngcontent-geu-c17="">Contacta con amigos y conocidos</span>
-            </div>
+                class="fa-solid fa-user-group"></i><span _ngcontent-geu-c17="">Contacta con amigos y conocidos</span></div>
           </div>
           <div _ngcontent-geu-c17="" class="col-sm-6 offset-sm-3 offset-lg-0 col-lg-4">
             <div _ngcontent-geu-c17="" class="account-item account-last"><i _ngcontent-geu-c17=""
-                class="fa-solid fa-star"></i><span _ngcontent-geu-c17="">Aplicar por el trabajo de tus sueños</span>
-            </div>
+                class="fa-solid fa-star"></i><span _ngcontent-geu-c17="">Aplicar por el trabajo de tus sueños</span></div>
           </div>
         </div>
         <div _ngcontent-geu-c17="" class="banner-btn"><a _ngcontent-geu-c17="" routerlink="/create-account"
-            ng-reflect-router-link="/create-account" href="/create-account">Crea Tu Perfil</a><a _ngcontent-geu-c17=""
-            routerlink="/submit-resume" ng-reflect-router-link="/submit-resume" href="/submit-resume">Carga tu CV</a>
-        </div>
+            ng-reflect-router-link="/create-account" href="/create-account">Crea Tu Perfil</a><a
+            _ngcontent-geu-c17="" routerlink="/submit-resume" ng-reflect-router-link="/submit-resume"
+            href="/submit-resume">Carga tu CV</a></div>
       </div>
     </div>
 
@@ -466,7 +341,7 @@
       <div class="container">
         <div class="row">
           <div class="col-6">
-            <h3 class="mb-3">Empresas más Populares </h3>
+            <h3 class="mb-3" >Empresas más Populares </h3>
           </div>
           <div class="col-6 text-right">
 
@@ -480,11 +355,10 @@
 
                     <div class="col-md-4 mb-3">
                       <div class="card">
-                        <img class="img-fluid" alt="100%x280" src="img/intel.webp">
+                        <img class="img-fluid" alt="100%x280" src="recursos/intel.webp">
                         <div class="card-body">
                           <h4 class="card-title">Un Salto al Futuro</h4>
-                          <p class="card-text">En Intel disfrutamos lo que hacemos. Revolucionamos el mundo con nuestro
-                            ingenio creativo.
+                          <p class="card-text">En Intel disfrutamos lo que hacemos. Revolucionamos el mundo con nuestro ingenio creativo. 
                             ¿Quieres ser parte del cambio?
                           </p>
 
@@ -494,12 +368,11 @@
                     </div>
                     <div class="col-md-4 mb-3">
                       <div class="card">
-                        <img class="img-fluid" alt="100%x280" src="img/Resize_amazon.webp">
+                        <img class="img-fluid" alt="100%x280" src="recursos/Resize_amazon.webp">
                         <div class="card-body">
                           <h4 class="card-title">Ser la compañía más centrada en el cliente del mundo</h4>
-                          <p class="card-text">Para la mayoría de puestos de trabajo, empezamos el proceso con una
-                            entrevista telefónica.
-
+                          <p class="card-text">Para la mayoría de puestos de trabajo, empezamos el proceso con una entrevista telefónica. 
+                            
                           </p>
 
                         </div>
@@ -507,11 +380,10 @@
                     </div>
                     <div class="col-md-4 mb-3">
                       <div class="card">
-                        <img class="img-fluid" alt="100%x280" src="img/goole.png">
+                        <img class="img-fluid" alt="100%x280" src="recursos/goole.png">
                         <div class="card-body">
                           <h4 class="card-title">Don't be Evil</h4>
-                          <p class="card-text">La compañía Google Inc, ofrece a sus trabajadores una serie de beneficios
-                            y ventajas muy llamativas
+                          <p class="card-text">La compañía Google Inc, ofrece a sus trabajadores una serie de beneficios y ventajas muy llamativas 
                             además de las habituales en una gran empresa
                           </p>
 
@@ -542,7 +414,7 @@
             <!-- Instagram -->
             <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
                 class="fab fa-instagram"></i></a>
-
+            
           </section>
           <!-- Section: Social media -->
 
@@ -586,8 +458,7 @@
           <!-- Section: Text -->
           <section class="mb-4">
             <p>
-              Este producto está protegido por derechos de autor y se distribuye bajo licencias que restringen la copia,
-              distribución y descompilación.
+              Este producto está protegido por derechos de autor y se distribuye bajo licencias que restringen la copia, distribución y descompilación.
             </p>
           </section>
           <!-- Section: Text -->
