@@ -1,7 +1,14 @@
 package mx.edu.utez.poeta.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,7 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import mx.edu.utez.poeta.entity.User;
 import mx.edu.utez.poeta.service.UserService;
@@ -48,5 +57,22 @@ public class UserController {
     @PostMapping(value = "/logout")
     public ResponseEntity<?> logout(@RequestBody User user) {
         return userService.createTokenAuthentication(user);
+    }
+
+    @PostMapping("/upload/picture")
+    public boolean handleFileUpload(@RequestParam("file") MultipartFile file) {
+        String separator = FileSystems.getDefault().getSeparator();
+        String fileName = UUID.randomUUID().toString();
+        String ext = FilenameUtils.getExtension(file.getOriginalFilename());
+        Map<String, Object> data = new HashMap<>();
+        data.put("name", fileName + "." + ext);
+        try {
+            String userDirectory = FileSystems.getDefault().getPath("").toAbsolutePath().toString();
+            file.transferTo(new File(userDirectory + "\\src\\main\\resources\\static\\uploads\\" + separator + "profilePics" + separator + fileName + "." + ext));
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

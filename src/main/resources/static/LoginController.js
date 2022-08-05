@@ -80,11 +80,43 @@ angular.module("routingApp").controller("LoginCtrl", [
             password: null,
         };
 
-        $(document).ready(function() {
+        $scope.register = {
+            username: null,
+            password: null,
+            passwordConfirm: null,
+            name: null,
+            lastname: null,
+            surname: null,
+            image: null,
+            city: null,
+            phone: null,
+            birthDate: null,
+            gender: null,
+        }
+
+        $(document).ready(function () {
             $scope.isRegister = false;
         })
 
         this.changeRegisterMode = () => {
+            $scope.user = {
+                username: null,
+                password: null,
+            };
+
+            $scope.register = {
+                username: null,
+                password: null,
+                passwordConfirm: null,
+                name: null,
+                lastname: null,
+                surname: null,
+                image: null,
+                city: null,
+                phone: null,
+                birthDate: null,
+                gender: null,
+            }
             $scope.isRegister = !$scope.isRegister;
         }
 
@@ -115,9 +147,23 @@ angular.module("routingApp").controller("LoginCtrl", [
 
         this.decodeToken = (token) => {
             var base64Url = token.split(".")[1];
-            var base64 = base64Url.replace("-","+").replace("_","/");
+            var base64 = base64Url.replace("-", "+").replace("_", "/");
             return JSON.parse($window.atob(base64));
         }
+
+        this.uploadProfilePic = async () => {
+            let picture = document.getElementById("picture").files[0];
+            var formData = new FormData();
+            if (picture) {
+                formData.append("file", picture);
+                let res = await fetch(`${APP_URL.url}/user/upload/picture`, {
+                    method: "POST",
+                    body: formData,
+                });
+                const data = await res.json();
+                console.log(data);
+            }
+        };
 
     }
 ])

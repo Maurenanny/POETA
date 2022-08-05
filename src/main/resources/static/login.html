@@ -145,30 +145,34 @@
     <div class="col-12">
       <div class="card mt-3 mx-auto" style="width: 400px;">
         <div class="card-body">
-          <h2 class="text-center">Iniciar Sesión</h2><hr>
+          <h2 class="text-center">Iniciar Sesión</h2>
+          <hr>
           <form class="needs-validation" novalidate>
             <div class="col-12">
               <label for="usuario" class="form-label">Correo Electrónico</label>
-              <input autocomplete="off" required ng-model="user.username" type="email" class="form-control" name="usuario" placeholder="Usuario">
+              <input autocomplete="off" required ng-model="user.username" type="email" class="form-control"
+                name="usuario" placeholder="Usuario">
               <div class="invalid-feedback">
                 Rellene el campo
               </div>
             </div>
             <div class="col-12 mt-3">
               <label for="password" class="form-label">Contraseña</label>
-              <input autocomplete="off" required ng-model="user.password" type="password" class="form-control" name="password" placeholder="********">
+              <input autocomplete="off" required ng-model="user.password" type="password" class="form-control"
+                name="password" placeholder="********">
               <div class="invalid-feedback">
                 Rellene el campo
               </div>
             </div>
             <center>
-            <div class="col-12">
-                <button id="registrar" type="button" class="btn btn-primary mt-3" ng-click="ctrlLogin.beforeLogin()">Ingresar</button>
-            </div>
-            <div class="col-12 mt-3">
-              <a href="#!/login" ng-click="ctrlLogin.changeRegisterMode()">Registrar Nueva Cuenta</a>
-            </div>
-          </center>
+              <div class="col-12">
+                <button id="registrar" type="button" class="btn btn-primary mt-3"
+                  ng-click="ctrlLogin.beforeLogin()">Ingresar</button>
+              </div>
+              <div class="col-12 mt-3">
+                <a href="#!/login" ng-click="ctrlLogin.changeRegisterMode()">Registrar Nueva Cuenta</a>
+              </div>
+            </center>
           </form>
         </div>
       </div>
@@ -179,30 +183,78 @@
 <div class="container-fluid" ng-if="isRegister">
   <div class="row">
     <div class="col-12">
-      <div class="card mt-3 mx-auto" style="width: 400px;">
+      <div class="card mt-3 mx-auto" style="width: 700px;">
         <div class="card-body">
-          <h2 class="text-center">Crear Nueva Cuenta</h2><hr>
+          <h2 class="text-center">Crear Nueva Cuenta</h2>
+          <hr>
           <form class="needs-validation" novalidate>
-            <div class="col-12">
-              <label for="usuario" class="form-label">Correo Electrónico</label>
-              <input autocomplete="off" required ng-model="user.username" type="email" class="form-control" name="usuario" placeholder="Usuario">
-              <div class="invalid-feedback">
-                Rellene el campo
+            <div class="col-12 row">
+              <div class="col-4 mb-3">
+                <label for="name" class="form-label">Nombre</label>
+                <input autocomplete="off" required ng-model="register.name" type="text" class="form-control" name="name"
+                  placeholder="Nombre" minlength="3" maxlength="100">
+                <div class="invalid-feedback">
+                  Campo Obligatorio
+                </div>
               </div>
-            </div>
-            <div class="col-12 mt-3">
-              <label for="password" class="form-label">Contraseña</label>
-              <input autocomplete="off" required ng-model="user.password" type="password" class="form-control" name="password" placeholder="********">
-              <div class="invalid-feedback">
-                Rellene el campo
+              <div class="col-4 mb-3">
+                <label for="lastname" class="form-label">Primer Apellido</label>
+                <input autocomplete="off" required ng-model="register.lastname" type="text" class="form-control"
+                  name="lastname" placeholder="Primer Apellido" minlength="3" maxlength="100">
+                <div class="invalid-feedback">
+                  Campo Obligatorio
+                </div>
+              </div>
+              <div class="col-4 mb-3">
+                <label for="surname" class="form-label">Segundo Apellido</label>
+                <input autocomplete="off" required ng-model="register.surname" type="text" class="form-control"
+                  name="surname" placeholder="Segundo Apellido" minlength="3" maxlength="100">
+                <div class="invalid-feedback">
+                  Campo Obligatorio
+                </div>
+              </div>
+              <div class="col-4 mb-3">
+                <label class="form-label">Sexo</label>
+                <br>
+                <input type="radio" name="genderFIn" ng-model="register.gender" name="gender" value="0" required id="genderFIn">
+                <label for="genderFIn">Mujer</label>
+                <input type="radio" name="genderMIn" ng-model="register.gender" name="gender" value="1" required id="genderMIn">
+                <label for="genderMIn">Hombre</label>
+                <div class="invalid-feedback">
+                  Campo Obligatorio
+                </div>
+              </div>
+              <div class="col-4 mb-3">
+                <label for="birth" class="form-label">Fecha de Nacimiento</label>
+                <input type="date" name="birth" id="birth" required ng-model="register.birthDate" class="form-control">
+                <div class="invalid-feedback">
+                  Campo Obligatorio
+                </div>
+              </div>
+              <div class="col-12">
+                <label for="usuario" class="form-label">Correo Electrónico</label>
+                <input autocomplete="off" required ng-model="user.username" type="email" class="form-control"
+                  name="usuario" placeholder="Usuario">
+                <div class="invalid-feedback">
+                  Rellene el campo
+                </div>
+              </div>
+              <div class="col-12 mt-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <input autocomplete="off" required ng-model="user.password" type="password" class="form-control"
+                  name="password" placeholder="********">
+                <div class="invalid-feedback">
+                  Rellene el campo
+                </div>
               </div>
             </div>
             <center>
               <div class="col-12">
-                  <button id="registrar" type="submit" class="btn btn-primary mt-3" ng-click="ctrlLogin.beforeLogin()">Ingresar</button>
+                <button id="registrar" type="submit" class="btn btn-primary mt-3"
+                  ng-click="ctrlLogin.beforeLogin()">Ingresar</button>
               </div>
               <div class="col-12 mt-3">
-                <a href="#!/login" ng-click="ctrlLogin.changeRegisterMode()">Registrar Nueva Cuenta</a>
+                <a href="#!/login" ng-click="ctrlLogin.changeRegisterMode()">Iniciar Sesión</a>
               </div>
             </center>
           </form>
