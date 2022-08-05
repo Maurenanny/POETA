@@ -1,4 +1,4 @@
-package mx.edu.utez.poeta.security;
+/* package mx.edu.utez.poeta.security;
 
 import javax.sql.DataSource;
 
@@ -30,11 +30,19 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
         .authorizeRequests()
-        .antMatchers("/").permitAll() //Vista de inicio URL
+        .antMatchers("/").permitAll()
+        .antMatchers("/testV").permitAll() //Vista de inicio URL
+        .antMatchers("/test.html").permitAll()
         .antMatchers("/landing.html").permitAll() //Vista de inicio html
+        .antMatchers("/login.html").permitAll()
+        .antMatchers("/login").permitAll()
         .antMatchers("/css/**").permitAll()
         .antMatchers("/js/**").permitAll()
         .antMatchers("/img/**").permitAll()
+        .antMatchers("/view/**").permitAll()
+        .antMatchers("/postulant/cv/test").permitAll()
+        .antMatchers("/perfil").permitAll()
+        .antMatchers("/LoginController.js").permitAll()
         .anyRequest().authenticated()
         .and()
         .formLogin()
@@ -45,4 +53,4 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").permitAll();
     }
     
-}
+} */
