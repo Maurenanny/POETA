@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
     <link href="./css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="./css/all.min.css" />
     <link rel="stylesheet" href="./css/all.css" />
@@ -111,7 +111,6 @@
                         src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg"
                         width="40" height="40" class="rounded-circle">
 
-
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <div class="user-dd animated flipInY show " data-bs-popper="none"
                             style="width: 300px; height: 200px;">
@@ -125,10 +124,9 @@
                                     <p class="mb-0">angeelu23@gmail.com</p>
                                 </div>
                             </div>
-                            <a class="dropdown-item" href="#"> <i class="fa-solid fa-xmark">Mi Perfil</i></a>
+                            <a class="dropdown-item" href="#">Mi Perfil</a>
 
                             <div class="dropdown-divider"></div>
-                            <i class="fa-solid fa-facebook"></i>
                             <a class="dropdown-item" href="#">Salir</a>
                         </div>
                     </ul>
@@ -155,9 +153,15 @@
                         <center class="mt-4">
                             <img src="https://demos.wrappixel.com/premium-admin-templates/bootstrap/monster-bootstrap/package/assets/images/users/5.jpg"
                                 class="rounded-circle" width="150">
-                            <h4 class="card-title mt-2">Jesús Cabrera</h4>
-                            <button style="background-color: #128cbe; color: #fff; border-radius: 10px;" class="btn"><i
-                                    class="fa-solid fa-file-pdf"></i> Generar CV</button>
+                            <h4 class="card-title mt-2">Angiies</h4>
+                            <button
+                                style="background: linear-gradient(174deg,#048abf,#2cc1fc); color: #fff; border-radius: 10px;"
+                                class="btn"><i class="fa-solid fa-file-pdf"></i> Generar CV</button>
+                            <button onclick="prueba()"
+                                style="background: linear-gradient(174deg,#048abf,#2cc1fc); color: #fff; border-radius: 10px;"
+                                class="btn"><i class="fa-solid fa-file-pdf"></i> Cargar CV</button>
+                        </center>
+
                         </center>
                     </div>
                     <div>
@@ -268,6 +272,27 @@
 
                                         <div class="sl-left col-md-8">
                                             <h2 style="">Habilidades:</h2>
+                                            <ul>
+                                                <li>Páginas web</li>
+                                                <li>Trabajo en equipo</li>
+                                                <li>Coolaboración</li>
+                                            </ul>
+                                        </div>
+                                        <div class="sl-right col-md-4 ">
+                                            <img style="width: 50%;" src="./img/cursoo.png" class="img-fluid rounded">
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                </div>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="profiletimeline ">
+                                    <div class="sl-item d-flex align-items-start">
+
+                                        <div class="sl-left col-md-8">
+                                            <h2 style="">Experiencia laboral:</h2>
                                             <ul>
                                                 <li>Páginas web</li>
                                                 <li>Trabajo en equipo</li>
@@ -795,86 +820,89 @@
                                     </div>
                                 </div>
                         </div>
-                      
 
-                    
+
+
                     </div>
                     </section>
                 </div>
             </div>
         </div>
-            <!--Modal de editar-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header" style="background-color: #128cbe;">
-                    <h5 class="modal-title" id="exampleModalLabel">Editar Datos </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Nombre:</label>
-                            <input type="text" class="form-control" id="recipient-name">
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-lastname" class="col-form-label">Apellido Paterno:</label>
-                            <input type="text" class="form-control" id="lastname">
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-surname" class="col-form-label">Apellido Materno:</label>
-                            <input type="text" class="form-control" id="surname">
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-email" class="col-form-label">Correo:</label>
-                            <input type="email" class="form-control" id="email">
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-phone" class="col-form-label">Teléfono:</label>
-                            <input type="text" class="form-control" id="phone">
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-estados" class="col-form-label">Estado de la república:</label>
-                            <br>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Seleccionar</option>
-                                <option value="Aguascalientes">Aguascalientes</option>
-                                <option value="Baja California">Baja California</option>
-                                <option value="Baja California Sur">Baja California Sur</option>
-                                <option value="Campeche">Campeche</option>
-                                <option value="Coahuila de Zaragoza">Coahuila de Zaragoza</option>
-                            </select>
+        <!--Modal de editar-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #128cbe;">
+                        <h5 class="modal-title" id="exampleModalLabel">Editar Datos </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="recipient-name" class="col-form-label">Nombre:</label>
+                                <input type="text" class="form-control" id="recipient-name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-lastname" class="col-form-label">Apellido Paterno:</label>
+                                <input type="text" class="form-control" id="lastname">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-surname" class="col-form-label">Apellido Materno:</label>
+                                <input type="text" class="form-control" id="surname">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-email" class="col-form-label">Correo:</label>
+                                <input type="email" class="form-control" id="email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-phone" class="col-form-label">Teléfono:</label>
+                                <input type="text" class="form-control" id="phone">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-estados" class="col-form-label">Estado de la república:</label>
+                                <br>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Seleccionar</option>
+                                    <option value="Aguascalientes">Aguascalientes</option>
+                                    <option value="Baja California">Baja California</option>
+                                    <option value="Baja California Sur">Baja California Sur</option>
+                                    <option value="Campeche">Campeche</option>
+                                    <option value="Coahuila de Zaragoza">Coahuila de Zaragoza</option>
+                                </select>
 
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-birthday" class="col-form-label">Fecha de nacimiento:</label>
-                            <input type="date" class="form-control" id="birthday">
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-study" class="col-form-label">Estudios:</label>
-                            <input type="text" class="form-control" id="recipient-study">
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-language" class="col-form-label">Idiomas:</label>
-                            <input type="text" class="form-control" id="recipient-language">
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-course" class="col-form-label">Cursos:</label>
-                            <input type="text" class="form-control" id="recipient-course">
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-skill" class="col-form-label">Habilidades:</label>
-                            <input type="text" class="form-control" id="recipient-skill">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" style="background-color: #128cbe; color: #fff;" class="btn">Guardar</button>
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-birthday" class="col-form-label">Fecha de nacimiento:</label>
+                                <input type="date" class="form-control" id="birthday">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-study" class="col-form-label">Estudios:</label>
+                                <input type="text" class="form-control" id="recipient-study">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-language" class="col-form-label">Idiomas:</label>
+                                <input type="text" class="form-control" id="recipient-language">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-course" class="col-form-label">Cursos:</label>
+                                <input type="text" class="form-control" id="recipient-course">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-skill" class="col-form-label">Habilidades:</label>
+                                <input type="text" class="form-control" id="recipient-skill">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" style="background-color: #128cbe; color: #fff;"
+                            class="btn">Guardar</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+
     </div>
     <!-- Column -->
 
@@ -892,6 +920,55 @@
     <script src="./js/angular-locale_es-es.js"></script>
     <script src="./js/jquery.min.js"></script>
 
+    <!-- Para las Sweet Alrt-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.24/dist/sweetalert2.all.min.js"></script>
+   
+
+    <script>
+        function prueba(){
+            const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                swalWithBootstrapButtons.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+            } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    'Your imaginary file is safe :)',
+                    'error'
+                )
+            }
+        })
+        }
+    </script>
+
+
 </body>
+
+
+
+
+
 
 </html>

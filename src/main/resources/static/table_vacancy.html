@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Vacantes</title>
     <link href="https://unpkg.com/bootstrap-table@1.20.2/dist/bootstrap-table.min.css" rel="stylesheet">
     <link href="./css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="./css/all.min.css" />
@@ -122,26 +122,24 @@
                         width="40" height="40" class="rounded-circle">
 
 
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <div class="user-dd animated flipInY show " data-bs-popper="none"
-                            style="width: 300px; height: 200px;">
-                            <div class="d-flex align-items-center p-3 bg-info text-white">
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <div class="user-dd animated flipInY show " data-bs-popper="none" style="width: 300px; height: 200px;">
+                              <div class="d-flex align-items-center p-3 bg-info text-white">
                                 <div class="">
-                                    <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg"
-                                        alt="user" class="rounded-circle" width="40">
+                                  <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg"
+                                    alt="user" class="rounded-circle" width="40">
                                 </div>
                                 <div class="ms-2">
-                                    <h4 class="mb-0 text-white">Foxy Alviter</h4>
-                                    <p class="mb-0">angeelu23@gmail.com</p>
+                                  <h4 class="mb-0 text-white">Foxy Alviter</h4>
+                                  <p class="mb-0">angeelu23@gmail.com</p>
                                 </div>
+                              </div>
+                              <a class="dropdown-item" href="#">Mi Perfil</a>
+              
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="#">Salir</a>
                             </div>
-                            <a class="dropdown-item" href="#"> <i class="fa-solid fa-xmark">Mi Perfil</i></a>
-
-                            <div class="dropdown-divider"></div>
-                            <i class="fa-solid fa-facebook"></i>
-                            <a class="dropdown-item" href="#">Salir</a>
-                        </div>
-                    </ul>
+                          </ul>
                 </div>
             </div>
             <!-- Collapsible wrapper -->
@@ -158,13 +156,16 @@
 
         <div class="row ">
             <h2 style="padding-top: 30px; text-align: center;" class="col-md-10">Tabla de vacantes</h2>
-            <button type="submit" class="btn btn-info col-md-2" style="margin: 30px 0px; width: 10%;">Registrar</button>
+            <button type="submit" class="btn btn-info col-md-2" style="margin: 30px 0px; width: 10%;" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">Registrar</button>
         </div>
         <table class="table">
             <thead style="background-color: #128cbe; color: #fff;">
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Titulo</th>
+                    <th scope="col">Fecha Inicio</th>
+                    <th scope="col">Fecha Fin</th>
                     <th scope="col">Descripción</th>
                     <th scope="col">Estatus</th>
                     <th scope="col">Estado república Mexicana</th>
@@ -176,6 +177,8 @@
                 <tr>
                     <th scope="row">1</th>
                     <td>Desarrollo de software</td>
+                    <td>04/08/2022</td>
+                    <td>05/08/2022</td>
                     <td>Puesto para desarrollo de aplicaciones web utilizando .NET y SQL server</td>
                     <td><span class="badge rounded-pill bg-success">Activo</span></td>
                     <td>Morelos</td>
@@ -198,6 +201,8 @@
                 <tr>
                     <th scope="row">1</th>
                     <td>Desarrollo de software</td>
+                    <td>04/08/2022</td>
+                    <td>05/08/2022</td>
                     <td>Puesto para desarrollo de aplicaciones web utilizando .NET y SQL server</td>
                     <td><span class="badge bg-primary rounded-pill d-inline">Activo</span></td>
                     <td>Morelos</td>
@@ -220,6 +225,8 @@
                 <tr>
                     <th scope="row">1</th>
                     <td>Desarrollo de software</td>
+                    <td>04/08/2022</td>
+                    <td>05/08/2022</td>
                     <td>Puesto para desarrollo de aplicaciones web utilizando .NET y SQL server</td>
                     <td><span class="badge bg-warning rounded-pill d-inline">Espera</span></td>
                     <td>Morelos</td>
@@ -243,6 +250,78 @@
             </tbody>
         </table>
     </div>
+         <!--Modal de editar-->
+         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #128cbe;">
+                        <h5 class="modal-title" id="exampleModalLabel">Editar Datos </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="recipient-name" class="col-form-label">Nombre:</label>
+                                <input type="text" class="form-control" id="recipient-name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-lastname" class="col-form-label">Apellido Paterno:</label>
+                                <input type="text" class="form-control" id="lastname">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-surname" class="col-form-label">Apellido Materno:</label>
+                                <input type="text" class="form-control" id="surname">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-email" class="col-form-label">Correo:</label>
+                                <input type="email" class="form-control" id="email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-phone" class="col-form-label">Teléfono:</label>
+                                <input type="text" class="form-control" id="phone">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-estados" class="col-form-label">Estado de la república:</label>
+                                <br>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Seleccionar</option>
+                                    <option value="Aguascalientes">Aguascalientes</option>
+                                    <option value="Baja California">Baja California</option>
+                                    <option value="Baja California Sur">Baja California Sur</option>
+                                    <option value="Campeche">Campeche</option>
+                                    <option value="Coahuila de Zaragoza">Coahuila de Zaragoza</option>
+                                </select>
+    
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-birthday" class="col-form-label">Fecha de nacimiento:</label>
+                                <input type="date" class="form-control" id="birthday">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-study" class="col-form-label">Estudios:</label>
+                                <input type="text" class="form-control" id="recipient-study">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-language" class="col-form-label">Idiomas:</label>
+                                <input type="text" class="form-control" id="recipient-language">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-course" class="col-form-label">Cursos:</label>
+                                <input type="text" class="form-control" id="recipient-course">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-skill" class="col-form-label">Habilidades:</label>
+                                <input type="text" class="form-control" id="recipient-skill">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" style="background-color: #128cbe; color: #fff;" class="btn">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 </body>
 
 </html>
