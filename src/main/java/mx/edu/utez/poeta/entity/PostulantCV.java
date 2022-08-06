@@ -50,6 +50,9 @@ public class PostulantCV implements Serializable {
     @Column(name = "skills", length = 255, nullable = false)
     private String skills;
 
+    @Column(name = "uploaded_cv", length = 120, nullable = true)
+    private String uploadedCV;
+
     public Long getId() {
         return id;
     }
@@ -136,6 +139,14 @@ public class PostulantCV implements Serializable {
 
     public void setSkills(String skills) {
         this.skills = skills;
+    }
+
+    public String getUploadedCV() {
+        return uploadedCV;
+    }
+
+    public void setUploadedCV(String uploadedCV) {
+        this.uploadedCV = uploadedCV;
     }
 
 }
