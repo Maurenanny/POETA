@@ -22,6 +22,11 @@ public class CityService {
     }
 
     @Transactional(readOnly = true)
+    public List<City> findAllCitiesByState(long id) {
+        return cityRepository.findAllByStateId(id);
+    }
+
+    @Transactional(readOnly = true)
     public City findCityById(long id) {
         return cityRepository.findById(id).get();
     }

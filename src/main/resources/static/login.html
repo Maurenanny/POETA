@@ -140,6 +140,7 @@
 
 </html> -->
 <!-- LOGIN DE PRUEBA -->
+<div ng-init="ctrlLogin.findAllStates()"></div>
 <div class="container-fluid" ng-if="!isRegister">
   <div class="row">
     <div class="col-12">
@@ -151,7 +152,7 @@
             <div class="col-12">
               <label for="usuario" class="form-label">Correo Electrónico</label>
               <input autocomplete="off" required ng-model="user.username" type="email" class="form-control"
-                name="usuario" placeholder="Usuario">
+                name="usuario" placeholder="correo@example.com">
               <div class="invalid-feedback">
                 Rellene el campo
               </div>
@@ -183,7 +184,7 @@
 <div class="container-fluid" ng-if="isRegister">
   <div class="row">
     <div class="col-12">
-      <div class="card mt-3 mx-auto" style="width: 700px;">
+      <div class="card mt-3 mx-auto" style="width: 850px;">
         <div class="card-body">
           <h2 class="text-center">Crear Nueva Cuenta</h2>
           <hr>
@@ -216,9 +217,11 @@
               <div class="col-4 mb-3">
                 <label class="form-label">Sexo</label>
                 <br>
-                <input type="radio" name="genderFIn" ng-model="register.gender" name="gender" value="0" required id="genderFIn">
+                <input type="radio" name="genderFIn" ng-model="register.gender" name="gender" value="0" required
+                  id="genderFIn">
                 <label for="genderFIn">Mujer</label>
-                <input type="radio" name="genderMIn" ng-model="register.gender" name="gender" value="1" required id="genderMIn">
+                <input type="radio" name="genderMIn" ng-model="register.gender" name="gender" value="1" required
+                  id="genderMIn">
                 <label for="genderMIn">Hombre</label>
                 <div class="invalid-feedback">
                   Campo Obligatorio
@@ -231,20 +234,69 @@
                   Campo Obligatorio
                 </div>
               </div>
-              <div class="col-12">
-                <label for="usuario" class="form-label">Correo Electrónico</label>
-                <input autocomplete="off" required ng-model="user.username" type="email" class="form-control"
-                  name="usuario" placeholder="Usuario">
+              <div class="col-4 mb-3">
+                <label for="picture" class="form-label">Foto de Perfil</label>
+                <input type="file" name="picture" id="picture" ng-model="register.image" required accept="image/*"
+                  class="form-control">
                 <div class="invalid-feedback">
-                  Rellene el campo
+                  Campo Obligatorio
                 </div>
               </div>
-              <div class="col-12 mt-3">
+              <div class="col-4 mb-3">
+                <label for="state" class="form-label">Estado</label>
+                <select required class="form-select" name="state" id="state" ng-model="tmp.state"
+                  ng-options="state as state.name for state in listStates track by state.id"
+                  ng-change="ctrlLogin.findAllCities()">
+                  <option value="" hidden>Seleccionar Estado</option>
+                </select>
+                <div class="invalid-feedback">
+                  Campo Obligatorio
+                </div>
+              </div>
+              <div class="col-4 mb-3">
+                <label for="city" class="form-label">Municipio</label>
+                <select required class="form-select" name="city" id="city" ng-model="register.city"
+                  ng-options="city as city.name for city in listCities track by city.id">
+                  <option value="" hidden>Seleccionar Municipio</option>
+                </select>
+              </div>
+              <div class="col-4 mb-3">
+                <label for="usuario" class="form-label">Correo Electrónico</label>
+                <input autocomplete="off" required ng-model="register.username" type="email" class="form-control"
+                  name="usuario" placeholder="correo@example.com">
+                <div class="invalid-feedback">
+                  Campo Obligatorio
+                </div>
+              </div>
+              <div class="col-4 mb-3">
+                <label for="phone" class="form-label">Teléfono</label>
+                <input autocomplete="off" required ng-model="register.phone" type="text" class="form-control"
+                  name="phone" placeholder="Teléfono" maxlength="10">
+                <div class="invalid-feedback">
+                  Campo Obligatorio
+                </div>
+              </div>
+              <div class="col-8 mb-3">
+                <label for="rol" class="form-label">Tipo de Cuenta</label>
+                <select required class="form-select" name="rol" id="rol" ng-model="register.roles"
+                  ng-oprions="role as role.name for role in listRoles track by rol.id">
+                  <option value="" hidden>Seleccionar Tipo de Cuenta</option>
+                </select>
+              </div>
+              <div class="col-6 mb-3">
                 <label for="password" class="form-label">Contraseña</label>
-                <input autocomplete="off" required ng-model="user.password" type="password" class="form-control"
+                <input autocomplete="off" required ng-model="register.password" type="password" class="form-control"
                   name="password" placeholder="********">
                 <div class="invalid-feedback">
-                  Rellene el campo
+                  Campo Obligatorio
+                </div>
+              </div>
+              <div class="col-6 mb-3">
+                <label for="passwordConfirm" class="form-label">Confirmar Contraseña</label>
+                <input autocomplete="off" required ng-model="register.passwordConfirm" type="password"
+                  class="form-control" name="passwordConfirm" placeholder="********">
+                <div class="invalid-feedback">
+                  Campo Obligatorio
                 </div>
               </div>
             </div>

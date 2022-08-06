@@ -3,9 +3,7 @@ package mx.edu.utez.poeta.controller;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import org.apache.commons.io.FilenameUtils;
@@ -20,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import mx.edu.utez.poeta.entity.Roles;
 import mx.edu.utez.poeta.entity.User;
+import mx.edu.utez.poeta.service.RoleService;
 import mx.edu.utez.poeta.service.UserService;
 
 @RestController
@@ -28,6 +28,8 @@ import mx.edu.utez.poeta.service.UserService;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private RoleService roleService;
 
     @RequestMapping(value = "/list", method = {RequestMethod.GET})
     public List<User> findAllUsers() {
@@ -60,19 +62,23 @@ public class UserController {
     }
 
     @PostMapping("/upload/picture")
-    public boolean handleFileUpload(@RequestParam("file") MultipartFile file) {
+    public String handleFileUpload(@RequestParam("file") MultipartFile file) {
         String separator = FileSystems.getDefault().getSeparator();
         String fileName = UUID.randomUUID().toString();
         String ext = FilenameUtils.getExtension(file.getOriginalFilename());
-        Map<String, Object> data = new HashMap<>();
-        data.put("name", fileName + "." + ext);
         try {
             String userDirectory = FileSystems.getDefault().getPath("").toAbsolutePath().toString();
             file.transferTo(new File(userDirectory + "\\src\\main\\resources\\static\\uploads\\" + separator + "profilePics" + separator + fileName + "." + ext));
-            return true;
+            return fileName + "." + ext;
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
+
+    @RequestMapping(name = "/roles", method = {RequestMethod.GET})
+    public List<Roles> findAllRoles() {
+        return roleService.findAllRoles();
+    }
+
 }

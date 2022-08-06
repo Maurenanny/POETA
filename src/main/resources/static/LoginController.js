@@ -80,6 +80,10 @@ angular.module("routingApp").controller("LoginCtrl", [
             password: null,
         };
 
+        $scope.tmp = {
+            state: null,
+        }
+
         $scope.register = {
             username: null,
             password: null,
@@ -116,8 +120,41 @@ angular.module("routingApp").controller("LoginCtrl", [
                 phone: null,
                 birthDate: null,
                 gender: null,
-            }
+            };
+
+            $scope.tmp = {
+                state: null,
+            };
             $scope.isRegister = !$scope.isRegister;
+            if ($scope.isRegister) {
+                $('#state').children().first().remove();
+            }
+        }
+
+        this.findAllStates = () => {
+            return $http({
+                method: "GET",
+                url: `${APP_URL.url}/state/list`,
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+            }).then((res) => {
+                $scope.listStates = res.data;
+            })
+        }
+
+        this.findAllCities = () => {
+            return $http({
+                method: "GET",
+                url: `${APP_URL.url}/city/list/${$scope.tmp.state.id}`,
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+            }).then((res) => {
+                $scope.listCities = res.data;
+            })
         }
 
         this.login = () => {
@@ -149,6 +186,19 @@ angular.module("routingApp").controller("LoginCtrl", [
             var base64Url = token.split(".")[1];
             var base64 = base64Url.replace("-", "+").replace("_", "/");
             return JSON.parse($window.atob(base64));
+        }
+
+        this.findRoles = () => {
+            return $http({
+                method: "GET",
+                url: `${APP_URL.url}/user/roles`,
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+            }).then((res) => {
+                $scope.listRoles = res.data;
+            })
         }
 
         this.uploadProfilePic = async () => {
