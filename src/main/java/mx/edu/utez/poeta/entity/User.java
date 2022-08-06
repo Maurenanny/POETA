@@ -50,7 +50,7 @@ public class User implements Serializable {
 
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user"), inverseJoinColumns = @JoinColumn(name = "role"))
-    private Roles roles;
+    private Set<Roles> roles;
 
     @ManyToOne
     @JoinColumn(name = "city_id", nullable = false)
@@ -62,6 +62,9 @@ public class User implements Serializable {
     @Column(name = "birth_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date birthDate;
+
+    @Column(name = "gender", nullable = false)
+    private int gender;
 
     public User() {
         this.enabled = true;
@@ -131,12 +134,19 @@ public class User implements Serializable {
         this.image = image;
     }
 
-    public Roles getRoles() {
+    public Set<Roles> getRoles() {
         return roles;
     }
 
-    public void setRoles(Roles roles) {
+    public void setRoles(Set<Roles> roles) {
         this.roles = roles;
+    }
+
+    public void addRole(Roles role) {
+        if (roles == null) {
+            roles = new HashSet<Roles>();
+        }
+        roles.add(role);
     }
 
     public City getCity() {

@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2<!-- /dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
 
@@ -16,27 +16,24 @@
     integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <!--Angular js-->
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
-
   <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="./css/login.css" />
   <title>Iniciar sesión</title>
 </head>
 
 <body>
-  <div class="container">
+  <div class="">
     <div class="forms-container">
       <div class="signin-signup">
-        <form action="./landing.html" class="sign-in-form">
+        <form action="/login" class="sign-in-form" method="post">
           <h2 class="title">Iniciar sesión</h2>
           <div class="input-field">
             <i class="fas fa-user"></i>
-            <input type="text" placeholder="Usuario" ng-model="usuario" />
+            <input type="email" placeholder="Correo Electrónico" ng-model="username" name="username" />
           </div>
           <div class="input-field">
             <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Contraseña" ng-model="contrasena" />
+            <input type="password" placeholder="Contraseña" ng-model="password" name="password" />
           </div>
           <input type="submit" value="Iniciar sesión" class="btn solid"/>
 
@@ -141,4 +138,76 @@
   <script src="./js/login.js"></script>
 </body>
 
-</html>
+</html> -->
+<!-- LOGIN DE PRUEBA -->
+<div class="container-fluid" ng-if="!isRegister">
+  <div class="row">
+    <div class="col-12">
+      <div class="card mt-3 mx-auto" style="width: 400px;">
+        <div class="card-body">
+          <h2 class="text-center">Iniciar Sesión</h2><hr>
+          <form class="needs-validation" novalidate>
+            <div class="col-12">
+              <label for="usuario" class="form-label">Correo Electrónico</label>
+              <input autocomplete="off" required ng-model="user.username" type="email" class="form-control" name="usuario" placeholder="Usuario">
+              <div class="invalid-feedback">
+                Rellene el campo
+              </div>
+            </div>
+            <div class="col-12 mt-3">
+              <label for="password" class="form-label">Contraseña</label>
+              <input autocomplete="off" required ng-model="user.password" type="password" class="form-control" name="password" placeholder="********">
+              <div class="invalid-feedback">
+                Rellene el campo
+              </div>
+            </div>
+            <center>
+            <div class="col-12">
+                <button id="registrar" type="button" class="btn btn-primary mt-3" ng-click="ctrlLogin.beforeLogin()">Ingresar</button>
+            </div>
+            <div class="col-12 mt-3">
+              <a href="#!/login" ng-click="ctrlLogin.changeRegisterMode()">Registrar Nueva Cuenta</a>
+            </div>
+          </center>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid" ng-if="isRegister">
+  <div class="row">
+    <div class="col-12">
+      <div class="card mt-3 mx-auto" style="width: 400px;">
+        <div class="card-body">
+          <h2 class="text-center">Crear Nueva Cuenta</h2><hr>
+          <form class="needs-validation" novalidate>
+            <div class="col-12">
+              <label for="usuario" class="form-label">Correo Electrónico</label>
+              <input autocomplete="off" required ng-model="user.username" type="email" class="form-control" name="usuario" placeholder="Usuario">
+              <div class="invalid-feedback">
+                Rellene el campo
+              </div>
+            </div>
+            <div class="col-12 mt-3">
+              <label for="password" class="form-label">Contraseña</label>
+              <input autocomplete="off" required ng-model="user.password" type="password" class="form-control" name="password" placeholder="********">
+              <div class="invalid-feedback">
+                Rellene el campo
+              </div>
+            </div>
+            <center>
+              <div class="col-12">
+                  <button id="registrar" type="submit" class="btn btn-primary mt-3" ng-click="ctrlLogin.beforeLogin()">Ingresar</button>
+              </div>
+              <div class="col-12 mt-3">
+                <a href="#!/login" ng-click="ctrlLogin.changeRegisterMode()">Registrar Nueva Cuenta</a>
+              </div>
+            </center>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

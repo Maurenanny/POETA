@@ -27,16 +27,34 @@ angular
         })
         .when("/login", {
           templateUrl: "/login.html",
-          /* controller: "LoginCtrl",
+          controller: "LoginCtrl",
           controllerAs: "ctrlLogin",
-          resolve: {
-            auth: function (AuthService) {
-              return AuthService.login();
-            },
-          }, */
         })
-        .when("/test", {
-          templateUrl: "/view/test.html",
+        .when("/perfil", {
+          templateUrl: "/view/profile/perfil.html"
+        })
+        .when("/testV", {
+          templateUrl: "/view/test/test.html",
+          controller: "TestCtrl",
+          controllerAs: "ctrlTest",
         })
     }
   ])
+  .constant('APP_URL', {
+    url: "http://localhost:8080"
+  })
+  .value("SESSION", {
+    token: localStorage.getItem("token"),
+  }).run(function ($rootScope, $location) {
+    $rootScope.$on(
+      "$routeChangeError",
+      function (event, current, previous, rejection) {
+        if (rejection === "Not Authenticated") {
+          $location.path("/login");
+        }
+        if (rejection === "Session") {
+          $location.path("/"); //Cambiar a la que corresponde xdxdxd
+        }
+      }
+    )
+  })

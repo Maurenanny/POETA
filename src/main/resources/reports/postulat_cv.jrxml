@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="postulat_cv" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6425d59d-5ee0-48bf-b1da-a4137d64e2e9">
+	<property name="ireport.zoom" value="1.6105100000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="PROFILE_IMAGE" class="java.lang.String"/>
+	<parameter name="POSTULANT_ID" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[SELECT
+CONCAT(u.name, ' ', u.lastname, ' ', u.surname) AS name,
+pcv.title,
+pcv.description,
+pcv.experience,
+pcv.studies,
+pcv.languages,
+pcv.certifications,
+pcv.courses,
+pcv.knowledge,
+pcv.skills,
+u.username AS email,
+u.phone,
+s.name AS state_name,
+c.name AS city_name
+FROM users u
+INNER JOIN postulant_cv pcv ON pcv.postulant_id = u.id
+INNER JOIN city c ON c.id = u.city_id
+INNER JOIN state s ON s.id = c.state
+WHERE u.id = $P{POSTULANT_ID}]]>
+	</queryString>
+	<field name="name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="title" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="description" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="experience" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="studies" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="languages" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="certifications" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="courses" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="knowledge" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="skills" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="email" class="java.lang.String"/>
+	<field name="phone" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="state_name" class="java.lang.String"/>
+	<field name="city_name" class="java.lang.String"/>
+	<background>
+		<band height="753"/>
+	</background>
+	<title>
+		<band height="129" splitType="Stretch">
+			<image>
+				<reportElement x="12" y="12" width="100" height="109" uuid="37ee8595-1d89-4908-9ae9-0cb8a583ffcf"/>
+				<imageExpression><![CDATA[$P{PROFILE_IMAGE}]]></imageExpression>
+			</image>
+			<rectangle>
+				<reportElement x="131" y="47" width="424" height="74" forecolor="#4481EB" backcolor="#4481EB" uuid="dd78e9e1-9814-48f2-929e-32f88f31ac60"/>
+			</rectangle>
+			<textField>
+				<reportElement x="131" y="47" width="424" height="35" forecolor="#FFFFFF" uuid="c7e51c7c-f1ee-4744-9549-dded742bfa27"/>
+				<box leftPadding="10" rightPadding="10"/>
+				<textElement verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}.trim()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="131" y="97" width="424" height="20" forecolor="#FFFFFF" uuid="8848b548-306d-4cf5-b13f-e1f3ec586122"/>
+				<box leftPadding="10" rightPadding="10"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{title}.toUpperCase()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="241" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="10" width="240" height="20" uuid="2a22c6f7-1b78-4c89-9186-390fafd615d6"/>
+				<box leftPadding="10" rightPadding="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SOBRE MI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="315" y="10" width="240" height="20" uuid="d4d9355e-f5ff-4a68-aae8-258af7b6c2a7"/>
+				<box leftPadding="10" rightPadding="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[EXPERIENCIA LABORAL]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="40" width="240" height="78" uuid="1a1c7b1c-5bef-4d78-a33b-f31a1aeb4f30"/>
+				<box topPadding="5" leftPadding="10" bottomPadding="5" rightPadding="10"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="315" y="40" width="240" height="78" uuid="ba9faa2e-1c14-496c-9a3b-c2439aa74cb5"/>
+				<box topPadding="5" leftPadding="10" bottomPadding="5" rightPadding="10"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{experience}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="133" width="240" height="20" uuid="7689ca40-429d-497a-959e-52ed7d5079c5"/>
+				<box leftPadding="10" rightPadding="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTUDIOS ACADÉMICOS]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="315" y="163" width="240" height="78" uuid="8e7f3de9-4adb-4e5f-8173-9efcf8ba6d96"/>
+				<box topPadding="5" leftPadding="10" bottomPadding="5" rightPadding="10"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{languages}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="315" y="133" width="240" height="20" uuid="5fa00e3b-e2fc-4e0b-8f70-7c2c995fd3f4"/>
+				<box leftPadding="10" rightPadding="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[IDIOMAS]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="163" width="240" height="78" uuid="de1f8877-96f3-4687-b164-ded89647b5d6"/>
+				<box topPadding="5" leftPadding="10" bottomPadding="5" rightPadding="10"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{studies}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="118">
+			<printWhenExpression><![CDATA[$F{certifications} != null || $F{courses} != null]]></printWhenExpression>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="315" y="40" width="240" height="78" uuid="b4576bc3-624d-497c-8f27-2e02afc58d68"/>
+				<box topPadding="5" leftPadding="10" bottomPadding="5" rightPadding="10"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{courses}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="315" y="10" width="240" height="20" uuid="9ddb5aaf-ab20-4f55-95a1-ef219a5f4003"/>
+				<box leftPadding="10" rightPadding="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CURSOS]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="40" width="240" height="78" uuid="9ae5eff2-67b2-4dee-9cc8-973e69e8e974"/>
+				<box topPadding="5" leftPadding="10" bottomPadding="5" rightPadding="10"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{certifications}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="10" width="240" height="20" uuid="e5b915bc-8ab0-442d-9a1c-244d3e12863c"/>
+				<box leftPadding="10" rightPadding="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CERTIFICACIONES]]></text>
+			</staticText>
+		</band>
+		<band height="218">
+			<staticText>
+				<reportElement x="315" y="10" width="240" height="20" uuid="2edccbf8-6ce6-4b6b-8449-0ea631e6014c"/>
+				<box leftPadding="10" rightPadding="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[HABILIDADES]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="40" width="240" height="78" uuid="31329214-9efa-4568-b250-e0cc6e0641e4"/>
+				<box topPadding="5" leftPadding="10" bottomPadding="5" rightPadding="10"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{knowledge}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="10" width="240" height="20" uuid="c96d02eb-87b2-4967-9b3f-1ee4c68a3305"/>
+				<box leftPadding="10" rightPadding="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONOCIMIENTOS]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="315" y="40" width="240" height="78" uuid="74a502f2-80b8-45e1-a432-80e95b53184a"/>
+				<box topPadding="5" leftPadding="10" bottomPadding="5" rightPadding="10"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{skills}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="128" width="555" height="20" uuid="44b300ae-4eec-46e2-b6a4-d62d6549324a"/>
+				<box leftPadding="10" rightPadding="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONTACTO]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="131" y="158" width="110" height="20" uuid="cb446787-a396-4f24-92fa-c8cbae916832"/>
+				<box leftPadding="10"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="158" width="110" height="20" uuid="20ffb03b-f717-4719-9657-2578ab1ffc3a"/>
+				<box leftPadding="10"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Correo electrónico:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="315" y="158" width="110" height="20" uuid="fae3005b-de81-4403-b1ee-a38ab5d38996"/>
+				<box leftPadding="10"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Teléfono:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="444" y="158" width="110" height="20" uuid="ed8cfcce-ec40-4c6a-9525-79203d3aaeba"/>
+				<box leftPadding="10"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{phone}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="188" width="110" height="20" uuid="978cf187-29da-4486-84a2-31de3b3491e5"/>
+				<box leftPadding="10"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Estado:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="131" y="188" width="110" height="20" uuid="ee13f381-aa96-473e-b715-3cd7cab20dbf"/>
+				<box leftPadding="10"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{state_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="444" y="188" width="110" height="20" uuid="9b1ef8a1-08f2-4b84-aba6-a03a97323483"/>
+				<box leftPadding="10"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{city_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="315" y="188" width="110" height="20" uuid="c3cc18b5-48c3-4182-800e-c363629ee6f7"/>
+				<box leftPadding="10"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Municipio:]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>
