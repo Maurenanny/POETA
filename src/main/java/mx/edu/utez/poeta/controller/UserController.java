@@ -30,10 +30,21 @@ public class UserController {
     private UserService userService;
     @Autowired
     private RoleService roleService;
+    private String picName;
 
     @RequestMapping(value = "/list", method = {RequestMethod.GET})
     public List<User> findAllUsers() {
         return userService.findAllUsers();
+    }
+
+    @RequestMapping(value = "/roles", method = {RequestMethod.GET})
+    public List<Roles> findAllRoles() {
+        return roleService.findAllRoles();
+    }
+
+    @RequestMapping(value = "/roles/{id}", method = {RequestMethod.GET})
+    public Roles findRoleById(@PathVariable("id") long id) {
+        return roleService.findRoleById(id);
     }
 
     @RequestMapping(value = "/{id}", method = {RequestMethod.GET})
@@ -62,23 +73,29 @@ public class UserController {
     }
 
     @PostMapping("/upload/picture")
-    public String handleFileUpload(@RequestParam("file") MultipartFile file) {
+    public void handleFileUpload(@RequestParam("file") MultipartFile file) {
         String separator = FileSystems.getDefault().getSeparator();
         String fileName = UUID.randomUUID().toString();
         String ext = FilenameUtils.getExtension(file.getOriginalFilename());
         try {
             String userDirectory = FileSystems.getDefault().getPath("").toAbsolutePath().toString();
             file.transferTo(new File(userDirectory + "\\src\\main\\resources\\static\\uploads\\" + separator + "profilePics" + separator + fileName + "." + ext));
-            return fileName + "." + ext;
+            this.picName = fileName + "." + ext;
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
         }
     }
 
-    @RequestMapping(name = "/roles", method = {RequestMethod.GET})
-    public List<Roles> findAllRoles() {
-        return roleService.findAllRoles();
+    @PostMapping("/register")
+    public boolean register(@RequestBody User obj) {
+        try {
+            obj.setImage(picName);
+            userService.save(obj);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 }

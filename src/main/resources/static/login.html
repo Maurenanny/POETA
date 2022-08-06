@@ -141,6 +141,7 @@
 </html> -->
 <!-- LOGIN DE PRUEBA -->
 <div ng-init="ctrlLogin.findAllStates()"></div>
+<div ng-init="ctrlLogin.findRoles()"></div>
 <div class="container-fluid" ng-if="!isRegister">
   <div class="row">
     <div class="col-12">
@@ -261,14 +262,6 @@
                 </select>
               </div>
               <div class="col-4 mb-3">
-                <label for="usuario" class="form-label">Correo Electrónico</label>
-                <input autocomplete="off" required ng-model="register.username" type="email" class="form-control"
-                  name="usuario" placeholder="correo@example.com">
-                <div class="invalid-feedback">
-                  Campo Obligatorio
-                </div>
-              </div>
-              <div class="col-4 mb-3">
                 <label for="phone" class="form-label">Teléfono</label>
                 <input autocomplete="off" required ng-model="register.phone" type="text" class="form-control"
                   name="phone" placeholder="Teléfono" maxlength="10">
@@ -279,9 +272,17 @@
               <div class="col-8 mb-3">
                 <label for="rol" class="form-label">Tipo de Cuenta</label>
                 <select required class="form-select" name="rol" id="rol" ng-model="register.roles"
-                  ng-oprions="role as role.name for role in listRoles track by rol.id">
+                ng-options="r as r.alias for r in listRoles">
                   <option value="" hidden>Seleccionar Tipo de Cuenta</option>
                 </select>
+              </div>
+              <div class="col-4 mb-3">
+                <label for="usuario" class="form-label">Correo Electrónico</label>
+                <input autocomplete="off" required ng-model="register.username" type="email" class="form-control"
+                  name="usuario" placeholder="correo@example.com">
+                <div class="invalid-feedback">
+                  Campo Obligatorio
+                </div>
               </div>
               <div class="col-6 mb-3">
                 <label for="password" class="form-label">Contraseña</label>
@@ -303,7 +304,7 @@
             <center>
               <div class="col-12">
                 <button id="registrar" type="submit" class="btn btn-primary mt-3"
-                  ng-click="ctrlLogin.beforeLogin()">Ingresar</button>
+                  ng-click="ctrlLogin.save()">Crear Cuenta</button>
               </div>
               <div class="col-12 mt-3">
                 <a href="#!/login" ng-click="ctrlLogin.changeRegisterMode()">Iniciar Sesión</a>

@@ -2,18 +2,13 @@ package mx.edu.utez.poeta.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -48,9 +43,9 @@ public class User implements Serializable {
     @Column(name = "image", length = 255, nullable = false)
     private String image;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user"), inverseJoinColumns = @JoinColumn(name = "role"))
-    private Set<Roles> roles;
+    @ManyToOne
+    @JoinColumn(name = "role", nullable = false)
+    private Roles roles;
 
     @ManyToOne
     @JoinColumn(name = "city_id", nullable = false)
@@ -134,19 +129,20 @@ public class User implements Serializable {
         this.image = image;
     }
 
-    public Set<Roles> getRoles() {
+    public Roles getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Roles> roles) {
+    public void setRoles(Roles roles) {
         this.roles = roles;
     }
 
-    public void addRole(Roles role) {
-        if (roles == null) {
-            roles = new HashSet<Roles>();
-        }
-        roles.add(role);
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
     }
 
     public City getCity() {
