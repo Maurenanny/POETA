@@ -33,5 +33,18 @@ angular.module("routingApp").controller("TestCtrl", [
                 notyf.error("Descarga completada");
             })
         }
+
+        this.testEmail = () => {
+            return $http({
+                method: "GET",
+                url: `${APP_URL.url}/process/mail/test`,
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+            }).then((res) => {
+                
+            })
+        }
     }
 ])
