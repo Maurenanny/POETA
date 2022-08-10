@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Perfil</title>
     <link href="../../css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="../../css/all.min.css" />
     <link rel="stylesheet" href="../../css/all.css" />
@@ -155,9 +155,15 @@
                         <center class="mt-4">
                             <img src="https://demos.wrappixel.com/premium-admin-templates/bootstrap/monster-bootstrap/package/assets/images/users/5.jpg"
                                 class="rounded-circle" width="150">
-                            <h4 class="card-title mt-2">Jesús Cabrera</h4>
-                            <button style="background-color: #128cbe; color: #fff; border-radius: 10px;" class="btn"><i
+                            <h4 class="card-title mt-2">Anchoa Alviter Islas</h4>
+                            <button style="background: linear-gradient(169deg,#048abf,#2cc1fc); color: #fff; border-radius: 10px;" class="btn"><i
                                     class="fa-solid fa-file-pdf"></i> Generar CV</button>
+                                    <button onclick="prueba()"
+                                    style="background: linear-gradient(169deg,#048abf,#2cc1fc); color: #fff; border-radius: 10px;"
+                                    class="btn"><i class="fa-solid fa-file-pdf"></i> Cargar CV</button>
+                                    <h6 class="text-muted">Me considero una persona creativa y proactiva, me gustan los nuevos retos y adaptarme en cualquier ambiente. 
+                                        Soy autodidacta y se me facilita adquirir nuevos conocimientos.</h6>
+
                         </center>
                     </div>
                     <div>
@@ -221,7 +227,6 @@
 
                                 <div class="profiletimeline mt-0">
                                     <div class="sl-item d-flex align-items-start">
-
                                         <div class="sl-left col-md-8">
                                             <h2 style="">Idiomas:</h2>
                                             <ul>
@@ -237,7 +242,6 @@
                                         </div>
                                     </div>
                                     <hr>
-
                                 </div>
                             </div>
                             <div class="card-body">
@@ -254,7 +258,8 @@
                                             </ul>
                                         </div>
                                         <div class="sl-right col-md-4 mt-40">
-                                            <img style="width: 50%;" src="../..img/cursoo.png" class="img-fluid rounded">
+                                            <img style="width: 50%;" src="../../img/cursoo.png"
+                                                class="img-fluid rounded">
                                         </div>
                                     </div>
                                     <hr>
@@ -275,13 +280,66 @@
                                             </ul>
                                         </div>
                                         <div class="sl-right col-md-4 ">
-                                            <img style="width: 50%;" src="../..img/cursoo.png" class="img-fluid rounded">
+                                            <img style="width: 50%;" src="../../img/skills.png"
+                                                class="img-fluid rounded">
                                         </div>
                                     </div>
                                     <hr>
 
                                 </div>
                             </div>
+                            <div class="card-body">
+
+                                <div class="profiletimeline ">
+                                    <div class="sl-item d-flex align-items-start">
+
+                                        <div class="sl-left col-md-8">
+                                            <h2 style="">Certificaciones:</h2>
+                                            <ul>
+                                                <li>Dark Tone Desing</li>
+                                                <li>AWS Cloud Practitioner Essentials</li>
+                                                <li>Scrum Fundamentals</li>
+                                            </ul>
+                                        </div>
+                                        <div class="sl-right col-md-4 ">
+                                            <img style="width: 50%;" src="../../img/skills.png"
+                                                class="img-fluid rounded">
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+
+                                <div class="profiletimeline ">
+                                    <div class="sl-item d-flex align-items-start">
+
+                                        <div class="sl-left col-md-8">
+                                            <h2 style="">Conocimientos:</h2>
+                                            <ul>
+                                                <li>Illustrator</li>
+                                                <li>Photoshop</li>
+                                                <li>javascript</li>
+                                                <li>Paquetería Microsoft</li>
+                                                <li>Gestor de repositorios: Github, Gitlab, Fork</li>
+                                                <li>CSS</li>
+                                                <li>React Native</li>
+                                            </ul>
+                                        </div>
+                                        <div class="sl-right col-md-4 ">
+                                            <img style="width: 50%;" src="../../img/brain.png"
+                                                class="img-fluid rounded">
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                </div>
+                            </div>
+
+
+
                         </div>
                         <div class="tab-pane fade" id="contacto" role="tabpanel" aria-labelledby="pills-contacto-tab">
                             <h4 style="text-align: center;">Área de Contacto</h4>
@@ -795,86 +853,95 @@
                                     </div>
                                 </div>
                         </div>
-                      
 
-                    
+
+
                     </div>
                     </section>
                 </div>
             </div>
         </div>
-            <!--Modal de editar-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header" style="background-color: #128cbe;">
-                    <h5 class="modal-title" id="exampleModalLabel">Editar Datos </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Nombre:</label>
-                            <input type="text" class="form-control" id="recipient-name">
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-lastname" class="col-form-label">Apellido Paterno:</label>
-                            <input type="text" class="form-control" id="lastname">
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-surname" class="col-form-label">Apellido Materno:</label>
-                            <input type="text" class="form-control" id="surname">
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-email" class="col-form-label">Correo:</label>
-                            <input type="email" class="form-control" id="email">
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-phone" class="col-form-label">Teléfono:</label>
-                            <input type="text" class="form-control" id="phone">
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-estados" class="col-form-label">Estado de la república:</label>
-                            <br>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Seleccionar</option>
-                                <option value="Aguascalientes">Aguascalientes</option>
-                                <option value="Baja California">Baja California</option>
-                                <option value="Baja California Sur">Baja California Sur</option>
-                                <option value="Campeche">Campeche</option>
-                                <option value="Coahuila de Zaragoza">Coahuila de Zaragoza</option>
-                            </select>
+        <!--Modal de editar-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #128cbe;">
+                        <h5 class="modal-title" id="exampleModalLabel">Editar Datos </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="recipient-name" class="col-form-label">Nombre:</label>
+                                <input type="text" class="form-control" id="recipient-name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-lastname" class="col-form-label">Apellido Paterno:</label>
+                                <input type="text" class="form-control" id="lastname">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-surname" class="col-form-label">Apellido Materno:</label>
+                                <input type="text" class="form-control" id="surname">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-email" class="col-form-label">Correo:</label>
+                                <input type="email" class="form-control" id="email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-phone" class="col-form-label">Teléfono:</label>
+                                <input type="text" class="form-control" id="phone">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-estados" class="col-form-label">Estado de la república:</label>
+                                <br>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Seleccionar</option>
+                                    <option value="Aguascalientes">Aguascalientes</option>
+                                    <option value="Baja California">Baja California</option>
+                                    <option value="Baja California Sur">Baja California Sur</option>
+                                    <option value="Campeche">Campeche</option>
+                                    <option value="Coahuila de Zaragoza">Coahuila de Zaragoza</option>
+                                </select>
 
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-birthday" class="col-form-label">Fecha de nacimiento:</label>
-                            <input type="date" class="form-control" id="birthday">
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-study" class="col-form-label">Estudios:</label>
-                            <input type="text" class="form-control" id="recipient-study">
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-language" class="col-form-label">Idiomas:</label>
-                            <input type="text" class="form-control" id="recipient-language">
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-course" class="col-form-label">Cursos:</label>
-                            <input type="text" class="form-control" id="recipient-course">
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-skill" class="col-form-label">Habilidades:</label>
-                            <input type="text" class="form-control" id="recipient-skill">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" style="background-color: #128cbe; color: #fff;" class="btn">Guardar</button>
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-birthday" class="col-form-label">Fecha de nacimiento:</label>
+                                <input type="date" class="form-control" id="birthday">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-study" class="col-form-label">Estudios:</label>
+                                <input type="text" class="form-control" id="recipient-study">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-language" class="col-form-label">Idiomas:</label>
+                                <input type="text" class="form-control" id="recipient-language">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-course" class="col-form-label">Cursos:</label>
+                                <input type="text" class="form-control" id="recipient-course">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-skill" class="col-form-label">Habilidades:</label>
+                                <input type="text" class="form-control" id="recipient-skill">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-certifications" class="col-form-label">Certificaciones:</label>
+                                <input type="text" class="form-control" id="recipient-certifications">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-knowledge" class="col-form-label">Conocimientos:</label>
+                                <input type="text" class="form-control" id="recipient-knowledge">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" style="background-color: #128cbe; color: #fff;"
+                            class="btn">Guardar</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
     <!-- Column -->
 
@@ -891,6 +958,51 @@
     <script src="../..js/notyf.min.js"></script>
     <script src="../..js/angular-locale_es-es.js"></script>
     <script src="../..js/jquery.min.js"></script>
+
+    
+    <!-- Para las Sweet Alrt-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.24/dist/sweetalert2.all.min.js"></script>
+
+
+    
+    <script>
+        function prueba(){
+            const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: 'Desea subir su CV',
+            icon: 'question',
+            input: 'file',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, cargar',
+            cancelButtonText: 'No, cancelar!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                swalWithBootstrapButtons.fire(
+                    'Se ha cargado correctamente!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+            } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    'Your imaginary file is safe :)',
+                    'error'
+                )
+            }
+        })
+        }
+    </script>
 
 </body>
 

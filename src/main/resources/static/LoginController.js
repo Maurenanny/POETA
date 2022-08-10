@@ -80,12 +80,128 @@ angular.module("routingApp").controller("LoginCtrl", [
             password: null,
         };
 
-        $(document).ready(function() {
+        $scope.tmp = {
+            state: null,
+        }
+
+        $scope.register = {
+            username: null,
+            password: null,
+            passwordConfirm: null,
+            name: null,
+            lastname: null,
+            surname: null,
+            image: null,
+            city: null,
+            phone: null,
+            birthDate: null,
+            gender: null,
+            roles: null,
+        }
+
+        $scope.uploadedPic;
+
+        $(document).ready(function () {
             $scope.isRegister = false;
+            $scope.uploadedPic = false;
         })
 
         this.changeRegisterMode = () => {
+            $scope.user = {
+                username: null,
+                password: null,
+            };
+
+            $scope.register = {
+                username: null,
+                password: null,
+                passwordConfirm: null,
+                name: null,
+                lastname: null,
+                surname: null,
+                image: null,
+                city: null,
+                phone: null,
+                birthDate: null,
+                gender: null,
+                roles: null,
+            };
+
+            $scope.tmp = {
+                state: null,
+            };
             $scope.isRegister = !$scope.isRegister;
+            $scope.uploadedPic = false;
+        }
+
+        this.setRole = () => {
+            return $http({
+                method: "GET",
+                url: `${APP_URL.url}/user/roles/${$scope.register.roles.id}`,
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+            }).then((res) => {
+                $scope.register.roles = res.data;
+            })
+        }
+
+        this.save = async () => {
+            await this.uploadProfilePic();
+            if ($scope.register.username != null && $scope.register.password != null && $scope.register.passwordConfirm != null && $scope.register.name != null && $scope.register.lastname != null && $scope.uploadedPic == true && $scope.register.city != null && $scope.register.phone != null && $scope.register.birthDate != null && $scope.register.gender != null && $scope.register.roles) {
+                if ($scope.register.password == $scope.register.passwordConfirm) {
+                    return $http({
+                        method: "POST",
+                        url: `${APP_URL.url}/user/register`,
+                        headers: {
+                            "Content-Type": "application/json",
+                            Accept: "application/json",
+                        },
+                        data: $scope.register
+                    }).then((res) => {
+                        if (res.data) {
+                            this.changeRegisterMode();
+                            notyf.success("Cuenta creada correctamente, inicia sesión");
+                        } else {
+                            notyf.error("Ocurrió un error");
+                        }
+                    }).catch((e) => {
+                        console.log(e.error);
+                        notyf.error("Ocurrió un error");
+                    });
+                } else {
+                    notyf.error("Las contraseñas deben ser iguales");
+                }
+            } else {
+                notyf.error("Llena los campos faltantes");
+            }
+        }
+
+        this.findAllStates = () => {
+            return $http({
+                method: "GET",
+                url: `${APP_URL.url}/state/list`,
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+            }).then((res) => {
+                $scope.listStates = res.data;
+            })
+        }
+
+        this.findAllCities = () => {
+            return $http({
+                method: "GET",
+                url: `${APP_URL.url}/city/list/${$scope.tmp.state.id}`,
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+            }).then((res) => {
+                $scope.listCities = res.data;
+            })
         }
 
         this.login = () => {
@@ -115,9 +231,36 @@ angular.module("routingApp").controller("LoginCtrl", [
 
         this.decodeToken = (token) => {
             var base64Url = token.split(".")[1];
-            var base64 = base64Url.replace("-","+").replace("_","/");
+            var base64 = base64Url.replace("-", "+").replace("_", "/");
             return JSON.parse($window.atob(base64));
         }
+
+        this.findRoles = () => {
+            return $http({
+                method: "GET",
+                url: `${APP_URL.url}/user/roles`,
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+            }).then((res) => {
+                $scope.listRoles = res.data;
+            })
+        }
+
+        this.uploadProfilePic = async () => {
+            let picture = document.getElementById("picture").files[0];
+            var formData = new FormData();
+            if (picture) {
+                formData.append("file", picture);
+                let res = await fetch(`${APP_URL.url}/user/upload/picture`, {
+                    method: "POST",
+                    body: formData,
+                }).then((r) => {
+                    $scope.uploadedPic = true;
+                });
+            }
+        };
 
     }
 ])

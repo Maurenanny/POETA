@@ -18,6 +18,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,6 +46,9 @@ public class UserService implements UserDetailsService {
     @Autowired
     private IUserConnectionRepository userConnectionRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Transactional(readOnly = true)
     public List<User> findAllUsers() {
         return userRepository.findAll();
@@ -56,10 +60,15 @@ public class UserService implements UserDetailsService {
     }
 
     public boolean save(User obj) {
+        UserConnection userConnection = new UserConnection();
+        obj.setPassword(passwordEncoder.encode(obj.getPassword()));
         boolean flag = false;
         User tmp = userRepository.save(obj);
         if (tmp != null) {
             flag = true;
+            userConnection.setUser(tmp);
+            userConnection.setStatus(1);
+            userConnectionRepository.save(userConnection);
         }
         return flag;
     }
@@ -120,10 +129,10 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    //@Transactional(readOnly = true)
+    @Transactional(readOnly = true)
     private List<GrantedAuthority> getUserAuthority(List<User> users) {
         Set<GrantedAuthority> roles = new HashSet<>();
-        users.forEach((user) -> roles.add(new SimpleGrantedAuthority(user.getRoles().iterator().next().getAuthority())));
+        users.forEach((user) -> roles.add(new SimpleGrantedAuthority(user.getRoles().getName())));
         return new ArrayList<>(roles);
     }
 
