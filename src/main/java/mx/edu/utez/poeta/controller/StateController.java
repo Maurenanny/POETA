@@ -9,39 +9,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import mx.edu.utez.poeta.entity.City;
-import mx.edu.utez.poeta.service.CityService;
+import mx.edu.utez.poeta.entity.State;
+import mx.edu.utez.poeta.service.StateService;
 
 @RestController
-@RequestMapping(path = "/city")
-public class CityController {
-    
+@RequestMapping(path = "/state")
+public class StateController {
     @Autowired
-    private CityService cityService;
+    private StateService stateService;
 
     @RequestMapping(value = "/list", method = {RequestMethod.GET})
-    public List<City> findAllCities() {
-        return cityService.findAllCities();
-    }
-
-    @RequestMapping(value = "/list/{id}", method = {RequestMethod.GET})
-    public List<City> findAllCitiesByStateId(@PathVariable("id") long id) {
-        return cityService.findAllCitiesByState(id);
+    public List<State> findAllstates() {
+        return stateService.findAllStates();
     }
 
     @RequestMapping(value = "/{id}", method = {RequestMethod.GET})
-    public City findCityById(@PathVariable("id") long id) {
-        return cityService.findCityById(id);
+    public State findStateById(@PathVariable("id") long id) {
+        return stateService.findStateById(id);
     }
 
     @RequestMapping(name = "/save", method = {RequestMethod.POST})
-    public boolean save(@RequestBody City obj) {
-        return cityService.save(obj);
+    public boolean save(@RequestBody State obj) {
+        return stateService.save(obj);
     }
 
     @RequestMapping(name = "/delete/{id}", method = {RequestMethod.GET})
     public boolean delete(@PathVariable("id") long id) {
-        return cityService.deleteCityById(id);
+        return stateService.delete(id);
     }
-
 }
