@@ -1,20 +1,18 @@
 package mx.edu.utez.poeta.entity;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "users")
@@ -45,13 +43,23 @@ public class User implements Serializable {
     @Column(name = "image", length = 255, nullable = false)
     private String image;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user"), inverseJoinColumns = @JoinColumn(name = "role"))
-    private Set<Roles> roles;
+    @ManyToOne
+    @JoinColumn(name = "role", nullable = false)
+    private Roles roles;
 
     @ManyToOne
     @JoinColumn(name = "city_id", nullable = false)
     private City city;
+
+    @Column(name = "phone", length = 15, nullable = false)
+    private String phone;
+
+    @Column(name = "birth_date", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date birthDate;
+
+    @Column(name = "gender", nullable = false)
+    private int gender;
 
     public User() {
         this.enabled = true;
@@ -121,19 +129,20 @@ public class User implements Serializable {
         this.image = image;
     }
 
-    public Set<Roles> getRoles() {
+    public Roles getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Roles> roles) {
+    public void setRoles(Roles roles) {
         this.roles = roles;
     }
 
-    public void addRole(Roles role) {
-        if (roles == null) {
-            roles = new HashSet<Roles>();
-        }
-        roles.add(role);
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
     }
 
     public City getCity() {
@@ -144,11 +153,27 @@ public class User implements Serializable {
         this.city = city;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
     @Override
     public String toString() {
-        return "User [city=" + city + ", enabled=" + enabled + ", id=" + id + ", image=" + image + ", lastname="
-                + lastname + ", name=" + name + ", password=" + password + ", roles=" + roles + ", surname=" + surname
-                + ", username=" + username + "]";
+        return "User [birthDate=" + birthDate + ", city=" + city + ", enabled=" + enabled + ", id=" + id + ", image="
+                + image + ", lastname=" + lastname + ", name=" + name + ", password=" + password + ", phone=" + phone
+                + ", roles=" + roles + ", surname=" + surname + ", username=" + username + "]";
     }
 
 }

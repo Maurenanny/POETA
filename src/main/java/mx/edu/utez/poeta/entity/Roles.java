@@ -17,8 +17,11 @@ public class Roles implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "authority", nullable = false, length = 25)
-    private String authority;
+    @Column(name = "name", nullable = false, length = 25, unique = true)
+    private String name;
+
+    @Column(name = "alias", nullable = false, length = 25, unique = true)
+    private String alias;
 
     public Long getId() {
         return id;
@@ -28,16 +31,39 @@ public class Roles implements Serializable {
         this.id = id;
     }
 
-    public String getAuthority() {
+    /* public String getAuthority() {
         return authority;
     }
 
     public void setAuthority(String authority) {
         this.authority = authority;
+    } */
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
     }
 
     @Override
     public String toString() {
-        return "Roles [authority=" + authority + ", id=" + id + "]";
+        return "Roles [alias=" + alias + ", id=" + id + ", name=" + name + "]";
     }
+
+    /* @Override
+    public String toString() {
+        return "Roles [alias=" + alias + ", authority=" + authority + ", id=" + id + "]";
+    } */
+
+    
 }

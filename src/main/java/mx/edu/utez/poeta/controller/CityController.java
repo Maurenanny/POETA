@@ -24,6 +24,11 @@ public class CityController {
         return cityService.findAllCities();
     }
 
+    @RequestMapping(value = "/list/{id}", method = {RequestMethod.GET})
+    public List<City> findAllCitiesByStateId(@PathVariable("id") long id) {
+        return cityService.findAllCitiesByState(id);
+    }
+
     @RequestMapping(value = "/{id}", method = {RequestMethod.GET})
     public City findCityById(@PathVariable("id") long id) {
         return cityService.findCityById(id);

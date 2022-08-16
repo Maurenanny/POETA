@@ -47,6 +47,25 @@ public class Vacancies implements Serializable {
     @JoinColumn(name = "city_id", nullable = false)
     private City city;
 
+    @Column(name = "type", nullable = false)
+    private int type;
+
+    @Column(name = "job_start_date", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date jobStartDate;
+
+    @Column(name = "min_salary", nullable = false)
+    private double minSalary;
+
+    @Column(name = "max_salary", nullable = false)
+    private double maxSalary;
+
+    @Column(name = "payment_period", nullable = false)
+    private int paymetPeriod;
+
+    @Column(name = "benefits", nullable = false)
+    private String benefits;
+
     public Long getId() {
         return id;
     }
@@ -109,6 +128,54 @@ public class Vacancies implements Serializable {
 
     public void setCity(City city) {
         this.city = city;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public Date getJobStartDate() {
+        return jobStartDate;
+    }
+
+    public void setJobStartDate(Date jobStartDate) {
+        this.jobStartDate = jobStartDate;
+    }
+
+    public double getMinSalary() {
+        return minSalary;
+    }
+
+    public void setMinSalary(double minSalary) {
+        this.minSalary = minSalary;
+    }
+
+    public double getMaxSalary() {
+        return maxSalary;
+    }
+
+    public void setMaxSalary(double maxSalary) {
+        this.maxSalary = maxSalary;
+    }
+
+    public int getPaymetPeriod() {
+        return paymetPeriod;
+    }
+
+    public void setPaymetPeriod(int paymetPeriod) {
+        this.paymetPeriod = paymetPeriod;
+    }
+
+    public String getBenefits() {
+        return benefits;
+    }
+
+    public void setBenefits(String benefits) {
+        this.benefits = benefits;
     }
     
 }

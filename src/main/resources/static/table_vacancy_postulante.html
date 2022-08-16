@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postulantes</title>
+    <link href="https://unpkg.com/bootstrap-table@1.20.2/dist/bootstrap-table.min.css" rel="stylesheet">
+    <link href="./css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/all.min.css" />
+    <link rel="stylesheet" href="./css/all.css" />
+    <link rel="stylesheet" href="./css/notyf.min.css" />
+    <link rel="stylesheet" href="./css/dataTables.bootstrap5.min.css" />
+    <script src="https://unpkg.com/bootstrap-table@1.20.2/dist/bootstrap-table.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+        integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
+        integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <!-- Container wrapper -->
+        <div class="container">
+
+            <!-- Navbar brand -->
+            <a class="navbar-brand me-2" href="./landing.html">
+                <!--   <img src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.webp" height="16" alt="" loading="lazy"
+              style="margin-top: -1px;" />-->
+
+                <img src="./img/image 1.png" width="10%"><b>POETA</b>
+            </a>
+
+
+            <!-- Toggle button -->
+            <button class="navbar-toggler" type="button" (click)="buttonsNav.toggle()" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarButtonsExample" mdbCollapse #buttonsNav="mdbCollapse">
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+
+                    <!--     
+                 <nav class="navbar navbar-dark bg-dark navbar-expand-sm">
+                <a class="navbar-brand" href="#">
+                  <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/logo_white.png" width="30" height="30" alt="logo">
+                  BootstrapBay
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbar-list-4">
+                  <ul class="navbar-nav">
+                      <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="40" height="40" class="rounded-circle">
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Dashboard</a>
+                        <a class="dropdown-item" href="#">Edit Profile</a>
+                        <a class="dropdown-item" href="#">Log Out</a>
+                      </div>
+                    </li>   
+                  </ul>
+                </div>
+              </nav> 
+             -->
+
+
+                </ul>
+
+
+                <!-- Left links -->
+
+                <div class="d-flex align-items-center">
+                    <button type="button" class="btn btn-primary px-3 me-2">
+                        Ingresar
+                    </button>
+                    <button type="button" class="btn btn-warning me-3">
+                        Registrarme </button>
+                </div>
+
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Buscar</button>
+                </form>
+                <div class="dropdown">
+
+                    <img id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"
+                        src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg"
+                        width="40" height="40" class="rounded-circle">
+
+
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <div class="user-dd animated flipInY show " data-bs-popper="none"
+                            style="width: 300px; height: 200px;">
+                            <div class="d-flex align-items-center p-3 bg-info text-white">
+                                <div class="">
+                                    <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg"
+                                        alt="user" class="rounded-circle" width="40">
+                                </div>
+                                <div class="ms-2">
+                                    <h4 class="mb-0 text-white">Foxy Alviter</h4>
+                                    <p class="mb-0">angeelu23@gmail.com</p>
+                                </div>
+                            </div>
+                            <a class="dropdown-item" href="#">Mi Perfil</a>
+
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Salir</a>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+            <!-- Collapsible wrapper -->
+
+        </div>
+
+        <!--Container wrapper -->
+
+
+    </nav>
+
+
+    <div style="margin-left: 5%;margin-right: 5%">
+
+        <div class="row ">
+            <h2 style="padding-top: 30px; text-align: center;" class="col-md-10">Tabla de Postulaciones</h2>
+            <button type="submit" class="btn btn-info col-md-2" style="margin: 30px 0px; width: 10%;">Registrar</button>
+        </div>
+        <table class="table">
+            <thead style="    background: linear-gradient(90deg,#048abf,#2cc1fc); color: #fff;">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Titulo</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Estatus</th>
+                    <th scope="col">Estado república Mexicana</th>
+                    <th scope="col">Salario</th>
+                    <th scope="col">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Desarrollo de software</td>
+                    <td>Puesto para desarrollo de aplicaciones web utilizando .NET y SQL server</td>
+                    <td><span class="badge rounded-pill bg-success">Postulado</span></td>
+                    <td>Morelos</td>
+                    <td>$9300</td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm px-3" title="Editar" data-toggle="tooltip"
+                            data-placement="left">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm px-3 left" title="Eliminar"
+                            data-toggle="tooltip" data-placement="right">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                        <button type="button" class="btn btn-info btn-sm px-3 left" title="Favoritos"
+                            data-toggle="tooltip" data-placement="right">
+                            <i style="color: #fff; font-size: 17px" class="fa-regular fa-star"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Desarrollo de software</td>
+                    <td>Puesto para desarrollo de aplicaciones web utilizando .NET y SQL server</td>
+                    <td><span class="badge bg-primary rounded-pill d-inline">Contratado</span></td>
+                    <td>Morelos</td>
+                    <td>$9300</td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm px-3" title="Editar" data-toggle="tooltip"
+                            data-placement="left">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm px-3 left" title="Eliminar"
+                            data-toggle="tooltip" data-placement="right">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                        <button type="button" class="btn btn-info btn-sm px-3 left" title="Favoritos"
+                            data-toggle="tooltip" data-placement="right">
+                            <i style="color: #fff; font-size: 17px" class="fa-regular fa-star"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Desarrollo de software</td>
+                    <td>Puesto para desarrollo de aplicaciones web utilizando .NET y SQL server</td>
+                    <td><span class="badge bg-secondary rounded-pill d-inline">Rechazado</span></td>
+                    <td>Morelos</td>
+                    <td>$9300</td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm px-3" title="Editar" data-toggle="tooltip"
+                            data-placement="left">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm px-3 left" title="Eliminar"
+                            data-toggle="tooltip" data-placement="right">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                        <button type="button" class="btn btn-info btn-sm px-3 left" title="Favoritos"
+                            data-toggle="tooltip" data-placement="right">
+                            <i style="color: #fff; font-size: 17px" class="fa-regular fa-star"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>Desarrollo de software</td>
+                    <td>Puesto para desarrollo de aplicaciones web utilizando .NET y SQL server</td>
+                    <td><span class="badge bg-warning rounded-pill d-inline">Entrevista</span></td>
+                    <td>Morelos</td>
+                    <td>$9300</td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm px-3" title="Editar" data-toggle="tooltip"
+                            data-placement="left">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm px-3 left" title="Eliminar"
+                            data-toggle="tooltip" data-placement="right">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                        <button type="button" class="btn btn-info btn-sm px-3 left" title="Favoritos"
+                            data-toggle="tooltip" data-placement="right">
+                            <i style="color: #fff; font-size: 17px" class="fa-regular fa-star"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">5</th>
+                    <td>Desarrollo de software</td>
+                    <td>Puesto para desarrollo de aplicaciones web utilizando .NET y SQL server</td>
+                    <td><span class="badge bg-info rounded-pill d-inline">CV Visto</span></td>
+                    <td>Morelos</td>
+                    <td>$9300</td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm px-3" title="Editar" data-toggle="tooltip"
+                            data-placement="left">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm px-3 left" title="Eliminar"
+                            data-toggle="tooltip" data-placement="right">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                        <button type="button" class="btn btn-info btn-sm px-3 left" title="Favoritos"
+                            data-toggle="tooltip" data-placement="right">
+                            <i style="color: #fff; font-size: 17px" class="fa-regular fa-star"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">6</th>
+                    <td>Desarrollo de software</td>
+                    <td>Puesto para desarrollo de aplicaciones web utilizando .NET y SQL server</td>
+                    <td><span class="badge bg-light rounded-pill d-inline" style="color: grey;">Idóneo</span></td>
+                    <td>Morelos</td>
+                    <td>$9300</td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm px-3" title="Editar" data-toggle="tooltip"
+                            data-placement="left">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm px-3 left" title="Eliminar"
+                            data-toggle="tooltip" data-placement="right">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                        <button type="button" class="btn btn-info btn-sm px-3 left" title="Favoritos"
+                            data-toggle="tooltip" data-placement="right">
+                            <i style="color: #fff; font-size: 17px" class="fa-regular fa-star"></i>
+                        </button>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
