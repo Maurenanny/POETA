@@ -30,8 +30,10 @@ angular
           controller: "LoginCtrl",
           controllerAs: "ctrlLogin",
         })
-        .when("/perfil", {
-          templateUrl: "/view/profile/perfil.html"
+        .when("/usuario/perfil/:id", {
+          templateUrl: "/view/profile/perfil.html",
+          contorller: "ProfileCtrl",
+          controllerAs: "ctrlProfile"
         })
         .when("/testV", {
           templateUrl: "/view/test/test.html",
