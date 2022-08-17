@@ -32,7 +32,7 @@ angular
         })
         .when("/usuario/perfil/:id", {
           templateUrl: "/view/profile/perfil.html",
-          contorller: "ProfileCtrl",
+          controller: "ProfileCtrl",
           controllerAs: "ctrlProfile"
         })
         .when("/testV", {

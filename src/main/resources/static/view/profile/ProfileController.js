@@ -1,4 +1,4 @@
-/* angular.module("routingApp").controller("ProfileCtrl",[
+angular.module("routingApp").controller("ProfileCtrl",[
     "$rootScope",
     "$scope",
     "$http",
@@ -15,43 +15,21 @@
                 y : "top",
             },
         });
-        $(document).ready(function(){
-            console.log("aaaaaaaaaaaaaaa");
-        })
+        $scope.user = {}
         this.findUserProfile = () => {
-            notyf.success("aaaaaaa");
             if($routeParams.id){
                 return $http({
                     method : "get",
-                    url : `${APP_URL.url}/postulant/${$routeParams.id}`,
+                    url : `${APP_URL.url}/user/${$routeParams.id}`,
                     headers : {
                         "Content-Type" : "application/json",
                         Accept : "application/json",
                         Authorization : $scope.token,
                     },
                 }).then((res) => {
-                    console.log(res.data)
+                    $scope.user = res.data;
                 })
             }
         }
     }
-]); */
-angular.module("routingApp").controller("ProfileCtrl", [
-    "$rootScope",
-    "$scope",
-    "$http",
-    "APP_URL",
-    function ($rootScope, $scope, $http, APP_URL) {
-        const notyf = new Notyf({
-            duration: 2500,
-            position: {
-                x: "right",
-                y: "top",
-            },
-        });
-        $(document).ready(function(){
-            console.log("aaaaaaaaaaaaaaa");
-        })
-        
-    }
-])
+]);
