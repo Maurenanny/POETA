@@ -3,11 +3,13 @@ package mx.edu.utez.poeta.config;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import mx.edu.utez.poeta.entity.Roles;
 import mx.edu.utez.poeta.entity.User;
 import mx.edu.utez.poeta.service.UserService;
 
+@Service
 public class AuthCheckPermission {
     
     private static final Logger LOGGER = LogManager.getLogger();
@@ -27,9 +29,7 @@ public class AuthCheckPermission {
                 username = jwtTokenUtil.getUsernameFromToken(jwtToken);
                 User user = userService.findByUsername(username);
                 Roles role = user.getRoles();
-                if (role.getAlias().equalsIgnoreCase(roleAlias)) {
-                    return true;
-                }
+                if (role.getAlias().equalsIgnoreCase(roleAlias)) return true;
             } catch (Exception e) {
                 LOGGER.error(String.format("AuthCheckPermission: checkPermission %s", e.getMessage()));
             }
