@@ -8,18 +8,23 @@ import java.util.UUID;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import mx.edu.utez.poeta.config.AuthCheckPermission;
+import mx.edu.utez.poeta.entity.GeneralTemplateResponse;
 import mx.edu.utez.poeta.entity.Roles;
 import mx.edu.utez.poeta.entity.User;
+import mx.edu.utez.poeta.service.PostulantCVService;
 import mx.edu.utez.poeta.service.RoleService;
 import mx.edu.utez.poeta.service.UserService;
 
@@ -31,6 +36,10 @@ public class UserController {
     @Autowired
     private RoleService roleService;
     private String picName;
+    @Autowired
+    private PostulantCVService postulantCVService;
+    @Autowired
+    private AuthCheckPermission authCheckPermission;
 
     @RequestMapping(value = "/list", method = {RequestMethod.GET})
     public List<User> findAllUsers() {
@@ -50,6 +59,15 @@ public class UserController {
     @RequestMapping(value = "/{id}", method = {RequestMethod.GET})
     public User findUsersById(@PathVariable("id") long id) {
         return userService.findUserById(id);
+    }
+
+    @RequestMapping(value = "/profile/{id}", method = {RequestMethod.GET})
+    public GeneralTemplateResponse findUserProfile(@PathVariable("id") long id, @RequestHeader HttpHeaders headers) {
+        String token = String.valueOf(headers.get("authorization"));
+        if (authCheckPermission.checkPermission(token, "candidato") || authCheckPermission.checkPermission(token, "reclutador")) {
+            return new GeneralTemplateResponse(postulantCVService.findPostulantCVByUserId(id));
+        }
+        return new GeneralTemplateResponse();
     }
 
     @RequestMapping(name = "/delete/{id}", method = {RequestMethod.GET})
