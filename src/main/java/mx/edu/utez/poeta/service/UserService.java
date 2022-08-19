@@ -25,13 +25,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import mx.edu.utez.poeta.config.JwtResponse;
 import mx.edu.utez.poeta.config.JwtTokenUtil;
+import mx.edu.utez.poeta.entity.PostulantCV;
 import mx.edu.utez.poeta.entity.User;
 import mx.edu.utez.poeta.entity.UserConnection;
+import mx.edu.utez.poeta.repository.IPostulantCVRepository;
 import mx.edu.utez.poeta.repository.IUserConnectionRepository;
 import mx.edu.utez.poeta.repository.IUserRepository;
 
 @Service
-//@Transactional
+// @Transactional
 public class UserService implements UserDetailsService {
 
     @Autowired
@@ -48,6 +50,9 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private IPostulantCVRepository postulantCVRepository;
 
     @Transactional(readOnly = true)
     public List<User> findAllUsers() {
@@ -67,6 +72,11 @@ public class UserService implements UserDetailsService {
         if (tmp != null) {
             flag = true;
             userConnection.setUser(tmp);
+            if (tmp.getRoles().getAlias().equalsIgnoreCase("candidato")) {
+                PostulantCV tmpCv = new PostulantCV();
+                tmpCv.setPostulant(tmp);
+                postulantCVRepository.save(tmpCv);
+            }
             userConnection.setStatus(1);
             userConnectionRepository.save(userConnection);
         }
@@ -108,17 +118,17 @@ public class UserService implements UserDetailsService {
     }
 
     @Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = userRepository.findByUsername(username);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username);
 
-		if(user != null){
-			List<User> employees = new ArrayList<>(Collections.singletonList(user));
-			List<GrantedAuthority> authorities = getUserAuthority(employees);
-			return buildUserForAuthentication(user, authorities);
-		}else{
-			throw new UsernameNotFoundException("Not found");
-		}
-	}
+        if (user != null) {
+            List<User> employees = new ArrayList<>(Collections.singletonList(user));
+            List<GrantedAuthority> authorities = getUserAuthority(employees);
+            return buildUserForAuthentication(user, authorities);
+        } else {
+            throw new UsernameNotFoundException("Not found");
+        }
+    }
 
     public boolean authentication(String username, String password) {
         try {
@@ -137,7 +147,8 @@ public class UserService implements UserDetailsService {
     }
 
     private UserDetails buildUserForAuthentication(User user, List<GrantedAuthority> authorities) {
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
+                authorities);
     }
 
     public boolean verifySession(User user) {
@@ -153,5 +164,5 @@ public class UserService implements UserDetailsService {
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
-    
+
 }

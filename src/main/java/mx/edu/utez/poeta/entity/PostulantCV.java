@@ -23,19 +23,19 @@ public class PostulantCV implements Serializable {
     @JoinColumn(name = "postulant_id", nullable = false, unique = true)
     private User postulant;
 
-    @Column(name = "title", length = 50, nullable = false)
+    @Column(name = "title", length = 50, nullable = true)
     private String title;
 
-    @Column(name = "description", length = 255, nullable = false)
+    @Column(name = "description", length = 255, nullable = true)
     private String description;
 
-    @Column(name = "experience", length = 255, nullable = false)
+    @Column(name = "experience", length = 255, nullable = true)
     private String experience;
 
-    @Column(name = "studies", length = 255, nullable = false)
+    @Column(name = "studies", length = 255, nullable = true)
     private String studies;
 
-    @Column(name = "languages", nullable = false)
+    @Column(name = "languages", nullable = true)
     private String languages;
 
     @Column(name = "certifications", nullable = true)
@@ -44,10 +44,10 @@ public class PostulantCV implements Serializable {
     @Column(name = "courses", nullable = true)
     private String courses;
 
-    @Column(name = "knowledge", length = 255, nullable = false)
+    @Column(name = "knowledge", length = 255, nullable = true)
     private String knowledge;
 
-    @Column(name = "skills", length = 255, nullable = false)
+    @Column(name = "skills", length = 255, nullable = true)
     private String skills;
 
     @Column(name = "uploaded_cv", length = 120, nullable = true)
