@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -22,7 +22,8 @@
 
 </head>
 
-<body>
+<body> -->
+    <div ng-init="ctrlProfile.findUserProfile()"></div>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <!-- Container wrapper -->
@@ -155,14 +156,13 @@
                         <center class="mt-4">
                             <img src="https://demos.wrappixel.com/premium-admin-templates/bootstrap/monster-bootstrap/package/assets/images/users/5.jpg"
                                 class="rounded-circle" width="150">
-                            <h4 class="card-title mt-2">Anchoa Alviter Islas</h4>
+                            <h4 class="card-title mt-2">{{user.name}} {{user.lastname}} {{user.surname}}</h4>
                             <button style="background: linear-gradient(169deg,#048abf,#2cc1fc); color: #fff; border-radius: 10px;" class="btn"><i
                                     class="fa-solid fa-file-pdf"></i> Generar CV</button>
                                     <button onclick="prueba()"
                                     style="background: linear-gradient(169deg,#048abf,#2cc1fc); color: #fff; border-radius: 10px;"
                                     class="btn"><i class="fa-solid fa-file-pdf"></i> Cargar CV</button>
-                                    <h6 class="text-muted">Me considero una persona creativa y proactiva, me gustan los nuevos retos y adaptarme en cualquier ambiente. 
-                                        Soy autodidacta y se me facilita adquirir nuevos conocimientos.</h6>
+                                    <h6 class="text-muted">{{}}</h6>
 
                         </center>
                     </div>
@@ -171,13 +171,13 @@
                     </div>
                     <div class="card-body">
                         <small class="text-muted">Correo electrónico </small>
-                        <h6>angiielu@gmail.com</h6>
+                        <h6>{{user.username}}</h6>
                         <small class="text-muted pt-4 db">Teléfono</small>
-                        <h6>+91 654 784 547</h6>
+                        <h6>{{user.phone}}</h6>
                         <small class="text-muted pt-4 db">Estado de la república</small>
                         <h6>71 Pilgrim Avenue Chevy Chase, MD 20815</h6>
                         <small class="text-muted pt-4 db">Fecha de nacimiento</small>
-                        <h6>30-04-1999</h6>
+                        <h6>{{user.birth_date}}</h6>
                         <button type="button" class="btn btn-info" data-bs-toggle="modal"
                             data-bs-target="#exampleModal">Editar</button>
                     </div>
@@ -1004,6 +1004,6 @@
         }
     </script>
 
-</body>
+<!-- </body>
 
-</html>
+</html> -->
