@@ -15,9 +15,27 @@ angular.module("routingApp").controller("LoginCtrl", [
             },
         });
 
+        $rootScope.utils = {
+            img: null,
+            id: null,
+            role: null,
+        }
+
         $scope.initial = function () {
-            $rootScope.currenteSession = $scope.getToken()
-            $rootScope.role = localStorage.getItem("role")
+            if (localStorage.getItem("token")) {
+                $rootScope.currentSession = true;
+                $rootScope.role = localStorage.getItem("role");
+                $rootScope.utils.img = $scope.decodeToken(localStorage.getItem("token")).image;
+                $rootScope.utils.id = $scope.decodeToken(localStorage.getItem("token")).id;
+                $rootScope.utils.role = $scope.decodeToken(localStorage.getItem("token")).role;
+            } else {
+                $rootScope.currentSession = false;
+                $rootScope.utils = {
+                    img: null,
+                    id: null,
+                    role: null,
+                }
+            }
         }
 
         $scope.getToken = function () {
@@ -52,6 +70,7 @@ angular.module("routingApp").controller("LoginCtrl", [
             $rootScope.currenteSession = false;
             $window.localStorage.clear();
             $window.location.href = "#!/";
+            $scope.initial()
         }
 
         (() => {
@@ -179,16 +198,20 @@ angular.module("routingApp").controller("LoginCtrl", [
         }
 
         this.findAllStates = () => {
-            return $http({
-                method: "GET",
-                url: `${APP_URL.url}/state/list`,
-                headers: {
-                    "Content-Type": "application/json",
-                    Accept: "application/json",
-                },
-            }).then((res) => {
-                $scope.listStates = res.data;
-            })
+            if ($rootScope.currentSession) {
+                $window.location.href = "#!/"
+            } else {
+                return $http({
+                    method: "GET",
+                    url: `${APP_URL.url}/state/list`,
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                    },
+                }).then((res) => {
+                    $scope.listStates = res.data;
+                })
+            }
         }
 
         this.findAllCities = () => {
@@ -216,11 +239,16 @@ angular.module("routingApp").controller("LoginCtrl", [
             }).then((res) => {
                 if (res.data) {
                     $window.localStorage.setItem("token", res.data.jwtToken);
-                    let name = this.decodeToken(res.data.jwtToken)
+                    let name = $scope.decodeToken(res.data.jwtToken)
                     $window.localStorage.setItem("role", name.role);
                     $rootScope.currentSession = $scope.getToken();
                     notyf.success("¡Bienvenido(a)!");
-                    $window.location.href = "#!/"; //cambiar dependiendo el rol, si es reclutador mandar a sus vacantes, si es postulante mandar a su perfil
+                    $scope.initial();
+                    if (name.role == "ROLE_RECLUTADOR") {
+                        $window.location.href = "#!/mis-vacantes"
+                    } else if (name.role == "ROLE_CANDIDATO") {
+                        $window.location.href = "#!/vacantes"
+                    }
                 } else {
                     notyf.error("Usuario y/o Contraseña Incorrecto");
                 }
@@ -229,7 +257,7 @@ angular.module("routingApp").controller("LoginCtrl", [
             });
         };
 
-        this.decodeToken = (token) => {
+        $scope.decodeToken = (token) => {
             var base64Url = token.split(".")[1];
             var base64 = base64Url.replace("-", "+").replace("_", "/");
             return JSON.parse($window.atob(base64));

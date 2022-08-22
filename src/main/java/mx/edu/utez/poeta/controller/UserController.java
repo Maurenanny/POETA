@@ -125,7 +125,7 @@ public class UserController {
         String ext = FilenameUtils.getExtension(file.getOriginalFilename());
         try {
             String userDirectory = FileSystems.getDefault().getPath("").toAbsolutePath().toString();
-            file.transferTo(new File(userDirectory + "\\src\\main\\resources\\static\\uploads\\" + separator + "profilePics" + separator + fileName + "." + ext));
+            file.transferTo(new File(userDirectory + "\\src\\main\\resources\\static\\img\\uploads\\" + separator + "profilePics" + separator + fileName + "." + ext));
             this.picName = fileName + "." + ext;
         } catch (IOException e) {
             e.printStackTrace();

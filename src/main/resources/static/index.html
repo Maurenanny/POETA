@@ -33,16 +33,31 @@
     ></script>
 </head>
 
-<body ng-app="routingApp">
-    <nav class="py-2 bg-light border-bottom">
-        <div class="container flex-wrap d-flex">
-            <ul class="nav me-auto">
-                <li class="nav-item">
-                    <a href="#!" class="px-2 nav-link link-dark active" aria-current="page">
-                        Inicio
-                    </a>
-                </li>
-            </ul>
+<body ng-app="routingApp" ng-controller="LoginCtrl">
+    <div ng-init="initial()"></div>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand me-2" href="#!/"><img src="./img/image 1.png" alt="POETA" width="43" height="43"> <b>POETA</b></a>
+            <!-- <button class="navbar-toggler" type="button" (click)="buttonsNav.toggle()" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button> -->
+            <div class="navbar-collapse" id="navbarButtonsExample">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item" ng-if="utils.role === 'ROLE_CANDIDATO' || !currentSession">
+                        <a class="nav-link" href="/#!/vacantes">Vacantes</a>
+                    </li>
+                    <li class="nav-item" ng-if="utils.role === 'ROLE_RECLUTADOR'">
+                        <a class="nav-link" href="/#!/mis-vacantes">Mis Vacantes</a>
+                    </li>
+                    <li class="nav-item" ng-if="utils.role === 'ROLE_CANDIDATO'">
+                        <a class="nav-link" href="/#!/">Mis Postulaciones</a>
+                    </li>
+                </ul>
+                <a href="/#!/usuario/perfil/{{utils.id}}" ng-if="currentSession && utils.role === 'ROLE_CANDIDATO'">
+                    <img src="./img/uploads/profilePics/{{utils.img}}" width="43" height="43">
+                </a>
+                <a href="/#!/login" class="nav-link" ng-if="!currentSession">Iniciar Sesión / Registrarse</a>
+                <a style="color: red;" ng-click="logout()" ng-if="currentSession">Cerrar Sesión</a>
+            </div>
         </div>
     </nav>
     <div class="">
