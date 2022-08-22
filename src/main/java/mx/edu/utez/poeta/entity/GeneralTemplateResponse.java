@@ -18,6 +18,12 @@ public class GeneralTemplateResponse {
         this.message = "No tiene permiso para ejecutar esta acción";
     }
 
+    public GeneralTemplateResponse(String msg) {
+        this.code = 403;
+        this.object = msg;
+        this.message = "";
+    }
+
     public int getCode() {
         return this.code;
     }

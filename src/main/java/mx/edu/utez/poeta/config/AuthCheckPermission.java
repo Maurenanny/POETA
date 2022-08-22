@@ -37,4 +37,33 @@ public class AuthCheckPermission {
         return false;
     }
 
+    public User findUserByToken(String token) {
+        String requestTokenHeader = token.replace("[", "").replace("]", "");
+        User user = null;
+        if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer")) {
+            String jwtToken = requestTokenHeader.substring(7);
+            try {
+                user = userService.findByUsername(jwtTokenUtil.getUsernameFromToken(jwtToken));
+                return user;
+            } catch (Exception e) {
+                LOGGER.error(String.format("AuthCheckPermission: findUSerByToken %s", e.getMessage()));
+            }
+        }
+        return null;
+    }
+
+    public boolean isLoguedUser(String token, long id) {
+        User tmp = userService.findUserById(id);
+        User logued = findUserByToken(token);
+        if (tmp.getId() == logued.getId()) return true;
+        return false;
+    }
+
+    /* public boolean isLoguedUser(String token, long id) {
+        User tmp = findUserById(id);
+        User logued = findUserByToken(token);
+        if (tmp.getId() == logued.getId()) return true;
+        return false;
+    } */
+
 }

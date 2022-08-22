@@ -47,8 +47,11 @@ public class Vacancies implements Serializable {
     @JoinColumn(name = "city_id", nullable = false)
     private City city;
 
-    @Column(name = "type", nullable = false)
-    private int type;
+    /* @Column(name = "type", nullable = false)
+    private int type; */
+    @ManyToOne()
+    @JoinColumn(name = "type", nullable = false)
+    private VacancyType type;
 
     @Column(name = "job_start_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -60,8 +63,12 @@ public class Vacancies implements Serializable {
     @Column(name = "max_salary", nullable = false)
     private double maxSalary;
 
-    @Column(name = "payment_period", nullable = false)
-    private int paymetPeriod;
+    @ManyToOne()
+    @JoinColumn(name = "payment_period", nullable = false)
+    private VacancyPaymentPeriod paymentPeriod;
+
+    /* @Column(name = "payment_period", nullable = false)
+    private int paymentPeriod; */
 
     @Column(name = "benefits", nullable = false)
     private String benefits;
@@ -130,11 +137,11 @@ public class Vacancies implements Serializable {
         this.city = city;
     }
 
-    public int getType() {
+    public VacancyType getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(VacancyType type) {
         this.type = type;
     }
 
@@ -162,12 +169,12 @@ public class Vacancies implements Serializable {
         this.maxSalary = maxSalary;
     }
 
-    public int getPaymetPeriod() {
-        return paymetPeriod;
+    public VacancyPaymentPeriod getPaymentPeriod() {
+        return paymentPeriod;
     }
 
-    public void setPaymetPeriod(int paymetPeriod) {
-        this.paymetPeriod = paymetPeriod;
+    public void setPaymentPeriod(VacancyPaymentPeriod paymentPeriod) {
+        this.paymentPeriod = paymentPeriod;
     }
 
     public String getBenefits() {

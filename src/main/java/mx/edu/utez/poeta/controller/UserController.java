@@ -42,8 +42,8 @@ public class UserController {
     private AuthCheckPermission authCheckPermission;
 
     @RequestMapping(value = "/list", method = {RequestMethod.GET})
-    public List<User> findAllUsers() {
-        return userService.findAllUsers();
+    public GeneralTemplateResponse findAllUsers() {
+        return new GeneralTemplateResponse(userService.findAllUsers());
     }
 
     @RequestMapping(value = "/roles", method = {RequestMethod.GET})
@@ -56,9 +56,37 @@ public class UserController {
         return roleService.findRoleById(id);
     }
 
+    /* @RequestMapping(value = "/isLoguedUser/{id}", method = {RequestMethod.GET})
+    public GeneralTemplateResponse isLoguedUser(@RequestHeader HttpHeaders headers, @PathVariable("id") long id) {
+        String token = String.valueOf(headers.get("authorization"));
+        User tmp = userService.findUserById(id);
+        User logued = userService.findUserByToken(token);
+        if (tmp.getId() == logued.getId()) {
+            return new GeneralTemplateResponse(true);
+        } else {
+            return new GeneralTemplateResponse(false);
+        }
+    } */
+
+    @RequestMapping(value = "/actual", method = {RequestMethod.GET})
+    public GeneralTemplateResponse getACtualUser(@RequestHeader HttpHeaders headers) {
+        String token = String.valueOf(headers.get("authorization"));
+        if (authCheckPermission.checkPermission(token, "reclutador") || authCheckPermission.checkPermission(token, "candidato")) {
+            return new GeneralTemplateResponse(authCheckPermission.findUserByToken(token));
+        } 
+        return new GeneralTemplateResponse();
+    }
+
     @RequestMapping(value = "/{id}", method = {RequestMethod.GET})
-    public User findUsersById(@PathVariable("id") long id) {
-        return userService.findUserById(id);
+    public GeneralTemplateResponse findUsersById(@PathVariable("id") long id) {
+        User tmp = userService.findUserById(id);
+        if (tmp != null) {
+            String alias = tmp.getRoles().getAlias();
+            if (alias.equalsIgnoreCase("candidato")) {
+                return new GeneralTemplateResponse(userService.findUserById(id));
+            }
+        }
+        return new GeneralTemplateResponse(false);
     }
 
     @RequestMapping(value = "/profile/{id}", method = {RequestMethod.GET})

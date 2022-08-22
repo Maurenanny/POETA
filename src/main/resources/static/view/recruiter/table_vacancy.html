@@ -1,0 +1,311 @@
+<!-- Navbar -->
+<div ng-init="ctrlTableVacancy.getActualUser()"></div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- Container wrapper -->
+    <div class="container">
+
+        <!-- Navbar brand -->
+        <a class="navbar-brand me-2" href="./landing.html">
+            <!--   <img src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.webp" height="16" alt="" loading="lazy"
+              style="margin-top: -1px;" />-->
+
+            <img src="./img/image 1.png" width="10%"><b>POETA</b>
+        </a>
+
+
+        <!-- Toggle button -->
+        <button class="navbar-toggler" type="button" (click)="buttonsNav.toggle()" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+
+
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarButtonsExample" mdbCollapse #buttonsNav="mdbCollapse">
+            <!-- Left links -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+
+                <!--     
+                 <nav class="navbar navbar-dark bg-dark navbar-expand-sm">
+                <a class="navbar-brand" href="#">
+                  <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/logo_white.png" width="30" height="30" alt="logo">
+                  BootstrapBay
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbar-list-4">
+                  <ul class="navbar-nav">
+                      <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="40" height="40" class="rounded-circle">
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Dashboard</a>
+                        <a class="dropdown-item" href="#">Edit Profile</a>
+                        <a class="dropdown-item" href="#">Log Out</a>
+                      </div>
+                    </li>   
+                  </ul>
+                </div>
+              </nav> 
+             -->
+
+
+            </ul>
+
+
+            <!-- Left links -->
+
+            <div class="d-flex align-items-center">
+                <button type="button" class="btn btn-primary px-3 me-2">
+                    Ingresar
+                </button>
+                <button type="button" class="btn btn-warning me-3">
+                    Registrarme </button>
+            </div>
+
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
+            </form>
+            <div class="dropdown">
+
+                <img id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"
+                    src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg"
+                    width="40" height="40" class="rounded-circle">
+
+
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <div class="user-dd animated flipInY show " data-bs-popper="none"
+                        style="width: 300px; height: 200px;">
+                        <div class="d-flex align-items-center p-3 bg-info text-white">
+                            <div class="">
+                                <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg"
+                                    alt="user" class="rounded-circle" width="40">
+                            </div>
+                            <div class="ms-2">
+                                <h4 class="mb-0 text-white">Foxy Alviter</h4>
+                                <p class="mb-0">angeelu23@gmail.com</p>
+                            </div>
+                        </div>
+                        <a class="dropdown-item" href="#">Mi Perfil</a>
+
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Salir</a>
+                    </div>
+                </ul>
+            </div>
+        </div>
+        <!-- Collapsible wrapper -->
+
+    </div>
+
+    <!--Container wrapper -->
+
+
+</nav>
+
+
+<div style="margin-left: 5%;margin-right: 5%">
+
+    <div class="row ">
+        <h2 style="padding-top: 30px; text-align: center;" class="col-md-10">Mis Vacantes</h2>
+        <button type="button" class="btn btn-info col-md-2" style="margin: 30px 0px; width: 10%;" data-bs-toggle="modal"
+            data-bs-target="#registerModal">Registrar</button>
+    </div>
+    <table class="table" id="vacancies">
+        <thead style="    background: linear-gradient(90deg,#048abf,#2cc1fc);
+            color: #fff;">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Titulo</th>
+                <th scope="col">Fecha Inicio</th>
+                <th scope="col">Fecha Fin</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Estatus</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Salario</th>
+                <th scope="col">Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="vacancy in vacancies" repeat-done="initDataTable">
+                <td scope="col">{{$index+1}}</td>
+                <td scope="col">{{vacancy.title | limitTo: 30}}{{vacancy.title.length > 30 ? '...' : ''}}</td>
+                <td scope="col">{{vacancy.startDate | date:'dd/MMM/yyyy'}}</td>
+                <td scope="col">{{vacancy.dateEnd | date:'dd/MMM/yyyy'}}</td>
+                <td scope="col">{{vacancy.description | limitTo: 30}}{{vacancy.description.length > 30 ? '...' : ''}}</td>
+                <td scope="col">
+                    <span class="badge bg-success" ng-if="vacancy.status == 1">Vigente</span>
+                    <span class="badge bg-danger" ng-if="vacancy.status == 0">Vencido</span>
+                </td>
+                <td scope="col">{{vacancy.city.state.name}}</td>
+                <td scope="col">${{vacancy.minSalary}} - ${{vacancy.maxSalary}}</td>
+                <td scope="col">
+                    <button type="button" class="btn btn-primary btn-sm px-3" title="Editar" data-toggle="tooltip"
+                        data-placement="left" ng-click="ctrlTableVacancy.loadVacancy(vacancy.id)" data-bs-toggle="modal"
+                        data-bs-target="#registerModal">
+                        <i class="fa-solid fa-pen"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+<!--Inicio modal registro-->
+<div class="modal fade" id="registerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+aria-labelledby="modalDetallesLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+ <div class="modal-header">
+   <h6>{{isRegister == true ? "REGISTRAR VACANTE" : "ACTUALIZAR VACANTE"}}</h6>
+   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+ </div>
+ <div class="modal-body">
+   <div class="row">
+        <div class="col-12">
+            <label for="title" class="form-label">Título</label>
+            <input type="text" id="title" maxlength="150" required class="form-control" ng-model="register.title" placeholder="Título">
+        </div>
+        <div class="col-12 mt-3">
+            <label for="description" class="form-label">Descripción</label>
+            <textarea id="description" cols="30" rows="5" maxlength="255" required class="form-control" ng-model="register.description" placeholder="Descripción"></textarea>
+        </div>
+        <div class="col-6 mt-3">
+            <label for="state" class="form-label">Estado</label>
+            <select required class="form-select" name="state" id="state" ng-model="tmp.state"
+              ng-options="state as state.name for state in listStates track by state.id"
+              ng-change="ctrlTableVacancy.findAllCities()">
+              <option value="" hidden>Seleccionar Estado</option>
+            </select>
+            <div class="invalid-feedback">
+              Campo Obligatorio
+            </div>
+          </div>
+          <div class="col-6 mt-3">
+            <label for="city" class="form-label">Municipio</label>
+            <select required class="form-select" name="city" id="city" ng-model="register.city"
+              ng-options="city as city.name for city in listCities track by city.id">
+              <option value="" hidden>Seleccionar Municipio</option>
+            </select>
+          </div>
+        <div class="col-6 mt-3">
+            <label for="endDate" class="form-label">Fecha de Fin de la Vacante</label>
+            <input type="date" id="endDate" ng-change="ctrlTableVacancy.lockJobStartDateMin()" required class="form-control" ng-model="register.dateEnd">
+        </div>
+        <div class="col-6 mt-3">
+            <label for="jobStart" class="form-label">Fecha de Inicio del Trabajo</label>
+            <input type="date" id="jobStart" required class="form-control" ng-model="register.jobStartDate">
+        </div>
+        <div class="col-12 mt-3">
+            <label for="type">Horario</label>
+            <select id="type" required class="form-select" ng-model="register.type"
+            ng-options="type as type.name for type in types track by type.id">
+                <option value="" hidden>Horario</option>
+                <!-- <option value="1">Tiempo Completo</option>
+                <option value="2">Medio Tiempo</option>
+                <option value="3">Fines de Semana/Horario Flexible</option> -->
+            </select>
+        </div>
+        <div class="col-4 mt-3">
+            <label for="minSalary" class="form-label">Salario Mínimo</label>
+            <input type="number" id="minSalary" ng-change="ctrlTableVacancy.lockMaxSalaryMin()" min="100" required class="form-control" ng-model="register.minSalary" placeholder="Salario Mínimo">
+        </div>
+        <div class="col-4 mt-3">
+            <label for="maxSalary" class="form-label">Salario Máximo</label>
+            <input type="number" id="maxSalary" required class="form-control" ng-model="register.maxSalary" placeholder="Salario Máximo">
+        </div>
+        <div class="col-4 mt-3">
+            <label for="period">Periodicidad de Pagos</label>
+            <select id="period" required class="form-select" ng-model="register.paymentPeriod"
+            ng-options="period as period.name for period in periods track by period.id">
+                <option value="" hidden>Periodicidad de Pagos</option>
+            </select>
+        </div>
+        <div class="col-12 mt-3">
+            <label for="benefits" class="form-label">Beneficios</label>
+            <textarea id="benefits" cols="30" rows="5" maxlength="255" required class="form-control" ng-model="register.benefits" placeholder="Beneficios"></textarea>
+        </div>
+   </div>
+ </div>
+ <div class="modal-footer">
+    <button type="button" class="btn btn-secondary m-1" data-bs-dismiss="modal" ng-click="ctrlTableVacancy.clear()">
+        <i class="fas fa-times"></i> <span class="d-none d-md-inline">Cancelar</span>
+    </button>
+   <button type="button" class="btn btn-primary m-1" data-bs-dismiss="modal" ng-click="ctrlTableVacancy.save()">
+     <i class="fa fa-check"></i> <span class="d-none d-md-inline">{{isRegister == true ? "Registrar" : "Actulizar"}}</span>
+   </button>
+ </div>
+</div>
+</div>
+</div>
+<!--Fin modal registro-->
+<!--Modal de editar-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #128cbe;">
+                <h5 class="modal-title" id="exampleModalLabel">Editar Datos </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Título:</label>
+                        <input type="text" class="form-control" id="title">
+                    </div>
+                    <div class="mb-3">
+                        <label for="recipient-lastname" class="col-form-label">Fecha Inicio:</label>
+                        <input type="text" class="form-control" id="dateStart">
+                    </div>
+                    <div class="mb-3">
+                        <label for="recipient-surname" class="col-form-label">Fecha Fin:</label>
+                        <input type="text" class="form-control" id="dateEnd">
+                    </div>
+                    <div class="mb-3">
+                        <label for="recipient-email" class="col-form-label">Descripción:</label>
+                        <input type="email" class="form-control" id="description">
+                    </div>
+                    <div class="mb-3">
+                        <label for="recipient-phone" class="col-form-label">Estatus:</label>
+                        <input type="date" class="form-control" id="status">
+                    </div>
+                    <div class="mb-3">
+                        <label for="recipient-estados" class="col-form-label">Estado de la república:</label>
+                        <br>
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>Seleccionar</option>
+                            <option value="Aguascalientes">Aguascalientes</option>
+                            <option value="Baja California">Baja California</option>
+                            <option value="Baja California Sur">Baja California Sur</option>
+                            <option value="Campeche">Campeche</option>
+                            <option value="Coahuila de Zaragoza">Coahuila de Zaragoza</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="recipient-surname" class="col-form-label">Salario:</label>
+                        <input type="text" class="form-control" id="salary">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" style="background-color: #128cbe; color: #fff;" class="btn">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

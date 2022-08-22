@@ -35,6 +35,11 @@ angular
           controller: "ProfileCtrl",
           controllerAs: "ctrlProfile"
         })
+        .when("/mis-vacantes", {
+          templateUrl: "/view/recruiter/table_vacancy.html",
+          controller: "TableVacancyCtrl",
+          controllerAs: "ctrlTableVacancy",
+        })
         .when("/testV", {
           templateUrl: "/view/test/test.html",
           controller: "TestCtrl",

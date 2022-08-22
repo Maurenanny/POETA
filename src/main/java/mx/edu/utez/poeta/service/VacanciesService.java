@@ -45,4 +45,9 @@ public class VacanciesService {
         return flag;
     }
 
+    @Transactional(readOnly = true)
+    public List<Vacancies> findAllRecruiterVacancies(long id) {
+        return vacanciesRepository.findAllRecruiterVacancies(id);
+    }
+
 }
