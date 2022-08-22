@@ -9,14 +9,13 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import freemarker.template.Configuration;
 import freemarker.template.TemplateException;
-import mx.edu.utez.poeta.entity.Process;
+import mx.edu.utez.poeta.entity.PostulantProcess;
 
 @Service
 public class EmailService {
@@ -25,7 +24,7 @@ public class EmailService {
     @Autowired
     private Configuration configuration;
 
-    public void sendEmail(Process process, int type) throws MessagingException, IOException, TemplateException {
+    public void sendEmail(PostulantProcess process, int type) throws MessagingException, IOException, TemplateException {
         MimeMessage mimeMessage = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
         switch (type) {
@@ -39,17 +38,16 @@ public class EmailService {
             helper.setSubject("¡Todo listo!");
             break;
         }
-        helper.setSubject("Prueba con Plantilla bonita");
         helper.setTo(process.getPostulant().getUsername());
         String emailContent = getEmailContent(process, type);
         helper.setText(emailContent, true);
         emailSender.send(mimeMessage);
     }
 
-    String getEmailContent(Process process, int type) throws IOException, TemplateException {
+    String getEmailContent(PostulantProcess process, int type) throws IOException, TemplateException {
         StringWriter stringWriter = new StringWriter();
         Map<String, Object> model = new HashMap<>();
-        model.put("user", process.getPostulant());
+        model.put("process", process);
         switch (type) {
             case 1: //hired
             configuration.getTemplate("hired.ftlh").process(model, stringWriter);

@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import mx.edu.utez.poeta.config.AuthCheckPermission;
 import mx.edu.utez.poeta.entity.GeneralTemplateResponse;
-import mx.edu.utez.poeta.entity.Process;
+import mx.edu.utez.poeta.entity.PostulantProcess;
 import mx.edu.utez.poeta.service.EmailService;
-import mx.edu.utez.poeta.service.ProcessService;
+import mx.edu.utez.poeta.service.PostulantProcessService;
 
 @RestController
 @RequestMapping(path = "/process")
 public class ProcessController {
 
     @Autowired
-    private ProcessService processService;
+    private PostulantProcessService processService;
 
     @Autowired
     private EmailService emailService;
@@ -33,22 +33,6 @@ public class ProcessController {
         return new GeneralTemplateResponse(processService.findAllProcesses());
     }
 
-    @RequestMapping(value = "/mail/{id}/{type}", method = { RequestMethod.GET })
-    public void sendEmail(@RequestHeader HttpHeaders headers, @PathVariable("id") long id,
-            @PathVariable("type") int type) {
-        String token = String.valueOf(headers.get("authorization"));
-        if (authCheckPermission.checkPermission(token, "candidato")
-                || authCheckPermission.checkPermission(token, "reclutador")) {
-            try {
-                Process process = processService.findProcessById(id);
-                emailService.sendEmail(process, type);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
-
     @RequestMapping(value = "/{id}", method = { RequestMethod.GET })
     public GeneralTemplateResponse findProcessById(@PathVariable("id") long id, @RequestHeader HttpHeaders headers) {
         String token = String.valueOf(headers.get("authorization"));
@@ -58,13 +42,35 @@ public class ProcessController {
         return new GeneralTemplateResponse();
     }
 
-    @RequestMapping(name = "/save", method = { RequestMethod.POST })
-    public GeneralTemplateResponse save(@RequestBody Process obj, @RequestHeader HttpHeaders headers) {
+    @RequestMapping(value = "/save", method = { RequestMethod.POST })
+    public GeneralTemplateResponse save(@RequestBody PostulantProcess obj, @RequestHeader HttpHeaders headers) {
         String token = String.valueOf(headers.get("authorization"));
         if (authCheckPermission.checkPermission(token, "candidato")) {
-            new GeneralTemplateResponse(processService.save(obj));
+            try {
+                emailService.sendEmail(processService.save(obj), 3);
+                return new GeneralTemplateResponse(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            
         } 
         return new GeneralTemplateResponse();
+    }
+
+    @RequestMapping(value = "/mail/{id}/{type}", method = { RequestMethod.GET })
+    public void sendEmail(@RequestHeader HttpHeaders headers, @PathVariable("id") long id,
+            @PathVariable("type") int type) {
+        String token = String.valueOf(headers.get("authorization"));
+        if (authCheckPermission.checkPermission(token, "candidato")
+                || authCheckPermission.checkPermission(token, "reclutador")) {
+            try {
+                PostulantProcess process = processService.findProcessById(id);
+                emailService.sendEmail(process, type);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     @RequestMapping(name = "/delete/{id}", method = { RequestMethod.GET })

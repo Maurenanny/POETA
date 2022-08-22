@@ -1,7 +1,5 @@
 package mx.edu.utez.poeta.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,8 +23,17 @@ public class VacanciesController {
     AuthCheckPermission authCheckPermission;
 
     @RequestMapping(value = "/list", method = {RequestMethod.GET})
-    public List<Vacancies> findAllVacancies() {
-        return vacanciesService.findAllVacancies();
+    public GeneralTemplateResponse findAllVacancies() {
+        return new GeneralTemplateResponse(vacanciesService.findAllVacancies());
+    }
+
+    @RequestMapping(value = "/list/{id}", method = {RequestMethod.GET})
+    public GeneralTemplateResponse findAllActiveNotRegisteredByPostulantVacancies(@RequestHeader HttpHeaders headers, @PathVariable("id") long id) {
+        String token = String.valueOf(headers.get("authorization"));
+        if (authCheckPermission.checkPermission(token, "candidato")) {
+            return new GeneralTemplateResponse(vacanciesService.findAllActiveNotRegisteredByPostulantVacancies(id));
+        }
+        return new GeneralTemplateResponse();
     }
 
     @RequestMapping(value = "/{id}", method = {RequestMethod.GET})

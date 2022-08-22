@@ -18,12 +18,17 @@ public class VacanciesService {
 
     @Transactional(readOnly = true)
     public List<Vacancies> findAllVacancies() {
-        return vacanciesRepository.findAll();
+        return vacanciesRepository.findAllActiveVacancies();
     }
 
     @Transactional(readOnly = true)
     public Vacancies findVacancieById(long id) {
         return vacanciesRepository.findById(id).get();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Vacancies> findAllActiveNotRegisteredByPostulantVacancies(long id) {
+        return vacanciesRepository.findAllActiveNotRegisteredByPostulantVacancies(id);
     }
 
     public boolean save(Vacancies obj) {

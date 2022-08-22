@@ -40,6 +40,11 @@ angular
           controller: "TableVacancyCtrl",
           controllerAs: "ctrlTableVacancy",
         })
+        .when("/vacantes", {
+          templateUrl: "/view/general/table_vacancy_general.html",
+          controller: "TableVacancyGeneralCtrl",
+          controllerAs: "ctrlTableVacancyGeneral",
+        })
         .when("/testV", {
           templateUrl: "/view/test/test.html",
           controller: "TestCtrl",

@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "process")
-public class Process implements Serializable {
+public class PostulantProcess implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +33,8 @@ public class Process implements Serializable {
     @Column(name = "favorite", nullable = false)
     private boolean favorite;
 
-    public Process() {
+    public PostulantProcess() {
+        this.status = 1;
         this.favorite = false;
     }
 

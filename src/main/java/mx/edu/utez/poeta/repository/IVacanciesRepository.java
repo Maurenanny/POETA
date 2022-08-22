@@ -12,5 +12,11 @@ public interface IVacanciesRepository extends JpaRepository<Vacancies, Long> {
 
     @Query(value = "SELECT * FROM vacancies v WHERE v.recruiter_id = :id", nativeQuery = true)
     List<Vacancies> findAllRecruiterVacancies(@Param("id") long id);
+
+    @Query(value = "SELECT * FROM vacancies v WHERE v.status = 1", nativeQuery = true)
+    List<Vacancies> findAllActiveVacancies();
+
+    @Query(value = "SELECT * FROM vacancies v WHERE v.id NOT IN (SELECT p.vacant_id FROM process p WHERE p.postulant_id = :id) AND v.status = 1", nativeQuery = true)
+    List<Vacancies> findAllActiveNotRegisteredByPostulantVacancies(@Param("id") long id);
     
 }

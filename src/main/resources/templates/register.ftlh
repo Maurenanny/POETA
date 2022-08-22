@@ -236,11 +236,11 @@
                               <div class="v-text-align v-line-height"
                                 style="line-height: 160%; text-align: justify; word-wrap: break-word;">
                                 <p style="font-size: 14px; line-height: 160%;"><span
-                                    style="font-size: 16px; line-height: 25.6px;"><strong>¡Hola Ulises!</strong></span>
+                                    style="font-size: 16px; line-height: 25.6px;"><strong>¡Hola ${process.postulant.name}!</strong></span>
                                 </p>
                                 <p style="font-size: 14px; line-height: 160%;"> </p>
                                 <p style="font-size: 14px; line-height: 160%;">El equipo de trabajo de talenting ya ha
-                                  mandado tu informacion a la empresa que has solicitado. Porfavor mientras mantente al
+                                  mandado tu informacion a la empresa que ofrece la vacante de <b>${process.vacant.title}</b>. Porfavor mientras mantente al
                                   tanto de tu correo y tu plataforma Talenting. Ten un buen día.</p>
                               </div>
 
