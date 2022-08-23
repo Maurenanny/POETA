@@ -1,706 +1,617 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
+<div ng-init="ctrlProfile.findUserProfile()"></div>
+<div ng-init="ctrlProfile.findAllStates()"></div>
+<!-- Navbar -->
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil</title>
-    <link href="../../css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../../css/all.min.css" />
-    <link rel="stylesheet" href="../../css/all.css" />
-    <link rel="stylesheet" href="../../css/notyf.min.css" />
-    <link rel="stylesheet" href="../../css/dataTables.bootstrap5.min.css" />
-    <link rel="stylesheet" href="../../css/perfil.css">
+<div class="container-fluid">
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- -------------------------------------------------------------- -->
+    <!-- Start Page Content -->
+    <!-- -------------------------------------------------------------- -->
+    <!-- Row -->
+    <div class="row">
+        <!-- Column -->
+        <div class="col-lg-4 col-xlg-3 col-md-5">
+            <div class="card" style="position: sticky; top: 20px;">
+                <div class="card-body">
+                    <center class="mt-4">
+                        <img src="../../img/uploads/profilePics/{{user.image}}" class="rounded-circle" width="150">
+                        <h4 class="card-title mt-2">{{user.name}} {{user.lastname}} {{user.surname}}</h4>
+                        <button
+                            style="background: linear-gradient(169deg,#048abf,#2cc1fc); color: #fff; border-radius: 10px;"
+                            class="btn"><i class="fa-solid fa-file-pdf"></i> Generar CV</button>
+                        <button onclick="prueba()"
+                            style="background: linear-gradient(169deg,#048abf,#2cc1fc); color: #fff; border-radius: 10px;"
+                            class="btn"><i class="fa-solid fa-file-pdf"></i> Cargar CV</button>
+                        <h6 class="text-muted">{{profile.description}}</h6>
 
-</head>
-
-<body> -->
-    <div ng-init="ctrlProfile.findUserProfile()"></div>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <!-- Container wrapper -->
-        <div class="container">
-
-            <!-- Navbar brand -->
-            <a class="navbar-brand me-2" href="../..landing.html">
-                <!--   <img src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.webp" height="16" alt="" loading="lazy"
-              style="margin-top: -1px;" />-->
-
-                <img src="../../img/image 1.png" width="10%"><b>POETA</b>
-            </a>
-
-
-            <!-- Toggle button -->
-            <button class="navbar-toggler" type="button" (click)="buttonsNav.toggle()" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <i class="fas fa-bars"></i>
-            </button>
-
-
-            <!-- Collapsible wrapper -->
-            <div class="collapse navbar-collapse" id="navbarButtonsExample" mdbCollapse #buttonsNav="mdbCollapse">
-                <!-- Left links -->
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-
-                    <!--     
-                 <nav class="navbar navbar-dark bg-dark navbar-expand-sm">
-                <a class="navbar-brand" href="#">
-                  <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/logo_white.png" width="30" height="30" alt="logo">
-                  BootstrapBay
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbar-list-4">
-                  <ul class="navbar-nav">
-                      <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="40" height="40" class="rounded-circle">
-                      </a>
-                      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Dashboard</a>
-                        <a class="dropdown-item" href="#">Edit Profile</a>
-                        <a class="dropdown-item" href="#">Log Out</a>
-                      </div>
-                    </li>   
-                  </ul>
+                    </center>
                 </div>
-              </nav> 
-             -->
+                <div>
+                    <hr>
+                </div>
+                <div class="card-body">
+                    <small class="text-muted">Correo electrónico </small>
+                    <h6>{{user.username}}</h6>
+                    <small class="text-muted pt-4 db">Teléfono</small>
+                    <h6>{{user.phone}}</h6>
+                    <small class="text-muted pt-4 db">Estado de la república</small>
+                    <h6>{{user.city.name}}, {{user.city.state.name}}</h6>
+                    <small class="text-muted pt-4 db">Fecha de nacimiento</small>
+                    <h6>{{user.birthDate | date:'dd/MMM/yyyy'}}</h6>
+                    <button type="button" ng-click="ctrlProfile.stateHandler()" class="btn btn-info" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">Editar</button>
+                </div>
+            </div>
+        </div>
+        <!-- Column -->
+        <!-- Column -->
+        <div class="col-lg-8 col-xlg-9 col-md-7">
+            <div class="card">
+                <!-- Tabs -->
+                <ul class="nav nav-pills custom-pills" id="pills-tab" role="tablist">
 
+                    <li class="nav-item">
+                        <a class="nav-link active" id="pills-profile-tab" data-bs-toggle="pill" href="#perfil"
+                            role="tab" aria-controls="pills-profile" aria-selected="true">Perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-contacto-tab" data-bs-toggle="pill" href="#contacto" role="tab"
+                            aria-controls="pills-contacto" aria-selected="false">Contacto</a>
+                    </li>
 
                 </ul>
+                <!-- Tabs -->
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade active show" id="perfil" role="tabpanel"
+                        aria-labelledby="pills-profile-tab">
+                        <div class="card-body">
 
+                            <div class="profiletimeline mt-0">
+                                <div class="sl-item d-flex align-items-start">
 
-                <!-- Left links -->
-
-                <div class="d-flex align-items-center">
-                    <button type="button" class="btn btn-primary px-3 me-2">
-                        Ingresar
-                    </button>
-                    <button type="button" class="btn btn-warning me-3">
-                        Registrarme </button>
-                </div>
-
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Buscar</button>
-                </form>
-                <div class="dropdown">
-
-                    <img id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"
-                        src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg"
-                        width="40" height="40" class="rounded-circle">
-
-
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <div class="user-dd animated flipInY show " data-bs-popper="none"
-                            style="width: 300px; height: 200px;">
-                            <div class="d-flex align-items-center p-3 bg-info text-white">
-                                <div class="">
-                                    <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg"
-                                        alt="user" class="rounded-circle" width="40">
+                                    <div class="sl-left col-md-8">
+                                        <h2 style="">Estudios:</h2>
+                                        <p>{{profile.studies}}</p>
+                                    </div>
+                                    <div class="sl-right col-md-4">
+                                        <img style="width: 50%;"
+                                            src="https://cdn-icons-png.flaticon.com/512/747/747086.png"
+                                            class="img-fluid rounded">
+                                    </div>
                                 </div>
-                                <div class="ms-2">
-                                    <h4 class="mb-0 text-white">Foxy Alviter</h4>
-                                    <p class="mb-0">angeelu23@gmail.com</p>
-                                </div>
+                                <hr>
+
                             </div>
-                            <a class="dropdown-item" href="#"> <i class="fa-solid fa-xmark">Mi Perfil</i></a>
-
-                            <div class="dropdown-divider"></div>
-                            <i class="fa-solid fa-facebook"></i>
-                            <a class="dropdown-item" href="#">Salir</a>
                         </div>
-                    </ul>
-                </div>
-            </div>
-            <!-- Collapsible wrapper -->
+                        <div class="card-body">
 
-        </div>
-
-        <!--Container wrapper -->
-
-
-    </nav>
-    <div class="container-fluid">
-        <!-- -------------------------------------------------------------- -->
-        <!-- Start Page Content -->
-        <!-- -------------------------------------------------------------- -->
-        <!-- Row -->
-        <div class="row">
-            <!-- Column -->
-            <div class="col-lg-4 col-xlg-3 col-md-5">
-                <div class="card" style="position: sticky; top: 20px;">
-                    <div class="card-body">
-                        <center class="mt-4">
-                            <img src="../../img/uploads/profilePics/{{user.image}}"
-                                class="rounded-circle" width="150">
-                            <h4 class="card-title mt-2">{{user.name}} {{user.lastname}} {{user.surname}}</h4>
-                            <button style="background: linear-gradient(169deg,#048abf,#2cc1fc); color: #fff; border-radius: 10px;" class="btn"><i
-                                    class="fa-solid fa-file-pdf"></i> Generar CV</button>
-                                    <button onclick="prueba()"
-                                    style="background: linear-gradient(169deg,#048abf,#2cc1fc); color: #fff; border-radius: 10px;"
-                                    class="btn"><i class="fa-solid fa-file-pdf"></i> Cargar CV</button>
-                                    <h6 class="text-muted">{{}}</h6>
-
-                        </center>
-                    </div>
-                    <div>
-                        <hr>
-                    </div>
-                    <div class="card-body">
-                        <small class="text-muted">Correo electrónico </small>
-                        <h6>{{user.username}}</h6>
-                        <small class="text-muted pt-4 db">Teléfono</small>
-                        <h6>{{user.phone}}</h6>
-                        <small class="text-muted pt-4 db">Estado de la república</small>
-                        <h6>71 Pilgrim Avenue Chevy Chase, MD 20815</h6>
-                        <small class="text-muted pt-4 db">Fecha de nacimiento</small>
-                        <h6>{{user.birth_date}}</h6>
-                        <button type="button" class="btn btn-info" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">Editar</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Column -->
-            <!-- Column -->
-            <div class="col-lg-8 col-xlg-9 col-md-7">
-                <div class="card">
-                    <!-- Tabs -->
-                    <ul class="nav nav-pills custom-pills" id="pills-tab" role="tablist">
-
-                        <li class="nav-item">
-                            <a class="nav-link active" id="pills-profile-tab" data-bs-toggle="pill" href="#perfil"
-                                role="tab" aria-controls="pills-profile" aria-selected="true">Perfil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="pills-contacto-tab" data-bs-toggle="pill" href="#contacto"
-                                role="tab" aria-controls="pills-contacto" aria-selected="false">Contacto</a>
-                        </li>
-
-                    </ul>
-                    <!-- Tabs -->
-                    <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade active show" id="perfil" role="tabpanel"
-                            aria-labelledby="pills-profile-tab">
-                            <div class="card-body">
-
-                                <div class="profiletimeline mt-0">
-                                    <div class="sl-item d-flex align-items-start">
-
-                                        <div class="sl-left col-md-8">
-                                            <h2 style="">Estudios:</h2>
-                                            <p>Universidad: Desarrollo de software Multiplataforma</p>
-                                        </div>
-                                        <div class="sl-right col-md-4">
-                                            <img style="width: 50%;"
-                                                src="https://cdn-icons-png.flaticon.com/512/747/747086.png"
-                                                class="img-fluid rounded">
-                                        </div>
+                            <div class="profiletimeline mt-0">
+                                <div class="sl-item d-flex align-items-start">
+                                    <div class="sl-left col-md-8">
+                                        <h2 style="">Idiomas:</h2>
+                                        <ul>
+                                            <li>Ingles</li>
+                                            <li>Español</li>
+                                            <li>Frances</li>
+                                        </ul>
                                     </div>
-                                    <hr>
-
-                                </div>
-                            </div>
-                            <div class="card-body">
-
-                                <div class="profiletimeline mt-0">
-                                    <div class="sl-item d-flex align-items-start">
-                                        <div class="sl-left col-md-8">
-                                            <h2 style="">Idiomas:</h2>
-                                            <ul>
-                                                <li>Ingles</li>
-                                                <li>Español</li>
-                                                <li>Frances</li>
-                                            </ul>
-                                        </div>
-                                        <div class="sl-right col-md-4">
-                                            <img style="width: 50%;"
-                                                src="https://www.kindpng.com/picc/m/361-3613400_martin-chapman-fromm-icono-de-idioma-png-transparent.png"
-                                                class="img-fluid rounded">
-                                        </div>
+                                    <div class="sl-right col-md-4">
+                                        <img style="width: 50%;"
+                                            src="https://www.kindpng.com/picc/m/361-3613400_martin-chapman-fromm-icono-de-idioma-png-transparent.png"
+                                            class="img-fluid rounded">
                                     </div>
-                                    <hr>
                                 </div>
+                                <hr>
                             </div>
-                            <div class="card-body">
-
-                                <div class="profiletimeline mt-0">
-                                    <div class="sl-item d-flex align-items-start">
-
-                                        <div class="sl-left col-md-8">
-                                            <h2 style="">Cursos:</h2>
-                                            <ul>
-                                                <li>Desarrollo web</li>
-                                                <li>Base de datos</li>
-                                                <li>Aplicaciones móviles</li>
-                                            </ul>
-                                        </div>
-                                        <div class="sl-right col-md-4 mt-40">
-                                            <img style="width: 50%;" src="../../img/cursoo.png"
-                                                class="img-fluid rounded">
-                                        </div>
-                                    </div>
-                                    <hr>
-
-                                </div>
-                            </div>
-                            <div class="card-body">
-
-                                <div class="profiletimeline ">
-                                    <div class="sl-item d-flex align-items-start">
-
-                                        <div class="sl-left col-md-8">
-                                            <h2 style="">Habilidades:</h2>
-                                            <ul>
-                                                <li>Páginas web</li>
-                                                <li>Trabajo en equipo</li>
-                                                <li>Coolaboración</li>
-                                            </ul>
-                                        </div>
-                                        <div class="sl-right col-md-4 ">
-                                            <img style="width: 50%;" src="../../img/skills.png"
-                                                class="img-fluid rounded">
-                                        </div>
-                                    </div>
-                                    <hr>
-
-                                </div>
-                            </div>
-                            <div class="card-body">
-
-                                <div class="profiletimeline ">
-                                    <div class="sl-item d-flex align-items-start">
-
-                                        <div class="sl-left col-md-8">
-                                            <h2 style="">Certificaciones:</h2>
-                                            <ul>
-                                                <li>Dark Tone Desing</li>
-                                                <li>AWS Cloud Practitioner Essentials</li>
-                                                <li>Scrum Fundamentals</li>
-                                            </ul>
-                                        </div>
-                                        <div class="sl-right col-md-4 ">
-                                            <img style="width: 50%;" src="../../img/skills.png"
-                                                class="img-fluid rounded">
-                                        </div>
-                                    </div>
-                                    <hr>
-
-                                </div>
-                            </div>
-
-                            <div class="card-body">
-
-                                <div class="profiletimeline ">
-                                    <div class="sl-item d-flex align-items-start">
-
-                                        <div class="sl-left col-md-8">
-                                            <h2 style="">Conocimientos:</h2>
-                                            <ul>
-                                                <li>Illustrator</li>
-                                                <li>Photoshop</li>
-                                                <li>javascript</li>
-                                                <li>Paquetería Microsoft</li>
-                                                <li>Gestor de repositorios: Github, Gitlab, Fork</li>
-                                                <li>CSS</li>
-                                                <li>React Native</li>
-                                            </ul>
-                                        </div>
-                                        <div class="sl-right col-md-4 ">
-                                            <img style="width: 50%;" src="../../img/brain.png"
-                                                class="img-fluid rounded">
-                                        </div>
-                                    </div>
-                                    <hr>
-
-                                </div>
-                            </div>
-
-
-
                         </div>
-                        <div class="tab-pane fade" id="contacto" role="tabpanel" aria-labelledby="pills-contacto-tab">
-                            <h4 style="text-align: center;">Área de Contacto</h4>
-                            <section>
-                                <!-- Table with panel -->
-                                <div class="card card-cascade narrower border border-light">
+                        <div class="card-body">
 
-                                    <!--/Card image-->
-                                    <div class="card card-body">
-                                        <div class="table-responsive" style="height: 100%;">
-                                            <table class="table search-table v-middle">
-                                                <thead class="header-item">
-                                                    <tr>
-                                                        <th scope="col">#</th>
-                                                        <th>Nombre</th>
-                                                        <th>Correo</th>
-                                                        <th>Celular</th>
-                                                        <th>Opciones</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <!-- row -->
-                                                    <tr class="search-items">
-                                                        <td>
-                                                            1
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <img src="https://demos.wrappixel.com/premium-admin-templates/bootstrap/monster-bootstrap/package/assets/images/users/4.jpg"
-                                                                    alt="avatar" class="rounded-circle" width="45">
-                                                                <div class="ms-3">
-                                                                    <div class="user-meta-info">
-                                                                        <h6 class="user-name mb-0 font-weight-medium"
-                                                                            data-name="Emma Adams">
-                                                                            Emma Adams
-                                                                        </h6>
-                                                                        <small class="user-work text-muted"
-                                                                            data-occupation="Web Developer">Web
-                                                                            Developer</small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <span class="usr-email-addr"
-                                                                data-email="adams@mail.com">adams@mail.com</span>
-                                                        </td>
+                            <div class="profiletimeline mt-0">
+                                <div class="sl-item d-flex align-items-start">
 
-                                                        <td>
-                                                            <span class="usr-ph-no" data-phone="+1 (070) 123-4567">+91
-                                                                (070) 123-4567</span>
-                                                        </td>
-                                                        <td>
-                                                            <div class="action-btn">
-                                                                <a href="javascript:void(0)" class="text-info edit"><svg
-                                                                        xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-eye feather-sm fill-white">
-                                                                        <path
-                                                                            d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z">
-                                                                        </path>
-                                                                        <circle cx="12" cy="12" r="3"></circle>
-                                                                    </svg></a>
-                                                                <a href="javascript:void(0)"
-                                                                    class="text-dark delete ms-2"><svg
-                                                                        xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-trash-2 feather-sm fill-white">
-                                                                        <polyline points="3 6 5 6 21 6"></polyline>
-                                                                        <path
-                                                                            d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-                                                                        </path>
-                                                                        <line x1="10" y1="11" x2="10" y2="17"></line>
-                                                                        <line x1="14" y1="11" x2="14" y2="17"></line>
-                                                                    </svg></a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <!-- /.row -->
-                                                    <!-- row -->
-                                                    <tr class="search-items">
-                                                        <td>
-                                                            2
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <img src="https://demos.wrappixel.com/premium-admin-templates/bootstrap/monster-bootstrap/package/assets/images/users/1.jpg"
-                                                                    class="rounded-circle" alt="user" width="45">
-                                                                <div class="ms-3">
-                                                                    <div class="user-meta-info">
-                                                                        <h6 class="user-name mb-0 font-weight-medium"
-                                                                            data-name="Olivia Allen">
-                                                                            Olivia Allen
-                                                                        </h6>
-                                                                        <small class="user-work text-muted"
-                                                                            data-occupation="Web Designer">Web
-                                                                            Designer</small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <span class="usr-email-addr"
-                                                                data-email="allen@mail.com">allen@mail.com</span>
-                                                        </td>
+                                    <div class="sl-left col-md-8">
+                                        <h2 style="">Cursos:</h2>
+                                        <ul>
+                                            <li>Desarrollo web</li>
+                                            <li>Base de datos</li>
+                                            <li>Aplicaciones móviles</li>
+                                        </ul>
+                                    </div>
+                                    <div class="sl-right col-md-4 mt-40">
+                                        <img style="width: 50%;" src="../../img/cursoo.png" class="img-fluid rounded">
+                                    </div>
+                                </div>
+                                <hr>
 
-                                                        <td>
-                                                            <span class="usr-ph-no" data-phone="+91 (125) 450-1500">+91
-                                                                (125) 450-1500</span>
-                                                        </td>
-                                                        <td>
-                                                            <div class="action-btn">
-                                                                <a href="javascript:void(0)" class="text-info edit">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-eye feather-sm fill-white">
-                                                                        <path
-                                                                            d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z">
-                                                                        </path>
-                                                                        <circle cx="12" cy="12" r="3"></circle>
-                                                                    </svg>
-                                                                </a>
-                                                                <a href="javascript:void(0)"
-                                                                    class="text-dark delete ms-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-trash-2 feather-sm fill-white">
-                                                                        <polyline points="3 6 5 6 21 6"></polyline>
-                                                                        <path
-                                                                            d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-                                                                        </path>
-                                                                        <line x1="10" y1="11" x2="10" y2="17"></line>
-                                                                        <line x1="14" y1="11" x2="14" y2="17"></line>
-                                                                    </svg>
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <!-- /.row -->
-                                                    <!-- row -->
-                                                    <tr class="search-items">
-                                                        <td>
-                                                            3
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <img src="https://demos.wrappixel.com/premium-admin-templates/bootstrap/monster-bootstrap/package/assets/images/users/4.jpg"
-                                                                    alt="avatar" class="rounded-circle" width="45">
-                                                                <div class="ms-3">
-                                                                    <div class="user-meta-info">
-                                                                        <h6 class="user-name mb-0 font-weight-medium"
-                                                                            data-name="Isabella Anderson">
-                                                                            Isabella Anderson
-                                                                        </h6>
-                                                                        <small class="user-work text-muted"
-                                                                            data-occupation="UX/UI Designer">UX/UI
-                                                                            Designer</small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <span class="usr-email-addr"
-                                                                data-email="anderson@mail.com">anderson@mail.com</span>
-                                                        </td>
-                                                        <td>
-                                                            <span class="usr-ph-no" data-phone="+91 (100) 154-1254">+91
-                                                                (100) 154-1254</span>
-                                                        </td>
-                                                        <td>
-                                                            <div class="action-btn">
-                                                                <a href="javascript:void(0)" class="text-info edit"><svg
-                                                                        xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-eye feather-sm fill-white">
-                                                                        <path
-                                                                            d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z">
-                                                                        </path>
-                                                                        <circle cx="12" cy="12" r="3"></circle>
-                                                                    </svg></a>
-                                                                <a href="javascript:void(0)"
-                                                                    class="text-dark delete ms-2"><svg
-                                                                        xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-trash-2 feather-sm fill-white">
-                                                                        <polyline points="3 6 5 6 21 6"></polyline>
-                                                                        <path
-                                                                            d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-                                                                        </path>
-                                                                        <line x1="10" y1="11" x2="10" y2="17"></line>
-                                                                        <line x1="14" y1="11" x2="14" y2="17"></line>
-                                                                    </svg></a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <!-- /.row -->
-                                                    <!-- row -->
-                                                    <tr class="search-items">
-                                                        <td>
-                                                            4
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <img src="https://demos.wrappixel.com/premium-admin-templates/bootstrap/monster-bootstrap/package/assets/images/users/2.jpg"
-                                                                    alt="avatar" class="rounded-circle" width="45">
-                                                                <div class="ms-3">
-                                                                    <div class="user-meta-info">
-                                                                        <h6 class="user-name mb-0 font-weight-medium"
-                                                                            data-name="Amelia Armstrong">
-                                                                            Amelia Armstrong
-                                                                        </h6>
-                                                                        <small class="user-work text-muted"
-                                                                            data-occupation="Ethical Hacker">Ethical
-                                                                            Hacker</small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <span class="usr-email-addr"
-                                                                data-email="armstrong@mail.com">armstrong@mail.com</span>
-                                                        </td>
+                            </div>
+                        </div>
+                        <div class="card-body">
 
-                                                        <td>
-                                                            <span class="usr-ph-no" data-phone="+91 (154) 199- 1540">+91
-                                                                (154) 199- 1540</span>
-                                                        </td>
-                                                        <td>
-                                                            <div class="action-btn">
-                                                                <a href="javascript:void(0)" class="text-info edit"><svg
-                                                                        xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-eye feather-sm fill-white">
-                                                                        <path
-                                                                            d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z">
-                                                                        </path>
-                                                                        <circle cx="12" cy="12" r="3"></circle>
-                                                                    </svg></a>
-                                                                <a href="javascript:void(0)"
-                                                                    class="text-dark delete ms-2"><svg
-                                                                        xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-trash-2 feather-sm fill-white">
-                                                                        <polyline points="3 6 5 6 21 6"></polyline>
-                                                                        <path
-                                                                            d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-                                                                        </path>
-                                                                        <line x1="10" y1="11" x2="10" y2="17"></line>
-                                                                        <line x1="14" y1="11" x2="14" y2="17"></line>
-                                                                    </svg></a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <!-- /.row -->
-                                                    <!-- row -->
-                                                    <tr class="search-items">
-                                                        <td>
-                                                            5
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <img src="https://demos.wrappixel.com/premium-admin-templates/bootstrap/monster-bootstrap/package/assets/images/users/3.jpg"
-                                                                    alt="avatar" class="rounded-circle" width="45">
-                                                                <div class="ms-3">
-                                                                    <div class="user-meta-info">
-                                                                        <h6 class="user-name mb-0 font-weight-medium"
-                                                                            data-name="Emily Atkinson">
-                                                                            Emily Atkinson
-                                                                        </h6>
-                                                                        <small class="user-work text-muted"
-                                                                            data-occupation="Web developer">Web
-                                                                            developer</small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <span class="usr-email-addr"
-                                                                data-email="atkinson@mail.com">atkinson@mail.com</span>
-                                                        </td>
+                            <div class="profiletimeline ">
+                                <div class="sl-item d-flex align-items-start">
 
-                                                        <td>
-                                                            <span class="usr-ph-no" data-phone="+91 (900) 150- 1500">+91
-                                                                (900) 150- 1500</span>
-                                                        </td>
-                                                        <td>
-                                                            <div class="action-btn">
-                                                                <a href="javascript:void(0)" class="text-info edit"><svg
-                                                                        xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-eye feather-sm fill-white">
-                                                                        <path
-                                                                            d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z">
-                                                                        </path>
-                                                                        <circle cx="12" cy="12" r="3"></circle>
-                                                                    </svg></a>
-                                                                <a href="javascript:void(0)"
-                                                                    class="text-dark delete ms-2"><svg
-                                                                        xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-trash-2 feather-sm fill-white">
-                                                                        <polyline points="3 6 5 6 21 6"></polyline>
-                                                                        <path
-                                                                            d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-                                                                        </path>
-                                                                        <line x1="10" y1="11" x2="10" y2="17"></line>
-                                                                        <line x1="14" y1="11" x2="14" y2="17"></line>
-                                                                    </svg></a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <!-- /.row -->
-                                                    <!-- row -->
-                                                    <tr class="search-items">
-                                                        <td>
-                                                            6
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <img src="https://demos.wrappixel.com/premium-admin-templates/bootstrap/monster-bootstrap/package/assets/images/users/4.jpg"
-                                                                    alt="avatar" class="rounded-circle" width="45">
+                                    <div class="sl-left col-md-8">
+                                        <h2 style="">Habilidades:</h2>
+                                        <ul>
+                                            <li>Páginas web</li>
+                                            <li>Trabajo en equipo</li>
+                                            <li>Coolaboración</li>
+                                        </ul>
+                                    </div>
+                                    <div class="sl-right col-md-4 ">
+                                        <img style="width: 50%;" src="../../img/skills.png" class="img-fluid rounded">
+                                    </div>
+                                </div>
+                                <hr>
+
+                            </div>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="profiletimeline ">
+                                <div class="sl-item d-flex align-items-start">
+
+                                    <div class="sl-left col-md-8">
+                                        <h2 style="">Certificaciones:</h2>
+                                        <ul>
+                                            <li>Dark Tone Desing</li>
+                                            <li>AWS Cloud Practitioner Essentials</li>
+                                            <li>Scrum Fundamentals</li>
+                                        </ul>
+                                    </div>
+                                    <div class="sl-right col-md-4 ">
+                                        <img style="width: 50%;" src="../../img/skills.png" class="img-fluid rounded">
+                                    </div>
+                                </div>
+                                <hr>
+
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+
+                            <div class="profiletimeline ">
+                                <div class="sl-item d-flex align-items-start">
+
+                                    <div class="sl-left col-md-8">
+                                        <h2 style="">Conocimientos:</h2>
+                                        <ul>
+                                            <li>Illustrator</li>
+                                            <li>Photoshop</li>
+                                            <li>javascript</li>
+                                            <li>Paquetería Microsoft</li>
+                                            <li>Gestor de repositorios: Github, Gitlab, Fork</li>
+                                            <li>CSS</li>
+                                            <li>React Native</li>
+                                        </ul>
+                                    </div>
+                                    <div class="sl-right col-md-4 ">
+                                        <img style="width: 50%;" src="../../img/brain.png" class="img-fluid rounded">
+                                    </div>
+                                </div>
+                                <hr>
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div class="tab-pane fade" id="contacto" role="tabpanel" aria-labelledby="pills-contacto-tab">
+                        <h4 style="text-align: center;">Área de Contacto</h4>
+                        <section>
+                            <!-- Table with panel -->
+                            <div class="card card-cascade narrower border border-light">
+
+                                <!--/Card image-->
+                                <div class="card card-body">
+                                    <div class="table-responsive" style="height: 100%;">
+                                        <table class="table search-table v-middle">
+                                            <thead class="header-item">
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th>Nombre</th>
+                                                    <th>Correo</th>
+                                                    <th>Celular</th>
+                                                    <th>Opciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- row -->
+                                                <tr class="search-items">
+                                                    <td>
+                                                        1
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <img src="https://demos.wrappixel.com/premium-admin-templates/bootstrap/monster-bootstrap/package/assets/images/users/4.jpg"
+                                                                alt="avatar" class="rounded-circle" width="45">
+                                                            <div class="ms-3">
                                                                 <div class="user-meta-info">
                                                                     <h6 class="user-name mb-0 font-weight-medium"
-                                                                        data-name="Sofia Bailey">
-                                                                        Sofia Bailey
+                                                                        data-name="Emma Adams">
+                                                                        Emma Adams
+                                                                    </h6>
+                                                                    <small class="user-work text-muted"
+                                                                        data-occupation="Web Developer">Web
+                                                                        Developer</small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <span class="usr-email-addr"
+                                                            data-email="adams@mail.com">adams@mail.com</span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span class="usr-ph-no" data-phone="+1 (070) 123-4567">+91
+                                                            (070) 123-4567</span>
+                                                    </td>
+                                                    <td>
+                                                        <div class="action-btn">
+                                                            <a href="javascript:void(0)" class="text-info edit"><svg
+                                                                    xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                    height="24" viewBox="0 0 24 24" fill="none"
+                                                                    stroke="currentColor" stroke-width="2"
+                                                                    stroke-linecap="round" stroke-linejoin="round"
+                                                                    class="feather feather-eye feather-sm fill-white">
+                                                                    <path
+                                                                        d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z">
+                                                                    </path>
+                                                                    <circle cx="12" cy="12" r="3"></circle>
+                                                                </svg></a>
+                                                            <a href="javascript:void(0)"
+                                                                class="text-dark delete ms-2"><svg
+                                                                    xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                    height="24" viewBox="0 0 24 24" fill="none"
+                                                                    stroke="currentColor" stroke-width="2"
+                                                                    stroke-linecap="round" stroke-linejoin="round"
+                                                                    class="feather feather-trash-2 feather-sm fill-white">
+                                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                                    <path
+                                                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                                    </path>
+                                                                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                                                                </svg></a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <!-- /.row -->
+                                                <!-- row -->
+                                                <tr class="search-items">
+                                                    <td>
+                                                        2
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <img src="https://demos.wrappixel.com/premium-admin-templates/bootstrap/monster-bootstrap/package/assets/images/users/1.jpg"
+                                                                class="rounded-circle" alt="user" width="45">
+                                                            <div class="ms-3">
+                                                                <div class="user-meta-info">
+                                                                    <h6 class="user-name mb-0 font-weight-medium"
+                                                                        data-name="Olivia Allen">
+                                                                        Olivia Allen
+                                                                    </h6>
+                                                                    <small class="user-work text-muted"
+                                                                        data-occupation="Web Designer">Web
+                                                                        Designer</small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <span class="usr-email-addr"
+                                                            data-email="allen@mail.com">allen@mail.com</span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span class="usr-ph-no" data-phone="+91 (125) 450-1500">+91
+                                                            (125) 450-1500</span>
+                                                    </td>
+                                                    <td>
+                                                        <div class="action-btn">
+                                                            <a href="javascript:void(0)" class="text-info edit">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                    height="24" viewBox="0 0 24 24" fill="none"
+                                                                    stroke="currentColor" stroke-width="2"
+                                                                    stroke-linecap="round" stroke-linejoin="round"
+                                                                    class="feather feather-eye feather-sm fill-white">
+                                                                    <path
+                                                                        d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z">
+                                                                    </path>
+                                                                    <circle cx="12" cy="12" r="3"></circle>
+                                                                </svg>
+                                                            </a>
+                                                            <a href="javascript:void(0)" class="text-dark delete ms-2">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                    height="24" viewBox="0 0 24 24" fill="none"
+                                                                    stroke="currentColor" stroke-width="2"
+                                                                    stroke-linecap="round" stroke-linejoin="round"
+                                                                    class="feather feather-trash-2 feather-sm fill-white">
+                                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                                    <path
+                                                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                                    </path>
+                                                                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                                                                </svg>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <!-- /.row -->
+                                                <!-- row -->
+                                                <tr class="search-items">
+                                                    <td>
+                                                        3
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <img src="https://demos.wrappixel.com/premium-admin-templates/bootstrap/monster-bootstrap/package/assets/images/users/4.jpg"
+                                                                alt="avatar" class="rounded-circle" width="45">
+                                                            <div class="ms-3">
+                                                                <div class="user-meta-info">
+                                                                    <h6 class="user-name mb-0 font-weight-medium"
+                                                                        data-name="Isabella Anderson">
+                                                                        Isabella Anderson
                                                                     </h6>
                                                                     <small class="user-work text-muted"
                                                                         data-occupation="UX/UI Designer">UX/UI
                                                                         Designer</small>
                                                                 </div>
                                                             </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <span class="usr-email-addr"
+                                                            data-email="anderson@mail.com">anderson@mail.com</span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="usr-ph-no" data-phone="+91 (100) 154-1254">+91
+                                                            (100) 154-1254</span>
+                                                    </td>
+                                                    <td>
+                                                        <div class="action-btn">
+                                                            <a href="javascript:void(0)" class="text-info edit"><svg
+                                                                    xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                    height="24" viewBox="0 0 24 24" fill="none"
+                                                                    stroke="currentColor" stroke-width="2"
+                                                                    stroke-linecap="round" stroke-linejoin="round"
+                                                                    class="feather feather-eye feather-sm fill-white">
+                                                                    <path
+                                                                        d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z">
+                                                                    </path>
+                                                                    <circle cx="12" cy="12" r="3"></circle>
+                                                                </svg></a>
+                                                            <a href="javascript:void(0)"
+                                                                class="text-dark delete ms-2"><svg
+                                                                    xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                    height="24" viewBox="0 0 24 24" fill="none"
+                                                                    stroke="currentColor" stroke-width="2"
+                                                                    stroke-linecap="round" stroke-linejoin="round"
+                                                                    class="feather feather-trash-2 feather-sm fill-white">
+                                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                                    <path
+                                                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                                    </path>
+                                                                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                                                                </svg></a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <!-- /.row -->
+                                                <!-- row -->
+                                                <tr class="search-items">
+                                                    <td>
+                                                        4
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <img src="https://demos.wrappixel.com/premium-admin-templates/bootstrap/monster-bootstrap/package/assets/images/users/2.jpg"
+                                                                alt="avatar" class="rounded-circle" width="45">
+                                                            <div class="ms-3">
+                                                                <div class="user-meta-info">
+                                                                    <h6 class="user-name mb-0 font-weight-medium"
+                                                                        data-name="Amelia Armstrong">
+                                                                        Amelia Armstrong
+                                                                    </h6>
+                                                                    <small class="user-work text-muted"
+                                                                        data-occupation="Ethical Hacker">Ethical
+                                                                        Hacker</small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <span class="usr-email-addr"
+                                                            data-email="armstrong@mail.com">armstrong@mail.com</span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span class="usr-ph-no" data-phone="+91 (154) 199- 1540">+91
+                                                            (154) 199- 1540</span>
+                                                    </td>
+                                                    <td>
+                                                        <div class="action-btn">
+                                                            <a href="javascript:void(0)" class="text-info edit"><svg
+                                                                    xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                    height="24" viewBox="0 0 24 24" fill="none"
+                                                                    stroke="currentColor" stroke-width="2"
+                                                                    stroke-linecap="round" stroke-linejoin="round"
+                                                                    class="feather feather-eye feather-sm fill-white">
+                                                                    <path
+                                                                        d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z">
+                                                                    </path>
+                                                                    <circle cx="12" cy="12" r="3"></circle>
+                                                                </svg></a>
+                                                            <a href="javascript:void(0)"
+                                                                class="text-dark delete ms-2"><svg
+                                                                    xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                    height="24" viewBox="0 0 24 24" fill="none"
+                                                                    stroke="currentColor" stroke-width="2"
+                                                                    stroke-linecap="round" stroke-linejoin="round"
+                                                                    class="feather feather-trash-2 feather-sm fill-white">
+                                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                                    <path
+                                                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                                    </path>
+                                                                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                                                                </svg></a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <!-- /.row -->
+                                                <!-- row -->
+                                                <tr class="search-items">
+                                                    <td>
+                                                        5
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <img src="https://demos.wrappixel.com/premium-admin-templates/bootstrap/monster-bootstrap/package/assets/images/users/3.jpg"
+                                                                alt="avatar" class="rounded-circle" width="45">
+                                                            <div class="ms-3">
+                                                                <div class="user-meta-info">
+                                                                    <h6 class="user-name mb-0 font-weight-medium"
+                                                                        data-name="Emily Atkinson">
+                                                                        Emily Atkinson
+                                                                    </h6>
+                                                                    <small class="user-work text-muted"
+                                                                        data-occupation="Web developer">Web
+                                                                        developer</small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <span class="usr-email-addr"
+                                                            data-email="atkinson@mail.com">atkinson@mail.com</span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span class="usr-ph-no" data-phone="+91 (900) 150- 1500">+91
+                                                            (900) 150- 1500</span>
+                                                    </td>
+                                                    <td>
+                                                        <div class="action-btn">
+                                                            <a href="javascript:void(0)" class="text-info edit"><svg
+                                                                    xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                    height="24" viewBox="0 0 24 24" fill="none"
+                                                                    stroke="currentColor" stroke-width="2"
+                                                                    stroke-linecap="round" stroke-linejoin="round"
+                                                                    class="feather feather-eye feather-sm fill-white">
+                                                                    <path
+                                                                        d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z">
+                                                                    </path>
+                                                                    <circle cx="12" cy="12" r="3"></circle>
+                                                                </svg></a>
+                                                            <a href="javascript:void(0)"
+                                                                class="text-dark delete ms-2"><svg
+                                                                    xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                    height="24" viewBox="0 0 24 24" fill="none"
+                                                                    stroke="currentColor" stroke-width="2"
+                                                                    stroke-linecap="round" stroke-linejoin="round"
+                                                                    class="feather feather-trash-2 feather-sm fill-white">
+                                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                                    <path
+                                                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                                    </path>
+                                                                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                                                                </svg></a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <!-- /.row -->
+                                                <!-- row -->
+                                                <tr class="search-items">
+                                                    <td>
+                                                        6
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <img src="https://demos.wrappixel.com/premium-admin-templates/bootstrap/monster-bootstrap/package/assets/images/users/4.jpg"
+                                                                alt="avatar" class="rounded-circle" width="45">
+                                                            <div class="user-meta-info">
+                                                                <h6 class="user-name mb-0 font-weight-medium"
+                                                                    data-name="Sofia Bailey">
+                                                                    Sofia Bailey
+                                                                </h6>
+                                                                <small class="user-work text-muted"
+                                                                    data-occupation="UX/UI Designer">UX/UI
+                                                                    Designer</small>
+                                                            </div>
+                                                        </div>
+                                    </div>
+                                    </td>
+                                    <td>
+                                        <span class="usr-email-addr" data-email="bailey@mail.com">bailey@mail.com</span>
+                                    </td>
+
+                                    <td>
+                                        <span class="usr-ph-no" data-phone="+91 (001) 160- 1845">+91
+                                            (001) 160- 1845</span>
+                                    </td>
+                                    <td>
+                                        <div class="action-btn">
+                                            <a href="javascript:void(0)" class="text-info edit"><svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="feather feather-eye feather-sm fill-white">
+                                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z">
+                                                    </path>
+                                                    <circle cx="12" cy="12" r="3"></circle>
+                                                </svg></a>
+                                            <a href="javascript:void(0)" class="text-dark delete ms-2"><svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="feather feather-trash-2 feather-sm fill-white">
+                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                    <path
+                                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                    </path>
+                                                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                                                </svg></a>
                                         </div>
+                                    </td>
+                                    </tr>
+                                    <!-- /.row -->
+                                    <!-- row -->
+                                    <tr class="search-items">
+                                        <td>
+                                            7
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://demos.wrappixel.com/premium-admin-templates/bootstrap/monster-bootstrap/package/assets/images/users/4.jpg"
+                                                    alt="avatar" class="rounded-circle" width="45">
+                                                <div class="ms-3">
+                                                    <div class="user-meta-info">
+                                                        <h6 class="user-name mb-0" data-name="Victoria Sharma">
+                                                            Victoria Sharma
+                                                        </h6>
+                                                        <small class="user-work text-muted"
+                                                            data-occupation="Project Manager">Project
+                                                            Manager"</small>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </td>
                                         <td>
                                             <span class="usr-email-addr"
-                                                data-email="bailey@mail.com">bailey@mail.com</span>
+                                                data-email="sharma@mail.com">sharma@mail.com</span>
                                         </td>
 
                                         <td>
-                                            <span class="usr-ph-no" data-phone="+91 (001) 160- 1845">+91
-                                                (001) 160- 1845</span>
+                                            <span class="usr-ph-no" data-phone="+91 (110) 180- 1600">+91
+                                                (110) 180- 1600</span>
                                         </td>
                                         <td>
                                             <div class="action-btn">
@@ -727,247 +638,179 @@
                                                     </svg></a>
                                             </div>
                                         </td>
-                                        </tr>
-                                        <!-- /.row -->
-                                        <!-- row -->
-                                        <tr class="search-items">
-                                            <td>
-                                                7
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <img src="https://demos.wrappixel.com/premium-admin-templates/bootstrap/monster-bootstrap/package/assets/images/users/4.jpg"
-                                                        alt="avatar" class="rounded-circle" width="45">
-                                                    <div class="ms-3">
-                                                        <div class="user-meta-info">
-                                                            <h6 class="user-name mb-0" data-name="Victoria Sharma">
-                                                                Victoria Sharma
-                                                            </h6>
-                                                            <small class="user-work text-muted"
-                                                                data-occupation="Project Manager">Project
-                                                                Manager"</small>
-                                                        </div>
+                                    </tr>
+                                    <!-- /.row -->
+                                    <!-- row -->
+                                    <tr class="search-items">
+                                        <td>
+                                            8
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://demos.wrappixel.com/premium-admin-templates/bootstrap/monster-bootstrap/package/assets/images/users/4.jpg"
+                                                    alt="avatar" class="rounded-circle" width="45">
+                                                <div class="ms-3">
+                                                    <div class="user-meta-info">
+                                                        <h6 class="user-name mb-0 font-weight-medium"
+                                                            data-name="Penelope Baker">
+                                                            Penelope Baker
+                                                        </h6>
+                                                        <small class="user-work text-muted"
+                                                            data-occupation="Web Developer">Web
+                                                            Developer"</small>
                                                     </div>
                                                 </div>
-                                            </td>
-                                            <td>
-                                                <span class="usr-email-addr"
-                                                    data-email="sharma@mail.com">sharma@mail.com</span>
-                                            </td>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="usr-email-addr"
+                                                data-email="baker@mail.com">baker@mail.com</span>
+                                        </td>
 
-                                            <td>
-                                                <span class="usr-ph-no" data-phone="+91 (110) 180- 1600">+91
-                                                    (110) 180- 1600</span>
-                                            </td>
-                                            <td>
-                                                <div class="action-btn">
-                                                    <a href="javascript:void(0)" class="text-info edit"><svg
-                                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                            stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                            class="feather feather-eye feather-sm fill-white">
-                                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z">
-                                                            </path>
-                                                            <circle cx="12" cy="12" r="3"></circle>
-                                                        </svg></a>
-                                                    <a href="javascript:void(0)" class="text-dark delete ms-2"><svg
-                                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                            stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                            class="feather feather-trash-2 feather-sm fill-white">
-                                                            <polyline points="3 6 5 6 21 6"></polyline>
-                                                            <path
-                                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-                                                            </path>
-                                                            <line x1="10" y1="11" x2="10" y2="17"></line>
-                                                            <line x1="14" y1="11" x2="14" y2="17"></line>
-                                                        </svg></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <!-- /.row -->
-                                        <!-- row -->
-                                        <tr class="search-items">
-                                            <td>
-                                                8
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <img src="https://demos.wrappixel.com/premium-admin-templates/bootstrap/monster-bootstrap/package/assets/images/users/4.jpg"
-                                                        alt="avatar" class="rounded-circle" width="45">
-                                                    <div class="ms-3">
-                                                        <div class="user-meta-info">
-                                                            <h6 class="user-name mb-0 font-weight-medium"
-                                                                data-name="Penelope Baker">
-                                                                Penelope Baker
-                                                            </h6>
-                                                            <small class="user-work text-muted"
-                                                                data-occupation="Web Developer">Web
-                                                                Developer"</small>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span class="usr-email-addr"
-                                                    data-email="baker@mail.com">baker@mail.com</span>
-                                            </td>
-
-                                            <td>
-                                                <span class="usr-ph-no" data-phone="+91 (405) 483- 4512">+91
-                                                    (405) 483- 4512</span>
-                                            </td>
-                                            <td>
-                                                <div class="action-btn">
-                                                    <a href="javascript:void(0)" class="text-info edit"><svg
-                                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                            stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                            class="feather feather-eye feather-sm fill-white">
-                                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z">
-                                                            </path>
-                                                            <circle cx="12" cy="12" r="3"></circle>
-                                                        </svg></a>
-                                                    <a href="javascript:void(0)" class="text-dark delete ms-2"><svg
-                                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                            stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                            class="feather feather-trash-2 feather-sm fill-white">
-                                                            <polyline points="3 6 5 6 21 6"></polyline>
-                                                            <path
-                                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-                                                            </path>
-                                                            <line x1="10" y1="11" x2="10" y2="17"></line>
-                                                            <line x1="14" y1="11" x2="14" y2="17"></line>
-                                                        </svg></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <!-- /.row -->
-                                        </tbody>
-                                        </table>
-                                    </div>
+                                        <td>
+                                            <span class="usr-ph-no" data-phone="+91 (405) 483- 4512">+91
+                                                (405) 483- 4512</span>
+                                        </td>
+                                        <td>
+                                            <div class="action-btn">
+                                                <a href="javascript:void(0)" class="text-info edit"><svg
+                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-eye feather-sm fill-white">
+                                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z">
+                                                        </path>
+                                                        <circle cx="12" cy="12" r="3"></circle>
+                                                    </svg></a>
+                                                <a href="javascript:void(0)" class="text-dark delete ms-2"><svg
+                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-trash-2 feather-sm fill-white">
+                                                        <polyline points="3 6 5 6 21 6"></polyline>
+                                                        <path
+                                                            d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                        </path>
+                                                        <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                        <line x1="14" y1="11" x2="14" y2="17"></line>
+                                                    </svg></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <!-- /.row -->
+                                    </tbody>
+                                    </table>
                                 </div>
-                        </div>
-
-
-
+                            </div>
                     </div>
-                    </section>
+
+
+
                 </div>
+                </section>
             </div>
         </div>
-        <!--Modal de editar-->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header" style="background-color: #128cbe;">
-                        <h5 class="modal-title" id="exampleModalLabel">Editar Datos </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">Nombre:</label>
-                                <input type="text" class="form-control" id="recipient-name">
-                            </div>
-                            <div class="mb-3">
-                                <label for="recipient-lastname" class="col-form-label">Apellido Paterno:</label>
-                                <input type="text" class="form-control" id="lastname">
-                            </div>
-                            <div class="mb-3">
-                                <label for="recipient-surname" class="col-form-label">Apellido Materno:</label>
-                                <input type="text" class="form-control" id="surname">
-                            </div>
-                            <div class="mb-3">
-                                <label for="recipient-email" class="col-form-label">Correo:</label>
-                                <input type="email" class="form-control" id="email">
-                            </div>
-                            <div class="mb-3">
-                                <label for="recipient-phone" class="col-form-label">Teléfono:</label>
-                                <input type="text" class="form-control" id="phone">
-                            </div>
-                            <div class="mb-3">
-                                <label for="recipient-estados" class="col-form-label">Estado de la república:</label>
-                                <br>
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Seleccionar</option>
-                                    <option value="Aguascalientes">Aguascalientes</option>
-                                    <option value="Baja California">Baja California</option>
-                                    <option value="Baja California Sur">Baja California Sur</option>
-                                    <option value="Campeche">Campeche</option>
-                                    <option value="Coahuila de Zaragoza">Coahuila de Zaragoza</option>
-                                </select>
-
-                            </div>
-                            <div class="mb-3">
-                                <label for="recipient-birthday" class="col-form-label">Fecha de nacimiento:</label>
-                                <input type="date" class="form-control" id="birthday">
-                            </div>
-                            <div class="mb-3">
-                                <label for="recipient-study" class="col-form-label">Estudios:</label>
-                                <input type="text" class="form-control" id="recipient-study">
-                            </div>
-                            <div class="mb-3">
-                                <label for="recipient-language" class="col-form-label">Idiomas:</label>
-                                <input type="text" class="form-control" id="recipient-language">
-                            </div>
-                            <div class="mb-3">
-                                <label for="recipient-course" class="col-form-label">Cursos:</label>
-                                <input type="text" class="form-control" id="recipient-course">
-                            </div>
-                            <div class="mb-3">
-                                <label for="recipient-skill" class="col-form-label">Habilidades:</label>
-                                <input type="text" class="form-control" id="recipient-skill">
-                            </div>
-                            <div class="mb-3">
-                                <label for="recipient-certifications" class="col-form-label">Certificaciones:</label>
-                                <input type="text" class="form-control" id="recipient-certifications">
-                            </div>
-                            <div class="mb-3">
-                                <label for="recipient-knowledge" class="col-form-label">Conocimientos:</label>
-                                <input type="text" class="form-control" id="recipient-knowledge">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" style="background-color: #128cbe; color: #fff;"
-                            class="btn">Guardar</button>
-                    </div>
+    </div>
+    <!--Modal de editar-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #128cbe;">
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Datos </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="name" class="col-form-label">Nombre:</label>
+                            <input type="text" class="form-control" id="name" ng-model="user.name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="lastname" class="col-form-label">Apellido Paterno:</label>
+                            <input type="text" class="form-control" id="lastname" ng-model="user.lastname">
+                        </div>
+                        <div class="mb-3">
+                            <label for="surname" class="col-form-label">Apellido Materno:</label>
+                            <input type="text" class="form-control" id="surname" ng-model="user.surname">
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="col-form-label">Teléfono:</label>
+                            <input type="text" class="form-control" id="phone" ng-model="user.phone">
+                        </div>
+                        <div class="mb-3">
+                            <label for="state" class="form-label">Estado</label>
+                            <select required class="form-select" name="state" id="state" ng-model="tmp.state"
+                                ng-options="state as state.name for state in listStates track by state.id"
+                                ng-change="ctrlProfile.findAllCities()">
+                                <option value="" hidden>Seleccionar Estado</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="city" class="form-label">Municipio</label>
+                            <select required class="form-select" name="city" id="city" ng-model="user.city"
+                                ng-options="city as city.name for city in listCities track by city.id">
+                                <option value="" hidden>Seleccionar Municipio</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="study" class="col-form-label">Estudios:</label>
+                            <input type="text" class="form-control" id="study"  ng-model="profile.studies">
+                        </div>
+                        <div class="mb-3">
+                            <label for="language" class="col-form-label">Idiomas:</label>
+                            <input type="text" class="form-control" id="language"  ng-model="profile.languages">
+                        </div>
+                        <div class="mb-3">
+                            <label for="course" class="col-form-label">Cursos:</label>
+                            <input type="text" class="form-control" id="course"  ng-model="profile.courses">
+                        </div>
+                        <div class="mb-3">
+                            <label for="skill" class="col-form-label">Habilidades:</label>
+                            <input type="text" class="form-control" id="skill"  ng-model="profile.skills">
+                        </div>
+                        <div class="mb-3">
+                            <label for="certifications" class="col-form-label">Certificaciones:</label>
+                            <input type="text" class="form-control" id="certifications"  ng-model="profile.certifications">
+                        </div>
+                        <div class="mb-3">
+                            <label for="knowledge" class="col-form-label">Conocimientos:</label>
+                            <input type="text" class="form-control" id="knowledge"  ng-model="profile.knowledge">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" style="background-color: #128cbe; color: #fff;" class="btn" ng-click="ctrlProfile.updateUser()">Guardar</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Column -->
+</div>
+<!-- Column -->
 
 
 
-    <!-- Row -->
-    <!-- -------------------------------------------------------------- -->
-    <!-- End PAge Content -->
-    <!-- -------------------------------------------------------------- -->
+<!-- Row -->
+<!-- -------------------------------------------------------------- -->
+<!-- End PAge Content -->
+<!-- -------------------------------------------------------------- -->
 
-    <script src="../..js/angular.js"></script>
-    <script src="../..js/angular-route.js"></script>
-    <script src="../..js/angular-sanitize.js"></script>
-    <script src="../..js/notyf.min.js"></script>
-    <script src="../..js/angular-locale_es-es.js"></script>
-    <script src="../..js/jquery.min.js"></script>
-
-    
-    <!-- Para las Sweet Alrt-->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.24/dist/sweetalert2.all.min.js"></script>
+<script src="../..js/angular.js"></script>
+<script src="../..js/angular-route.js"></script>
+<script src="../..js/angular-sanitize.js"></script>
+<script src="../..js/notyf.min.js"></script>
+<script src="../..js/angular-locale_es-es.js"></script>
+<script src="../..js/jquery.min.js"></script>
 
 
-    
-    <script>
-        function prueba(){
-            const swalWithBootstrapButtons = Swal.mixin({
+<!-- Para las Sweet Alrt-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.24/dist/sweetalert2.all.min.js"></script>
+
+
+
+<script>
+    function prueba() {
+        const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: 'btn btn-success',
                 cancelButton: 'btn btn-danger'
@@ -1001,8 +844,8 @@
                 )
             }
         })
-        }
-    </script>
+    }
+</script>
 
 <!-- </body>
 

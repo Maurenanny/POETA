@@ -191,9 +191,10 @@ angular.module("routingApp").controller("TableVacancyCtrl", [
         }
 
         this.save = () => {
+            //$scope.profile.user = $scope.user
             return $http({
                 method: "POST",
-                url: `${APP_URL.url}/vacancies/save`,
+                url: `${APP_URL.url}/vacancies/save`, 
                 headers: {
                     "Content-Type": "application/json",
                     Accept: "application/json",
