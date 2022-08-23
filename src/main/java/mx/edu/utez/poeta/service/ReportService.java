@@ -29,12 +29,12 @@ public class ReportService {
     @Transactional(readOnly = true)
     public JasperPrint test() throws IOException, JRException, SQLException {
         try (java.sql.Connection con = localDataSource.getConnection()) {
-            String report = "classpath:reports/test.jrxml";
+            String report = "classpath:reports/postulat_cv.jrxml";
             JasperReport jasperReport = null;
             File file = ResourceUtils.getFile(report);
             jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
             Map<String, Object> map = new HashedMap();
-            //map.put("CLAVE", "VALOR");
+            map.put("POSTULANT_ID", 4L);
             return JasperFillManager.fillReport(jasperReport, map, con);
         }
     }

@@ -20,14 +20,19 @@ angular.module("routingApp").controller("ProfileCtrl",[
             if($routeParams.id){
                 return $http({
                     method : "get",
-                    url : `${APP_URL.url}/user/${$routeParams.id}`,
+                    url : `${APP_URL.url}/user/profile/${$routeParams.id}`,
                     headers : {
                         "Content-Type" : "application/json",
                         Accept : "application/json",
                         Authorization : $scope.token,
                     },
                 }).then((res) => {
-                    $scope.user = res.data;
+                    if (res.data.code == 200) {
+                        $scope.user = res.data.object.postulant
+                    } else if (res.data.code == 403) {
+                        notyf.error(res.data.message)
+                    }
+                    console.log(res.data.object);
                 })
             }
         }

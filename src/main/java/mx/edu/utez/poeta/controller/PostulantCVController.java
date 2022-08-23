@@ -76,16 +76,16 @@ public class PostulantCVController {
     public void test(HttpServletResponse response, @RequestHeader HttpHeaders headers)
             throws JRException, IOException, SQLException {
         String token = String.valueOf(headers.get("authorization"));
-        if (authCheckPermission.checkPermission(token, "candidato")) {
+        //if (authCheckPermission.checkPermission(token, "candidato")) {
             JasperPrint jasperPrint = reportService.test();
             response.setContentType(typeApp);
             response.setHeader("Content-disposition", attachment);
             OutputStream outputStream = response.getOutputStream();
             JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream);
-            response.setStatus(200);
-        } else {
+            //response.setStatus(200);
+        /* } else {
             response.setStatus(403);
-        }
+        }*/
 
     }
 
