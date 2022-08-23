@@ -47,7 +47,11 @@ public class ProcessController {
         String token = String.valueOf(headers.get("authorization"));
         if (authCheckPermission.checkPermission(token, "candidato")) {
             try {
-                emailService.sendEmail(processService.save(obj), 3);
+                if (obj.getId() == null) {
+                    emailService.sendEmail(processService.save(obj), 3);
+                } else {
+                    processService.save(obj);
+                }
                 return new GeneralTemplateResponse(true);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -73,11 +77,39 @@ public class ProcessController {
 
     }
 
-    @RequestMapping(name = "/delete/{id}", method = { RequestMethod.GET })
+    @RequestMapping(value = "/postulant/{id}", method = {RequestMethod.GET})
+    public GeneralTemplateResponse findPostulantProcessVacancies(@PathVariable("id") long id, @RequestHeader HttpHeaders headers) {
+        String token = String.valueOf(headers.get("authorization"));
+        if (authCheckPermission.checkPermission(token, "candidato")){
+            if (authCheckPermission.isLoguedUser(token, id)) {
+                return new GeneralTemplateResponse(processService.findAllUserProcesses(id));
+            } else {
+                return new GeneralTemplateResponse("No puedes consultar las vacantes de otros reclutadores desde aqui");
+            }
+        }
+        return new GeneralTemplateResponse();
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = { RequestMethod.GET })
     public GeneralTemplateResponse delete(@PathVariable("id") long id, @RequestHeader HttpHeaders headers) {
         String token = String.valueOf(headers.get("authorization"));
         if (authCheckPermission.checkPermission(token, "candidato")) {
-            return new GeneralTemplateResponse(processService.delete(id));
+            if (authCheckPermission.isLoguedUser(token, processService.findProcessById(id).getPostulant().getId())) {
+                return new GeneralTemplateResponse(processService.delete(id));
+            }
+        }
+        return new GeneralTemplateResponse();
+    }
+
+    @RequestMapping(value = "/filter/{id}/{type}", method = {RequestMethod.GET})
+    public GeneralTemplateResponse findPostulantProcessVacanciesByFilter(@PathVariable("id") long id, @PathVariable("type") int type, @RequestHeader HttpHeaders headers) {
+        String token = String.valueOf(headers.get("authorization"));
+        if (authCheckPermission.checkPermission(token, "candidato")) {
+            if (authCheckPermission.isLoguedUser(token, id)) {
+                return new GeneralTemplateResponse(processService.findPostulantProcessesByFilter(id, type));
+            } else {
+                return new GeneralTemplateResponse("No puedes consultar las vacantes de otros reclutadores desde aqui");
+            }
         }
         return new GeneralTemplateResponse();
     }

@@ -103,7 +103,7 @@ angular.module("routingApp").controller("TableVacancyCtrl", [
                     $scope.register.recruiter = res.data.object;
                     $scope.recruiter = res.data.object;
                 } else if (res.data.code == 403) {
-
+                    notyf.error(res.data.message);
                 }
             })
         }

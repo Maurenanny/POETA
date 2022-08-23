@@ -16,8 +16,9 @@ public class VacanciesService {
     @Autowired
     private IVacanciesRepository vacanciesRepository;
 
-    @Transactional(readOnly = true)
+    @Transactional()
     public List<Vacancies> findAllVacancies() {
+        vacanciesRepository.caducateVacancies();
         return vacanciesRepository.findAllActiveVacancies();
     }
 
@@ -26,8 +27,9 @@ public class VacanciesService {
         return vacanciesRepository.findById(id).get();
     }
 
-    @Transactional(readOnly = true)
+    @Transactional()
     public List<Vacancies> findAllActiveNotRegisteredByPostulantVacancies(long id) {
+        vacanciesRepository.caducateVacancies();
         return vacanciesRepository.findAllActiveNotRegisteredByPostulantVacancies(id);
     }
 

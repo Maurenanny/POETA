@@ -53,5 +53,19 @@ public class PostulantProcessService {
         }
         return flag;
     }
+
+    public List<PostulantProcess> findPostulantProcessesByFilter(long id, int type) {
+        switch (type) {
+            case 1:
+            return postulantProcessRepository.findAllProcessesByUserId(id);
+            case 2:
+            return postulantProcessRepository.findAllFavoriteProcessesByUserId(id);
+            case 3:
+            return postulantProcessRepository.findAllRejectedProcessesByUserId(id);
+            case 4:
+            return postulantProcessRepository.findAllAcceptedProcessesByUserId(id);
+        }
+        return null;
+    }
     
 }

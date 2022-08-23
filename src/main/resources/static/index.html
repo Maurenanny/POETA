@@ -49,7 +49,7 @@
                         <a class="nav-link" href="/#!/mis-vacantes">Mis Vacantes</a>
                     </li>
                     <li class="nav-item" ng-if="utils.role === 'ROLE_CANDIDATO'">
-                        <a class="nav-link" href="/#!/">Mis Postulaciones</a>
+                        <a class="nav-link" href="/#!/mis-postulaciones">Mis Postulaciones</a>
                     </li>
                 </ul>
                 <a href="/#!/usuario/perfil/{{utils.id}}" ng-if="currentSession && utils.role === 'ROLE_CANDIDATO'">
@@ -101,6 +101,7 @@
     <script src="./view/profile/ProfileController.js"></script>
     <script src="./view/recruiter/TableVacancyController.js"></script>
     <script src="./view/general/TableVacancyGeneralController.js"></script>
+    <script src="./view/postulant/TableVacancyPostulantController.js"></script>
 </body>
 
 </html>
