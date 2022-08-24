@@ -7,10 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Landing</title>
   <link rel="stylesheet" href="./css/estilos.css">
-    <script
-      src="https://kit.fontawesome.com/64d58efce2.js"
-      crossorigin="anonymous"
-    ></script>
+  <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
@@ -22,6 +19,16 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
+<style>
+  html.ng-scope {
+    overflow-x: hidden !important;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+</style>
+
 <body>
   <div id="root">
     <header>
@@ -29,7 +36,7 @@
         <div class="textos-header">
           <h1>Creación de Empleos POETA</h1>
           <h2>Te ayudamos a encontrar el empleo ideal para ti de forma rápida</h2>
-          <a href="#">Buscar trabajo</a>
+          <a href="#!/vacantes">Buscar trabajo</a>
         </div>
         <div class="imagen-header">
           <div class="animation-2"></div>
@@ -53,8 +60,12 @@
                   class="flaticon-job-search"></i></div>
               <div _ngcontent-pmv-c17="" class="jobseeker-inner"><span _ngcontent-pmv-c17="">Solicitante</span>
                 <h3 _ngcontent-pmv-c17="">¿Buscas un Trabajo?</h3>
-              </div><a _ngcontent-pmv-c17="" routerlink="/create-account" ng-reflect-router-link="/create-account"
-                href="/create-account">Aplicar Ahora<i _ngcontent-pmv-c17="" class="icofont-arrow-right"></i></a>
+              </div>
+
+              <a class="nav-link" href="/#!/vacantes"  ng-if="utils.role === 'ROLE_CANDIDATO' || currentSession">Aplicar Ahora</a>
+              <a class="nav-link" ng-if="utils.role === 'ROLE_RECLUTADOR'" href="/#!/mis-vacantes">Aplicar Ahora</a>
+              <a href="/#!/login" ng-if="!currentSession"  class="icofont-arrow-right" >Aplicar Ahora</a>
+              
             </div>
           </div>
           <div _ngcontent-pmv-c17="" class="col-sm-6 col-lg-6">
@@ -62,9 +73,12 @@
               <div _ngcontent-pmv-c17="" class="jobseeker-icon"><i _ngcontent-pmv-c17=""
                   class="flaticon-recruitment"></i></div>
               <div _ngcontent-pmv-c17="" class="jobseeker-inner"><span _ngcontent-pmv-c17="">Reclutador</span>
-                <h3 _ngcontent-pmv-c17="">¿Eres Reclutador?</h3>
-              </div><a _ngcontent-pmv-c17="" routerlink="/post-a-job" ng-reflect-router-link="/post-a-job"
-                href="/post-a-job">Publica un nuevo puesto<i _ngcontent-pmv-c17="" class="icofont-arrow-right"></i></a>
+                <h3 _ngcontent-pmv-c17="">¿Eres Reclutador?</h3>                
+              </div>
+              <a class="nav-link" href="/#!/vacantes"  ng-if="utils.role === 'ROLE_CANDIDATO' || currentSession">Publica un nuevo puesto</a>
+              <a class="nav-link" ng-if="utils.role === 'ROLE_RECLUTADOR'" href="/#!/mis-vacantes">Publica un nuevo puesto</a>
+              <a href="/#!/login" ng-if="!currentSession" class="icofont-arrow-right" >Publica un nuevo puesto</a>
+             
             </div>
           </div>
         </div>
@@ -154,107 +168,80 @@
     <section _ngcontent-tln-c17="" class="job-area pt-100 pb-70">
       <div _ngcontent-tln-c17="" class="container">
         <div _ngcontent-tln-c17="" class="section-title">
-          <h2 _ngcontent-tln-c17="">Más solicitados</h2>
+          <h2 _ngcontent-tln-c17="">Top 4 Vacantes más buscadas</h2>
         </div>
-        <div _ngcontent-tln-c17="" class="sorting-menu">
+        <!-- <div _ngcontent-tln-c17="" class="sorting-menu">
           <ul _ngcontent-tln-c17="">
             <li _ngcontent-tln-c17="" data-filter="all" class="filter active mixitup-control-active">Todos</li>
             <li _ngcontent-tln-c17="" data-filter=".ui" class="filter">Destacados</li>
             <li _ngcontent-tln-c17="" data-filter=".ux" class="filter">Tiempo completo</li>
             <li _ngcontent-tln-c17="" data-filter=".wp" class="filter">Medio Tiempo</li>
           </ul>
-        </div>
+        </div>-->
         <div _ngcontent-tln-c17="" id="container">
           <div _ngcontent-tln-c17="" class="row">
             <div _ngcontent-tln-c17="" class="col-lg-6 mix web ui">
-              <div _ngcontent-tln-c17="" class="job-item"><img _ngcontent-tln-c17="" src="img/deve.jpg" width="40px"
-                  alt="Job">
+              <div _ngcontent-tln-c17="" class="job-item"><img _ngcontent-tln-c17="" src="./img/logoAngular.png"
+                  width="40px" alt="Job" style="padding-top: 15px;">
                 <div _ngcontent-tln-c17="" class="job-inner align-items-center">
                   <div _ngcontent-tln-c17="" class="job-inner-left">
                     <h3 _ngcontent-tln-c17=""> Diseñador UI/UX</h3><a _ngcontent-tln-c17=""
                       routerlink="/company-details" ng-reflect-router-link="/company-details"
-                      href="/company-details">Winbrans.com</a>
+                      href="/company-details">utez.edu.mx</a>
                     <ul _ngcontent-tln-c17="">
                       <li _ngcontent-tln-c17=""><i _ngcontent-tln-c17="" class="icofont-money-bag"></i> $20k - $25k</li>
-                      <li _ngcontent-tln-c17=""><i _ngcontent-tln-c17="" class="icofont-location-pin"></i> Ubicación
+                      <li _ngcontent-tln-c17=""><i _ngcontent-tln-c17="" class="icofont-location-pin"></i> Ubicación:
                         210-27 Quadra, Market Street, Victoria Canada</li>
-                    </ul>
-                  </div>
-                  <div _ngcontent-tln-c17="" class="job-inner-right">
-                    <ul _ngcontent-tln-c17="">
-                      <li _ngcontent-tln-c17=""><a _ngcontent-tln-c17="" routerlink="/create-account"
-                          ng-reflect-router-link="/create-account" href="/create-account">Aplicar</a></li>
-                      <li _ngcontent-tln-c17=""><span _ngcontent-tln-c17="">Indeterminado</span></li>
                     </ul>
                   </div>
                 </div>
               </div>
             </div>
             <div _ngcontent-tln-c17="" class="col-lg-6 mix ui web">
-              <div _ngcontent-tln-c17="" class="job-item"><img _ngcontent-tln-c17=""
-                  src="./img/Republica-Dominicana (1).png" width="40px" alt="Job">
+              <div _ngcontent-tln-c17="" class="job-item"><img style="padding-top: 15px;" _ngcontent-tln-c17=""
+                  src="./img/logoAngular.png" width="40px" alt="Job">
                 <div _ngcontent-tln-c17="" class="job-inner align-items-center">
                   <div _ngcontent-tln-c17="" class="job-inner-left">
                     <h3 _ngcontent-tln-c17="">Desarrollador Android</h3><a _ngcontent-tln-c17=""
                       routerlink="/company-details" ng-reflect-router-link="/company-details"
                       href="/company-details">Infiniza.com</a>
                     <ul _ngcontent-tln-c17="">
-                      <li _ngcontent-tln-c17=""><i _ngcontent-tln-c17="" class="icofont-money-bag"></i> $20k - $25k</li>
+                      <li _ngcontent-tln-c17=""><i _ngcontent-tln-c17="" class="icofont-money-bag"></i> $10k - $15k</li>
                       <li _ngcontent-tln-c17=""><i _ngcontent-tln-c17="" class="icofont-location-pin"></i> Ubicación
-                        210-27 Quadra, Market Street, Victoria Canada</li>
-                    </ul>
-                  </div>
-                  <div _ngcontent-tln-c17="" class="job-inner-right">
-                    <ul _ngcontent-tln-c17="">
-                      <li _ngcontent-tln-c17=""><a _ngcontent-tln-c17="" routerlink="/create-account"
-                          ng-reflect-router-link="/create-account" href="/create-account">Aplicar</a></li>
-                      <li _ngcontent-tln-c17=""><span _ngcontent-tln-c17="">Medio tiempo</span></li>
+                        Av Uiniversidad Emiliano zapata, Jiutepec.</li>
                     </ul>
                   </div>
                 </div>
               </div>
             </div>
             <div _ngcontent-tln-c17="" class="col-lg-6 mix branding wp">
-              <div _ngcontent-tln-c17="" class="job-item"><img _ngcontent-tln-c17=""
-                  src="img/Republica-Dominicana (1).png" alt="Job" width="40px">
+              <div _ngcontent-tln-c17="" class="job-item"><img style="padding-top: 15px;" _ngcontent-tln-c17=""
+                  src="./img/logoAngular.png" alt="Job" width="40px">
                 <div _ngcontent-tln-c17="" class="job-inner align-items-center">
                   <div _ngcontent-tln-c17="" class="job-inner-left">
                     <h3 _ngcontent-tln-c17="">Manager</h3><a _ngcontent-tln-c17="" routerlink="/company-details"
-                      ng-reflect-router-link="/company-details" href="/company-details">Glovibo.com</a>
+                      ng-reflect-router-link="/company-details" href="/company-details">poeta.com</a>
                     <ul _ngcontent-tln-c17="">
-                      <li _ngcontent-tln-c17=""><i _ngcontent-tln-c17="" class="icofont-money-bag"></i> $20k - $25k</li>
+                      <li _ngcontent-tln-c17=""><i _ngcontent-tln-c17="" class="icofont-money-bag"></i> $30k - $35k</li>
                       <li _ngcontent-tln-c17=""><i _ngcontent-tln-c17="" class="icofont-location-pin"></i> Ubicación
-                        210-27 Quadra, Market Street, Victoria Canada</li>
+                        Calle nueva rusia N° 105</li>
                     </ul>
                   </div>
-                  <div _ngcontent-tln-c17="" class="job-inner-right">
-                    <ul _ngcontent-tln-c17="">
-                      <li _ngcontent-tln-c17=""><a _ngcontent-tln-c17="" routerlink="/create-account"
-                          ng-reflect-router-link="/create-account" href="/create-account">Aplicar</a></li>
-                      <li _ngcontent-tln-c17=""><span _ngcontent-tln-c17="">Indeterminado</span></li>
-                    </ul>
-                  </div>
+
                 </div>
               </div>
             </div>
             <div _ngcontent-tln-c17="" class="col-lg-6 mix ux branding">
-              <div _ngcontent-tln-c17="" class="job-item"><img _ngcontent-tln-c17=""
-                  src="img/Republica-Dominicana (1).png" alt="Job" width="40px">
+              <div _ngcontent-tln-c17="" class="job-item"><img style="padding-top: 15px;" _ngcontent-tln-c17=""
+                  src="./img/logoAngular.png" alt="Job" width="40px">
                 <div _ngcontent-tln-c17="" class="job-inner align-items-center">
                   <div _ngcontent-tln-c17="" class="job-inner-left">
                     <h3 _ngcontent-tln-c17="">Scrum Master</h3><a _ngcontent-tln-c17="" routerlink="/company-details"
-                      ng-reflect-router-link="/company-details" href="/company-details">Bizotic.com</a>
+                      ng-reflect-router-link="/company-details" href="/company-details">TDM.com</a>
                     <ul _ngcontent-tln-c17="">
-                      <li _ngcontent-tln-c17=""><i _ngcontent-tln-c17="" class="icofont-money-bag"></i> $20k - $25k</li>
+                      <li _ngcontent-tln-c17=""><i _ngcontent-tln-c17="" class="icofont-money-bag"></i> $50k - $55k</li>
                       <li _ngcontent-tln-c17=""><i _ngcontent-tln-c17="" class="icofont-location-pin"></i> Ubicación
-                        210-27 Quadra, Market Street, Victoria Canada</li>
-                    </ul>
-                  </div>
-                  <div _ngcontent-tln-c17="" class="job-inner-right">
-                    <ul _ngcontent-tln-c17="">
-                      <li _ngcontent-tln-c17=""><a _ngcontent-tln-c17="" routerlink="/create-account"
-                          ng-reflect-router-link="/create-account" href="/create-account">Aplicar</a></li>
-                      <li _ngcontent-tln-c17=""><span _ngcontent-tln-c17="">Medio tiempo</span></li>
+                        Av del trabajo, Temixco Morelos</li>
                     </ul>
                   </div>
                 </div>
@@ -262,6 +249,19 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="col-md-12">
+        <button style="
+        margin-left: 45%;
+        display: inline-block;
+        padding: 10px 0;
+        width: 180px;
+        text-decoration: none;
+        border: 1px solid #048abf;
+        border-radius: 3px;
+        text-align: center;
+        color: white;
+        background: #2cc1fc"> <a href="#!/vacantes" style="text-decoration: none;">Buscar más Vacantes</a></button>
       </div>
     </section>
 
@@ -286,10 +286,6 @@
                 class="fa-solid fa-star"></i><span _ngcontent-geu-c17="">Aplicar por el trabajo de tus sueños</span>
             </div>
           </div>
-        </div>
-        <div _ngcontent-geu-c17="" class="banner-btn"><a _ngcontent-geu-c17="" routerlink="/create-account"
-            ng-reflect-router-link="/create-account" href="/create-account">Crea Tu Perfil</a><a _ngcontent-geu-c17=""
-            routerlink="/submit-resume" ng-reflect-router-link="/submit-resume" href="/submit-resume">Carga tu CV</a>
         </div>
       </div>
     </div>
@@ -406,7 +402,7 @@
                 <div class="col-auto">
                   <!-- Submit button -->
                   <button type="submit" class="btn btn-outline-light mb-4">
-                    Suscribirse
+                    <a href="/#!/login">Suscribirse</a>
                   </button>
                 </div>
                 <!--Grid column-->
@@ -432,12 +428,6 @@
               <!--Grid column-->
               <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
                 <ul class="list-unstyled mb-0">
-                  <li>
-                    <a href="#!" class="text-white">Link 1</a>
-                  </li>
-                  <li>
-                    <a href="#!" class="text-white">Link 2</a>
-                  </li>
                 </ul>
               </div>
               <!--Grid column-->
@@ -445,12 +435,6 @@
               <!--Grid column-->
               <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
                 <ul class="list-unstyled mb-0">
-                  <li>
-                    <a href="#!" class="text-white">Link 1</a>
-                  </li>
-                  <li>
-                    <a href="#!" class="text-white">Link 2</a>
-                  </li>
                 </ul>
               </div>
               <!--Grid column-->
@@ -458,12 +442,6 @@
               <!--Grid column-->
               <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
                 <ul class="list-unstyled mb-0">
-                  <li>
-                    <a href="#!" class="text-white">Link 1</a>
-                  </li>
-                  <li>
-                    <a href="#!" class="text-white">Link 2</a>
-                  </li>
                 </ul>
               </div>
               <!--Grid column-->
@@ -471,12 +449,6 @@
               <!--Grid column-->
               <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
                 <ul class="list-unstyled mb-0">
-                  <li>
-                    <a href="#!" class="text-white">Link 1</a>
-                  </li>
-                  <li>
-                    <a href="#!" class="text-white">Link 2</a>
-                  </li>
                 </ul>
               </div>
               <!--Grid column-->
