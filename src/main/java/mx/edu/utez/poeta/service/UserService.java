@@ -83,6 +83,15 @@ public class UserService implements UserDetailsService {
         return flag;
     }
 
+    public boolean save2(User obj) {
+        boolean flag = false;
+        User tmp = userRepository.save(obj);
+        if (tmp != null) {
+            flag = true;
+        }
+        return flag;
+    }
+
     public boolean delete(long id) {
         boolean flag = false;
         User tmp = findUserById(id);

@@ -6,7 +6,8 @@ angular.module("routingApp").controller("ProfileCtrl", [
     "$location",
     "$routeParams",
     "$filter",
-    function ($rootScope, $scope, $http, APP_URL, $location, $routeParams, $filter) {
+    "$window",
+    function ($rootScope, $scope, $http, APP_URL, $location, $routeParams, $filter, $window) {
         $scope.token = "Bearer " + localStorage.getItem("token");
         const notyf = new Notyf({
             duration: 2500,
@@ -16,8 +17,8 @@ angular.module("routingApp").controller("ProfileCtrl", [
             },
         });
         $scope.user = {}
-        this.findUserProfile = () => {
-            if ($routeParams.id) {
+        this.findUserProfile = () => {   
+            if ($routeParams.id && localStorage.getItem("token")) {
                 return $http({
                     method: "get",
                     url: `${APP_URL.url}/user/profile/${$routeParams.id}`,
@@ -34,6 +35,8 @@ angular.module("routingApp").controller("ProfileCtrl", [
                         notyf.error(res.data.message)
                     }
                 })
+            } else {
+                window.location.href = "#!/"
             }
         }
 
@@ -47,15 +50,14 @@ angular.module("routingApp").controller("ProfileCtrl", [
                 },
             }).then((res) => {
                 $scope.listStates = res.data;
-                console.log($scope.listStates);
             })
         }
 
         this.updateUser = () => {
-            $scope.profile.user = $scope.user
+            $scope.profile.postulant = $scope.user
             return $http({
                 method: "POST",
-                url: `${APP_URL.url}/postulant/cv/save`, 
+                url: `${APP_URL.url}/postulant/cv/save`,
                 headers: {
                     "Content-Type": "application/json",
                     Accept: "application/json",
@@ -64,15 +66,51 @@ angular.module("routingApp").controller("ProfileCtrl", [
                 data: $scope.profile,
             }).then((res) => {
                 if (res.data.code == 200) {
-                    //if ($scope.isRegister) {
-                        //notyf.success("Vacante Registrada");
-                    //} else {
-                        notyf.success("Perfil Actualizado");
-                    //}
-                    //$('#vacancies').DataTable().destroy();
-                    //this.clear();
-                    //this.getActualUser();
+                    $("#exampleModal").modal("hide");
+                    notyf.success("Perfil Actualizado");
+                } else if (res.data.code == 403) {
+                    notyf.error(res.data.message);
                 }
+            })
+        }
+
+        this.uploadCV = async () => {
+            let cv = document.getElementById("cv").files[0];
+            var formData = new FormData();
+            if (cv) {
+                formData.append("file", cv);
+                let res = await fetch(`${APP_URL.url}/user/upload/cv/${$scope.user.id}`, {
+                    method: "POST",
+                    body: formData,
+                    authorization: $scope.token,
+                }).then((r) => {
+                        $scope.uploadedPic = true;
+                        $("#uploadCv").modal("hide");
+                        notyf.success("Curriculum subido correctamente");
+                });
+            } else {
+                notyf.error("Debes subir tu curriculum");
+            }
+        };
+
+        this.downloadCV = () => {
+            return $http({
+                method: "GET",
+                url: `${APP_URL.url}/postulant/cv/generate/${$scope.user.id}`,
+                responseType: "arraybuffer",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    authorization: $scope.token
+                },
+            }).then((res) => {
+                const fileName = `${$scope.user.name}${$scope.user.lastname}${$scope.user.surname}CV`;
+                const a = document.createElement("a");
+                document.body.appendChild(a);
+                const file = new Blob([res.data], {type: "application/pdf"});
+                a.href = window.URL.createObjectURL(file);
+                a.download = fileName.replace(" ", "");
+                a.click();
             })
         }
 

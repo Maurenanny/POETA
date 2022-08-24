@@ -76,25 +76,26 @@ public class PostulantCVController {
         }
         return new GeneralTemplateResponse();
     }
-
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    
+    @RequestMapping(value = "/generate/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public void test(HttpServletResponse response, @RequestHeader HttpHeaders headers)
-            throws JRException, IOException, SQLException {
+    public void gneratePostulantCV(HttpServletResponse response, @RequestHeader HttpHeaders headers, @PathVariable("id") long id) throws JRException, IOException, SQLException {
         String token = String.valueOf(headers.get("authorization"));
-        JasperPrint jasperPrint = reportService.test();
-        response.setContentType(typeApp);
-        response.setHeader("Content-disposition", attachment);
-        OutputStream outputStream = response.getOutputStream();
-        JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream);
+        if (authCheckPermission.checkPermission(token, "candidato") || authCheckPermission.checkPermission(token, "reclutador")) {
+            JasperPrint jasperPrint = reportService.GeneratePostulantCV(userService.findUserById(id));
+            response.setContentType(typeApp);
+            response.setHeader("Content-disposition", attachment);
+            OutputStream outputStream = response.getOutputStream();
+            JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream);
+        }
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public GeneralTemplateResponse save (@RequestBody PostulantCV obj, @RequestHeader HttpHeaders headers){
+    public GeneralTemplateResponse save (@RequestBody PostulantCV obj, @RequestHeader HttpHeaders headers) {
         String token = String.valueOf(headers.get("authorization"));
         if (authCheckPermission.checkPermission(token, "candidato")) {
             if (authCheckPermission.isLoguedUser(token, obj.getPostulant().getId())) {
-                userService.save(obj.getPostulant());
+                userService.save2(obj.getPostulant());
                 return new GeneralTemplateResponse(postulantCVService.save(obj));
             }
         }

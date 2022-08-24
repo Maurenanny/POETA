@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import mx.edu.utez.poeta.config.AuthCheckPermission;
 import mx.edu.utez.poeta.entity.GeneralTemplateResponse;
+import mx.edu.utez.poeta.entity.PostulantCV;
 import mx.edu.utez.poeta.entity.Roles;
 import mx.edu.utez.poeta.entity.User;
 import mx.edu.utez.poeta.service.PostulantCVService;
@@ -41,43 +42,32 @@ public class UserController {
     @Autowired
     private AuthCheckPermission authCheckPermission;
 
-    @RequestMapping(value = "/list", method = {RequestMethod.GET})
+    @RequestMapping(value = "/list", method = { RequestMethod.GET })
     public GeneralTemplateResponse findAllUsers() {
         return new GeneralTemplateResponse(userService.findAllUsers());
     }
 
-    @RequestMapping(value = "/roles", method = {RequestMethod.GET})
+    @RequestMapping(value = "/roles", method = { RequestMethod.GET })
     public List<Roles> findAllRoles() {
         return roleService.findAllRoles();
     }
 
-    @RequestMapping(value = "/roles/{id}", method = {RequestMethod.GET})
+    @RequestMapping(value = "/roles/{id}", method = { RequestMethod.GET })
     public Roles findRoleById(@PathVariable("id") long id) {
         return roleService.findRoleById(id);
     }
 
-    /* @RequestMapping(value = "/isLoguedUser/{id}", method = {RequestMethod.GET})
-    public GeneralTemplateResponse isLoguedUser(@RequestHeader HttpHeaders headers, @PathVariable("id") long id) {
-        String token = String.valueOf(headers.get("authorization"));
-        User tmp = userService.findUserById(id);
-        User logued = userService.findUserByToken(token);
-        if (tmp.getId() == logued.getId()) {
-            return new GeneralTemplateResponse(true);
-        } else {
-            return new GeneralTemplateResponse(false);
-        }
-    } */
-
-    @RequestMapping(value = "/actual", method = {RequestMethod.GET})
+    @RequestMapping(value = "/actual", method = { RequestMethod.GET })
     public GeneralTemplateResponse getACtualUser(@RequestHeader HttpHeaders headers) {
         String token = String.valueOf(headers.get("authorization"));
-        if (authCheckPermission.checkPermission(token, "reclutador") || authCheckPermission.checkPermission(token, "candidato")) {
+        if (authCheckPermission.checkPermission(token, "reclutador")
+                || authCheckPermission.checkPermission(token, "candidato")) {
             return new GeneralTemplateResponse(authCheckPermission.findUserByToken(token));
-        } 
+        }
         return new GeneralTemplateResponse();
     }
 
-    @RequestMapping(value = "/{id}", method = {RequestMethod.GET})
+    @RequestMapping(value = "/{id}", method = { RequestMethod.GET })
     public GeneralTemplateResponse findUsersById(@PathVariable("id") long id) {
         User tmp = userService.findUserById(id);
         if (tmp != null) {
@@ -89,16 +79,17 @@ public class UserController {
         return new GeneralTemplateResponse(false);
     }
 
-    @RequestMapping(value = "/profile/{id}", method = {RequestMethod.GET})
+    @RequestMapping(value = "/profile/{id}", method = { RequestMethod.GET })
     public GeneralTemplateResponse findUserProfile(@PathVariable("id") long id, @RequestHeader HttpHeaders headers) {
         String token = String.valueOf(headers.get("authorization"));
-        if (authCheckPermission.checkPermission(token, "candidato") || authCheckPermission.checkPermission(token, "reclutador")) {
+        if (authCheckPermission.checkPermission(token, "candidato")
+                || authCheckPermission.checkPermission(token, "reclutador")) {
             return new GeneralTemplateResponse(postulantCVService.findPostulantCVByUserId(id));
         }
         return new GeneralTemplateResponse();
     }
 
-    @RequestMapping(name = "/delete/{id}", method = {RequestMethod.GET})
+    @RequestMapping(name = "/delete/{id}", method = { RequestMethod.GET })
     public boolean delete(@PathVariable("id") long id) {
         return userService.delete(id);
     }
@@ -125,8 +116,25 @@ public class UserController {
         String ext = FilenameUtils.getExtension(file.getOriginalFilename());
         try {
             String userDirectory = FileSystems.getDefault().getPath("").toAbsolutePath().toString();
-            file.transferTo(new File(userDirectory + "\\src\\main\\resources\\static\\img\\uploads\\" + separator + "profilePics" + separator + fileName + "." + ext));
+            file.transferTo(new File(userDirectory + "\\src\\main\\resources\\static\\img\\uploads\\" + separator
+                    + "profilePics" + separator + fileName + "." + ext));
             this.picName = fileName + "." + ext;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @PostMapping("/upload/cv/{id}")
+    public void handleCVUpload(@RequestParam("file") MultipartFile file, @PathVariable("id") long id) {
+        String separator = FileSystems.getDefault().getSeparator();
+        String fileName = UUID.randomUUID().toString();
+        String ext = FilenameUtils.getExtension(file.getOriginalFilename());
+        try {
+            String userDirectory = FileSystems.getDefault().getPath("").toAbsolutePath().toString();
+            file.transferTo(new File(userDirectory + "\\src\\main\\resources\\static\\img\\uploads\\"
+                    + separator + "CVs" + separator + fileName + "." + ext));
+            PostulantCV tmp = postulantCVService.findPostulantCVByUserId(id);
+            tmp.setUploadedCV(file + "." + ext);
         } catch (IOException e) {
             e.printStackTrace();
         }
