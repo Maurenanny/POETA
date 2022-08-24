@@ -134,7 +134,8 @@ public class UserController {
             file.transferTo(new File(userDirectory + "\\src\\main\\resources\\static\\img\\uploads\\"
                     + separator + "CVs" + separator + fileName + "." + ext));
             PostulantCV tmp = postulantCVService.findPostulantCVByUserId(id);
-            tmp.setUploadedCV(file + "." + ext);
+            tmp.setUploadedCV(fileName + "." + ext);
+            postulantCVService.save(tmp);
         } catch (IOException e) {
             e.printStackTrace();
         }
