@@ -1,0 +1,111 @@
+<div ng-init="ctrlTableVacancyPostulant.getActualUser()"></div>
+<div style="margin-left: 5%;margin-right: 5%">
+
+    <div class="row ">
+        <div class="col-6">
+            <h2 style="padding-top: 15px; text-align: center;" class="col-md-10">{{title}}</h2>
+        </div>
+        <div class="col-6 mt-4">
+            <div class="row">
+                <div class="col-3">
+                    <button type="button" class="btn btn-primary btn-sm px-3 left" title="Mostrar Todos"
+                        data-toggle="tooltip" data-placement="right" ng-click="ctrlTableVacancyPostulant.filter(1)">
+                        <i style="color: #fff; font-size: 17px" class="fa-solid fa-earth-americas"></i>
+                    </button>
+                </div>
+                <div class="col-3">
+                    <button type="button" class="btn btn-info btn-sm px-3 left" title="Mostrar Favoritos"
+                        data-toggle="tooltip" data-placement="right" ng-click="ctrlTableVacancyPostulant.filter(2)">
+                        <i style="color: #fff; font-size: 17px" class="fa-solid fa-star"></i>
+                    </button>
+                </div>
+                <div class="col-3">
+                    <button type="button" class="btn btn-danger btn-sm px-3 left" title="Mostrar Rechazados"
+                        data-toggle="tooltip" data-placement="right" ng-click="ctrlTableVacancyPostulant.filter(3)">
+                        <i style="color: #fff; font-size: 17px" class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="col-3">
+                    <button type="button" class="btn btn-success btn-sm px-3 left" title="Mostrar Aceptados"
+                        data-toggle="tooltip" data-placement="right" ng-click="ctrlTableVacancyPostulant.filter(4)">
+                        <i style="color: #fff; font-size: 17px" class="fa-solid fa-check-double"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <table class="table" id="vacancies">
+        <thead style="background: linear-gradient(90deg,#048abf,#2cc1fc);
+        color: #fff;">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Título</th>
+                <th scope="col">Fecha Fin</th>
+                <th scope="col">Fecha Inicio del Trabajo</th>
+                <th scope="col">Estatus</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Salario</th>
+                <th scope="col">Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="p in process" repeat-done="initDataTable">
+                <td scope="col">{{$index+1}}</td>
+                <td scope="col">{{p.vacant.title | limitTo: 30}}{{p.vacant.title.length > 30 ? '...' : ''}}</td>
+                <td scope="col">{{p.vacant.dateEnd | date:'dd/MMM/yyyy'}}</td>
+                <td scope="col">{{p.vacant.jobStartDate | date:'dd/MMM/yyyy'}}</td>
+                <td scope="col">
+                    <span class="badge bg-danger" ng-if="p.status == 0">Rechazado</span>
+                    <span class="badge bg-warning" style="color: #000 !important;"
+                        ng-if="p.status == 1">Postulado</span>
+                    <span class="badge bg-info" ng-if="p.status == 2">CV Visto</span>
+                    <span class="badge bg-secondary" ng-if="p.status == 3">Entrevista</span>
+                    <span class="badge bg-primary" ng-if="p.status == 4">Idóneo</span>
+                    <span class="badge bg-success" ng-if="p.status == 5">Contratado</span>
+                </td>
+                <td scope="col">{{p.vacant.city.state.name}}</td>
+                <td scope="col">${{p.vacant.minSalary}} - ${{p.vacant.maxSalary}}</td>
+                <td scope="col">
+                    <button type="button" class="btn btn-danger btn-sm px-3 left" title="Cancelar Registro"
+                        data-toggle="tooltip" data-placement="right" ng-click="ctrlTableVacancyPostulant.confirmVacancyDeletion(p)" data-bs-toggle="modal" data-bs-target="#confirmModal">
+                        <i class="fa-solid fa-cancel"></i>
+                    </button>
+                    <button type="button" class="btn btn-info btn-sm px-3 left" title="Añadir a Favoritos"
+                        data-toggle="tooltip" data-placement="right" ng-if="!p.favorite"
+                        ng-click="ctrlTableVacancyPostulant.changeFavorites(p)">
+                        <i style="color: #fff; font-size: 17px" class="fa-regular fa-star"></i>
+                    </button>
+                    <button type="button" class="btn btn-info btn-sm px-3 left" title="Quitar de Favoritos"
+                        data-toggle="tooltip" data-placement="right" ng-if="p.favorite"
+                        ng-click="ctrlTableVacancyPostulant.changeFavorites(p)">
+                        <i style="color: #fff; font-size: 17px" class="fa-solid fa-star"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- Modal Confirmación -->
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">¡Espera!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+            <h1 class="fa-5x">
+                <i class="fa fa-exclamation-triangle text-danger"></i>
+            </h1>
+            <p class="text-wrap">Cancelarás tu registro a la vacante <b>{{modalProcess.vacant.title}}</b></p>
+            <h6 ng-if="modalProcess.postulant.gender == 1">¿Estás seguro?</h6>
+            <h6 ng-if="modalProcess.postulant.gender == 0">¿Estás segura?</h6>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" ng-click="ctrlTableVacancyPostulant.deleteProcess(modalProcess.id)">Cancelar Postulación</button>
+        </div>
+      </div>
+    </div>
+  </div>

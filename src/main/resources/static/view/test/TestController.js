@@ -12,6 +12,8 @@ angular.module("routingApp").controller("TestCtrl", [
             },
         });
 
+        $scope.token = "Bearer " + localStorage.getItem("token");
+
         this.testDownload = () => {
             notyf.success("Descargando...");
             return $http({
@@ -21,6 +23,7 @@ angular.module("routingApp").controller("TestCtrl", [
                 headers: {
                     "Content-Type": "application/json",
                     Accept: "application/json",
+                    authorization: $scope.token
                 },
             }).then((res) => {
                 const fileName = "test";
@@ -41,6 +44,7 @@ angular.module("routingApp").controller("TestCtrl", [
                 headers: {
                     "Content-Type": "application/json",
                     Accept: "application/json",
+                    authorization: $scope.token
                 },
             }).then((res) => {
                 

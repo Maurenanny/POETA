@@ -1,62 +1,148 @@
 package mx.edu.utez.poeta.controller;
 
-import java.util.List;
+import java.io.IOException;
+
+import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import mx.edu.utez.poeta.entity.Email;
-import mx.edu.utez.poeta.entity.Process;
+import freemarker.template.TemplateException;
+import mx.edu.utez.poeta.config.AuthCheckPermission;
+import mx.edu.utez.poeta.entity.GeneralTemplateResponse;
+import mx.edu.utez.poeta.entity.PostulantProcess;
 import mx.edu.utez.poeta.service.EmailService;
-import mx.edu.utez.poeta.service.ProcessService;
+import mx.edu.utez.poeta.service.PostulantProcessService;
+import mx.edu.utez.poeta.service.VacanciesService;
 
 @RestController
 @RequestMapping(path = "/process")
 public class ProcessController {
-    
+
     @Autowired
-    private ProcessService processService;
+    private PostulantProcessService processService;
+
+    @Autowired
+    private VacanciesService vacanciesService;
 
     @Autowired
     private EmailService emailService;
 
-    @RequestMapping(value = "/list", method = {RequestMethod.GET})
-    public List<Process> findAllProcesses() {
-        return processService.findAllProcesses();
+    @Autowired
+    private AuthCheckPermission authCheckPermission;
+
+    @RequestMapping(value = "/list", method = { RequestMethod.GET })
+    public GeneralTemplateResponse findAllProcesses() {
+        return new GeneralTemplateResponse(processService.findAllProcesses());
     }
 
-    @RequestMapping(value = "/mail/test", method = {RequestMethod.GET})
-    public boolean sentTestMail() {
-        try {
-            //emailService.test("ulisesislas@utez.edu.mx", "prueba", "<h1>Hola</h1>");
-            Email test = new Email();
-            test.setTo("ulisesislas@utez.edu.mx");
-            emailService.test(test);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+    @RequestMapping(value = "/{id}", method = { RequestMethod.GET })
+    public GeneralTemplateResponse findProcessById(@PathVariable("id") long id, @RequestHeader HttpHeaders headers) {
+        String token = String.valueOf(headers.get("authorization"));
+        if (authCheckPermission.checkPermission(token, "candidato")) {
+            return new GeneralTemplateResponse(processService.findProcessById(id));
         }
+        return new GeneralTemplateResponse();
     }
 
-    @RequestMapping(value = "/{id}", method = {RequestMethod.GET})
-    public Process findProcessById(@PathVariable("id") long id) {
-        return processService.findProcessById(id);
+    @RequestMapping(value = "/save", method = { RequestMethod.POST })
+    public GeneralTemplateResponse save(@RequestBody PostulantProcess obj, @RequestHeader HttpHeaders headers) {
+        String token = String.valueOf(headers.get("authorization"));
+        if (authCheckPermission.checkPermission(token, "candidato") || authCheckPermission.checkPermission(token, "reclutador")) {
+            try {
+                if (obj.getId() == null) {
+                    emailService.sendEmail(processService.save(obj), 3);
+                } else {
+                    processService.save(obj);
+                }
+                return new GeneralTemplateResponse(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            
+        } 
+        return new GeneralTemplateResponse();
     }
 
-    @RequestMapping(name = "/save", method = {RequestMethod.POST})
-    public boolean save(@RequestBody Process obj) {
-        return processService.save(obj);
+    @RequestMapping(value = "/mail/{id}/{type}", method = { RequestMethod.GET })
+    public void sendEmail(@RequestHeader HttpHeaders headers, @PathVariable("id") long id,
+            @PathVariable("type") int type) {
+        String token = String.valueOf(headers.get("authorization"));
+        if (authCheckPermission.checkPermission(token, "candidato")
+                || authCheckPermission.checkPermission(token, "reclutador")) {
+            try {
+                PostulantProcess process = processService.findProcessById(id);
+                emailService.sendEmail(process, type);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
-    @RequestMapping(name = "/delete/{id}", method = {RequestMethod.GET})
-    public boolean delete(@PathVariable("id") long id) {
-        return processService.delete(id);
+    @RequestMapping(value = "/postulant/{id}", method = {RequestMethod.GET})
+    public GeneralTemplateResponse findPostulantProcessVacancies(@PathVariable("id") long id, @RequestHeader HttpHeaders headers) {
+        String token = String.valueOf(headers.get("authorization"));
+        if (authCheckPermission.checkPermission(token, "candidato")){
+            if (authCheckPermission.isLoguedUser(token, id)) {
+                return new GeneralTemplateResponse(processService.findAllUserProcesses(id));
+            } else {
+                return new GeneralTemplateResponse("No puedes consultar las vacantes de otros reclutadores desde aqui");
+            }
+        }
+        return new GeneralTemplateResponse();
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = { RequestMethod.GET })
+    public GeneralTemplateResponse delete(@PathVariable("id") long id, @RequestHeader HttpHeaders headers) {
+        String token = String.valueOf(headers.get("authorization"));
+        if (authCheckPermission.checkPermission(token, "candidato")) {
+            if (authCheckPermission.isLoguedUser(token, processService.findProcessById(id).getPostulant().getId())) {
+                return new GeneralTemplateResponse(processService.delete(id));
+            }
+        }
+        return new GeneralTemplateResponse();
+    }
+
+    @RequestMapping(value = "/filter/{id}/{type}", method = {RequestMethod.GET})
+    public GeneralTemplateResponse findPostulantProcessVacanciesByFilter(@PathVariable("id") long id, @PathVariable("type") int type, @RequestHeader HttpHeaders headers) {
+        String token = String.valueOf(headers.get("authorization"));
+        if (authCheckPermission.checkPermission(token, "candidato")) {
+            if (authCheckPermission.isLoguedUser(token, id)) {
+                return new GeneralTemplateResponse(processService.findPostulantProcessesByFilter(id, type));
+            } else {
+                return new GeneralTemplateResponse("No puedes consultar las vacantes de otros reclutadores desde aqui");
+            }
+        }
+        return new GeneralTemplateResponse();
+    }
+
+    @RequestMapping(value = "/management/{id}/{type}", method = {RequestMethod.GET})
+    public GeneralTemplateResponse findAllVacanciesProcessByVacancyId(@PathVariable("id") long id, @PathVariable("type") int type, @RequestHeader HttpHeaders headers) {
+        String token = String.valueOf(headers.get("authorization"));
+        if (authCheckPermission.checkPermission(token, "reclutador")) {
+            if (authCheckPermission.isLoguedUser(token, vacanciesService.findVacancieById(id).getRecruiter().getId())) {
+                return new GeneralTemplateResponse(processService.findAllProcessFromVacancy(id, type));
+            }
+        }
+        return new GeneralTemplateResponse();
+    }
+
+    @RequestMapping(value = "/selectWinner/{id}", method = {RequestMethod.GET})
+    public GeneralTemplateResponse selectWinner(@PathVariable("id") long id, @RequestHeader HttpHeaders headers) throws MessagingException, IOException, TemplateException {
+        String token = String.valueOf(headers.get("authorization"));
+        if (authCheckPermission.checkPermission(token, "reclutador")) {
+            if (authCheckPermission.isLoguedUser(token, processService.findProcessById(id).getVacant().getRecruiter().getId())) {
+                return new GeneralTemplateResponse(processService.selectProcessWinner(id));
+            }
+        }
+        return new GeneralTemplateResponse();
     }
 
 }

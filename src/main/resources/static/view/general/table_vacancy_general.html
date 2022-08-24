@@ -1,0 +1,93 @@
+<!-- Navbar -->
+<div ng-init="ctrlTableVacancyGeneral.findAllVacancies()"></div>
+<div style="margin-left: 5%;margin-right: 5%">
+
+    <div class="row ">
+        <h2 style="padding-top: 30px; text-align: center;" class="col-md-10">Vacantes Disponibles</h2>
+    </div>
+
+    <table class="table" id="vacancies">
+        <thead style="    background: linear-gradient(90deg,#048abf,#2cc1fc);
+            color: #fff;
+            ">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Título</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Estatus</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Salario</th>
+                <th scope="col">Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="vacancy in vacancies" repeat-done="initDataTable">
+                <td scope="col">{{$index+1}}</td>
+                <td scope="col">{{vacancy.title | limitTo: 30}}{{vacancy.title.length > 30 ? '...' : ''}}</td>
+                <td scope="col">{{vacancy.description | limitTo: 30}}{{vacancy.description.length > 30 ? '...' : ''}}
+                </td>
+                <td scope="col">
+                    <span class="badge bg-success" ng-if="vacancy.status == 1">Vigente</span>
+                    <span class="badge bg-danger" ng-if="vacancy.status == 0">Vencido</span>
+                </td>
+                <td scope="col">{{vacancy.city.state.name}}</td>
+                <td scope="col">${{vacancy.minSalary}} - ${{vacancy.maxSalary}}</td>
+                <td scope="col">
+                    <button type="button" class="btn btn-secondary btn-sm px-3" title="Detalles"
+                        data-placement="left" data-bs-toggle="modal" data-bs-target="#modalDetalles" ng-click="ctrlTableVacancyGeneral.findVacancy(vacancy.id)"><i class="fa fa-eye"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Inicio Modal Detalles -->
+<div class="modal fade" id="modalDetalles" tabindex="-1"  aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" >Detalles de la Vacante</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-12">
+                <b>Título:</b> <span class="text-wrap">{{vacancy.title}}</span>
+            </div>
+            <div class="col-12 mt-3">
+                <b>Descripción:</b> <span class="text-wrap">{{vacancy.description}}</span>
+            </div>
+            <div class="col-6 mt-3">
+                <b>Fin de la Vacante:</b> <span class="text-wrap">{{vacancy.dateEnd | date:'dd/MMM/yyyy'}}</span>
+            </div>
+            <div class="col-6 mt-3">
+                <b>Inicio del Trabajo:</b> <span class="text-wrap">{{vacancy.jobStartDate | date: 'dd/MMM/yyyy'}}</span>
+            </div>
+            <div class="col-6 mt-3">
+                <b>Estado:</b> <span class="text-wrap">{{vacancy.city.state.name}}</span>
+            </div>
+            <div class="col-6 mt-3">
+                <b>Municipio:</b> <span class="text-wrap">{{vacancy.city.name}}</span>
+            </div>
+            <div class="col-4 mt-3">
+                <b>Salario:</b> <span class="text-wrap">${{vacancy.minSalary}} - ${{vacancy.maxSalary}}</span>
+            </div>
+            <div class="col-4 mt-3">
+                <b>Periodo de Pagos:</b> <span class="text-wrap">{{vacancy.paymentPeriod.name}}</span>
+            </div>
+            <div class="col-4 mt-3">
+                <b>Horario:</b> <span class="text-wrap">{{vacancy.type.name}}</span>
+            </div>
+            <div class="col-12 mt-3">
+                <b>Beneficios:</b> <span class="text-wrap">{{vacancy.benefits}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" id="registerBtn" class="btn btn-primary" ng-click="ctrlTableVacancyGeneral.register(vacancy)" ng-if="currentSession">Postularme</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Fin Modal Detalles -->

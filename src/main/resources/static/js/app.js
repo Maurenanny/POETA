@@ -30,8 +30,30 @@ angular
           controller: "LoginCtrl",
           controllerAs: "ctrlLogin",
         })
-        .when("/perfil", {
-          templateUrl: "/view/profile/perfil.html"
+        .when("/usuario/perfil/:id", {
+          templateUrl: "/view/profile/perfil.html",
+          controller: "ProfileCtrl",
+          controllerAs: "ctrlProfile"
+        })
+        .when("/mis-vacantes", {
+          templateUrl: "/view/recruiter/table_vacancy.html",
+          controller: "TableVacancyCtrl",
+          controllerAs: "ctrlTableVacancy",
+        })
+        .when("/mis-postulaciones", {
+          templateUrl: "/view/postulant/table_vacancy_postulant.html",
+          controller: "TableVacancyPostulantCtrl",
+          controllerAs: "ctrlTableVacancyPostulant",
+        })
+        .when("/vacantes", {
+          templateUrl: "/view/general/table_vacancy_general.html",
+          controller: "TableVacancyGeneralCtrl",
+          controllerAs: "ctrlTableVacancyGeneral",
+        })
+        .when("/mi-vacante/:id", {
+          templateUrl: "/view/recruiter/recruiter_vacancy_management.html",
+          controller: "VacancyManagementCtrl",
+          controllerAs: "ctrlVacancyManagement",
         })
         .when("/testV", {
           templateUrl: "/view/test/test.html",

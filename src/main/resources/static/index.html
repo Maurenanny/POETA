@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html ng-app="routingApp">
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Portal de Empleo Talenting | POETA</title>
     <script src="./js/jquery.min.js"></script>
     <link href="./css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/app.css">
     <link rel="stylesheet" href="./css/all.min.css" />
     <link rel="stylesheet" href="./css/all.css" />
     <link rel="stylesheet" href="./css/notyf.min.css" />
@@ -18,46 +20,75 @@
     <script src="./js/dataTables.bootstrap5.min.js"></script>
     <script src="./js/dataTables.select.min.js"></script>
     <script src="./js/angular-locale_es-es.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
+
+    <script src="https://kit.fontawesome.com/1ba0cdec7d.js" crossorigin="anonymous"></script>
+
+    <script
+      src="./js/tinymce.min.js"
+    ></script>
 </head>
-<body ng-app="routingApp">
-    <nav class="py-2 bg-light border-bottom">
-        <div class="container flex-wrap d-flex">
-            <ul class="nav me-auto">
-                <li class="nav-item">
-                    <a
-                    href="#!"
-                    class="px-2 nav-link link-dark active"
-                    aria-current="page">
-                        Inicio
-                    </a>
-                </li>
-            </ul>
+
+<body ng-app="routingApp" ng-controller="LoginCtrl">
+    <div ng-init="initial()"></div>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand me-2" href="#!/"><img src="./img/image 1.png" alt="POETA" width="43" height="43"> <b>POETA</b></a>
+            <!-- <button class="navbar-toggler" type="button" (click)="buttonsNav.toggle()" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button> -->
+            <div class="navbar-collapse" id="navbarButtonsExample">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item" ng-if="utils.role === 'ROLE_CANDIDATO' || !currentSession">
+                        <a class="nav-link" href="/#!/vacantes">Vacantes</a>
+                    </li>
+                    <li class="nav-item" ng-if="utils.role === 'ROLE_RECLUTADOR'">
+                        <a class="nav-link" href="/#!/mis-vacantes">Mis Vacantes</a>
+                    </li>
+                    <li class="nav-item" ng-if="utils.role === 'ROLE_CANDIDATO'">
+                        <a class="nav-link" href="/#!/mis-postulaciones">Mis Postulaciones</a>
+                    </li>
+                </ul>
+                <a href="/#!/usuario/perfil/{{utils.id}}" ng-if="currentSession && utils.role === 'ROLE_CANDIDATO'">
+                    <img src="./img/uploads/profilePics/{{utils.img}}" class="rounded-circle" style="margin-right: 20px;" width="43" height="43">
+                </a>
+                <a href="/#!/login" class="nav-link" ng-if="!currentSession">Iniciar Sesión / Registrarse</a>
+                <a style="color: red;" ng-click="logout()" ng-if="currentSession">Cerrar Sesión</a>
+            </div>
         </div>
     </nav>
     <div class="">
-      <div class="mt-5 row">
-        <div ng-view></div>
-      </div>
+        <div class="mt-5 row">
+            <div ng-view></div>
+        </div>
     </div>
     <script type="text/javascript">
         angular.module("routingApp", ["ngRoute"]).config([
             "$routeProvider",
-            function($routeProvider) {
+            function ($routeProvider) {
                 $routeProvider
-                .when("/", {
-                    templateUrl: "landing.html",
-                })
-                .when("/login", {
-                    templateUrl: "login.html"
-                })
-                .when("/testV", {
-                    templateUrl: "/view/test/test.html",
-                    controller: "TestCtrl",
-                    controllerAs: "ctrlTest",
-                })
-                .otherwise({
-                    redirectTo: "/",
-                });
+                    .when("/", {
+                        templateUrl: "landing.html",
+                    })
+                    .when("/login", {
+                        templateUrl: "login.html"
+                    })
+                    .when("/testV", {
+                        templateUrl: "/view/test/test.html",
+                        controller: "TestCtrl",
+                        controllerAs: "ctrlTest",
+                    })
+                    .when("/usuario/perfil/:id", {
+                        templateUrl: "/view/profile/perfil.html",
+                        contorller: "ProfileCtrl",
+                        controllerAs: "ctrlProfile"
+                    })
+                    .otherwise({
+                        redirectTo: "/",
+                    });
             },
         ]).constant('APP_URL', {
             url: "http://localhost:8080"
@@ -67,5 +98,11 @@
     <script src="./js/app.js"></script>
     <script src="./view/test/TestController.js"></script>
     <script src="./LoginController.js"></script>
+    <script src="./view/profile/ProfileController.js"></script>
+    <script src="./view/recruiter/TableVacancyController.js"></script>
+    <script src="./view/general/TableVacancyGeneralController.js"></script>
+    <script src="./view/postulant/TableVacancyPostulantController.js"></script>
+    <script src="./view/recruiter/VacancyManagementCtrl.js"></script>
 </body>
+
 </html>

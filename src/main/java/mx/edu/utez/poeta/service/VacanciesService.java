@@ -16,14 +16,21 @@ public class VacanciesService {
     @Autowired
     private IVacanciesRepository vacanciesRepository;
 
-    @Transactional(readOnly = true)
+    @Transactional()
     public List<Vacancies> findAllVacancies() {
-        return vacanciesRepository.findAll();
+        vacanciesRepository.caducateVacancies();
+        return vacanciesRepository.findAllActiveVacancies();
     }
 
     @Transactional(readOnly = true)
     public Vacancies findVacancieById(long id) {
         return vacanciesRepository.findById(id).get();
+    }
+
+    @Transactional()
+    public List<Vacancies> findAllActiveNotRegisteredByPostulantVacancies(long id) {
+        vacanciesRepository.caducateVacancies();
+        return vacanciesRepository.findAllActiveNotRegisteredByPostulantVacancies(id);
     }
 
     public boolean save(Vacancies obj) {
@@ -43,6 +50,11 @@ public class VacanciesService {
             flag = true;
         }
         return flag;
+    }
+
+    @Transactional(readOnly = true)
+    public List<Vacancies> findAllRecruiterVacancies(long id) {
+        return vacanciesRepository.findAllRecruiterVacancies(id);
     }
 
 }

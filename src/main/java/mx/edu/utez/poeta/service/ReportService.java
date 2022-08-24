@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ResourceUtils;
 
+import mx.edu.utez.poeta.entity.User;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -27,14 +28,15 @@ public class ReportService {
     protected DataSource localDataSource;
 
     @Transactional(readOnly = true)
-    public JasperPrint test() throws IOException, JRException, SQLException {
+    public JasperPrint GeneratePostulantCV(User user) throws IOException, JRException, SQLException {
         try (java.sql.Connection con = localDataSource.getConnection()) {
-            String report = "classpath:reports/test.jrxml";
+            String report = "classpath:reports/postulat_cv.jrxml";
             JasperReport jasperReport = null;
             File file = ResourceUtils.getFile(report);
             jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
             Map<String, Object> map = new HashedMap();
-            //map.put("CLAVE", "VALOR");
+            map.put("POSTULANT_ID", user.getId());
+            map.put("PROFILE_IMAGE" , "classpath:static/img/uploads/profilePics/"+user.getImage());
             return JasperFillManager.fillReport(jasperReport, map, con);
         }
     }
