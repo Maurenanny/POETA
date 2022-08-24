@@ -90,6 +90,15 @@ public class PostulantCVController {
         }
     }
 
+    @RequestMapping(value = "/hasCv/{id}", method = RequestMethod.GET)
+    public GeneralTemplateResponse postulantHasUploadedCv (@PathVariable("id") long id, @RequestHeader HttpHeaders headers) {
+        String token = String.valueOf(headers.get("authorization"));
+        if (authCheckPermission.checkPermission(token, "reclutador")) {
+            return new GeneralTemplateResponse(postulantCVService.postulantHasUploadedCv(id));
+        }
+        return new GeneralTemplateResponse();
+    }
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public GeneralTemplateResponse save (@RequestBody PostulantCV obj, @RequestHeader HttpHeaders headers) {
         String token = String.valueOf(headers.get("authorization"));

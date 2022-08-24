@@ -49,5 +49,9 @@ public class PostulantCVService {
         }
         return flag;
     }
+
+    public int postulantHasUploadedCv(long id) {
+        return postulantCVRepository.postulantHasUploadedCv(id);
+    }
     
 }

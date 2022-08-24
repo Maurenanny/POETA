@@ -54,6 +54,20 @@ public class PostulantProcessService {
         return flag;
     }
 
+    public List<PostulantProcess> findAllProcessFromVacancy(long id, int type) {
+        switch (type) {
+            case 1: //Postulados
+            return postulantProcessRepository.findAllProcessFromVacancyStageOne(id);
+            case 2: //Para Entrevistar
+            return postulantProcessRepository.findAllProcessFromVacancyStageTwo(id);
+            case 3: //Idóneos
+            return postulantProcessRepository.findAllProcessFromVacancyStageThree(id);
+            case 4: //Contratado
+            return postulantProcessRepository.findAcceptedPostulantFromVacancy(id);
+        }
+        return null;
+    }
+
     public List<PostulantProcess> findPostulantProcessesByFilter(long id, int type) {
         switch (type) {
             case 1:

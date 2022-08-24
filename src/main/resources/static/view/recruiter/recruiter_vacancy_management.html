@@ -1,40 +1,99 @@
-<head>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet" data-semver="3.3.6" data-require="bootstrap-css@3.3.6" />
-    <script data-require="angular.js@1.4.8" data-semver="1.4.8" src="https://code.angularjs.org/1.4.8/angular.js"></script>
-    <link href="wizard.css" rel="stylesheet" />
-    <script src="wizard.js"></script>
-  </head>
-  <body ng-app="app">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          
-          <h1>Vacante</h1>
-          <div id="wizard-container" ng-controller="WizardController as vm">
-            
-            <div id="wizard-step-container">
-              <ul class="nav nav-pills nav-justified">
-                <li ng-repeat="step in vm.steps" ng-class="{'active':step.step == vm.currentStep}"><a ng-click="vm.gotoStep(step.step)" href="">{{step.step}}. {{step.name}}</a></li>
-              </ul>
-            </div>
-
-            <div id="wizard-content-container">
-              <ng-include src="vm.getStepWizard()"></ng-include>
-            </div>
-            
-            <div id="wizard-navigation-container">
-              <div class="pull-right">
-                <span class="btn-group">
-                  <button ng-disabled="vm.currentStep <= 1" class="btn btn-default" name="previous" type="button" ng-click="vm.gotoStep(vm.currentStep - 1)"><i class="fa fa-arrow-left">
-                    </i>Anterior</button>
-                  <button ng-disabled="vm.currentStep >= vm.steps.length" class="btn btn-primary" name="next" type="button" ng-click="vm.gotoStep(vm.currentStep + 1)">Siguiente <i class="fa fa-arrow-right"></i></button>
-                </span>
-                <button ng-disabled="vm.currentStep != vm.steps.length" class="btn btn-success" name="next" type="button" ng-click="vm.save()"> <i class="fa fa-floppy-o"></i> Guardar</button>
-              </div>
-            </div>
-
+<div ng-init="ctrlVacancyManagement.getActualUser()"></div>
+<div class="container">
+  <div class="card">
+    <div class="card-header" style="background: linear-gradient(90deg,#048abf,#2cc1fc);">
+      <h4 style="color: white;">{{vacancy.title}}</h4>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-6 mt-3">
+            <span class="text-wrap"><b>Descripción:</b> {{vacancy.description}}</span>
+          </div>
+          <div class="col-6 mt-3">
+            <span class="text-wrap"><b>Salario:</b> ${{vacancy.minSalary}} - ${{vacancy.maxSalary}}</span>
+          </div>
+          <div class="col-6 mt-3 mb-3">
+            <span class="text-wrap"><b>Fecha de Fin de la Vacante</b> {{vacancy.dateEnd | date:'dd/MMM/yyyy'}}</span>
+          </div>
+          <div class="col-6 mt-3 mb-3">
+            <span class="text-wrap"><b>Fecha de Inicio del Trabajo</b> {{vacancy.jobStartDate |
+              date:'dd/MMM/yyyy'}}</span>
           </div>
         </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-3 d-grid">
+            <button class="btn btn-outline-primary">Postulados</button>
+          </div>
+          <div class="col-3 d-grid">
+            <button class="btn btn-outline-primary">Listos Para Entrevista</button>
+          </div>
+          <div class="col-3 d-grid">
+            <button class="btn btn-outline-primary">Idóneos</button>
+          </div>
+          <div class="col-3 d-grid">
+            <button class="btn btn-outline-primary">Seleccionado</button>
+          </div>
+        </div>
+        <div class="col-12 mt-3">
+          <table class="table" id="postulants">
+            <thead style="background-color: #ffc271;
+            color: #fff;">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Correo Electrónico</th>
+                <th scope="col">Opciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="postulant in postulants" repeat-done="initDataTable">
+                <td scope="col">{{$index+1}}</td>
+                <td scope="col">{{postulant.postulant.name}} {{postulant.postulant.lastname}} {{postulant.postulant.surname}}</td>
+                <td scope="col">{{postulant.postulant.username}}</td>
+                <td scope="col" ng-if="stage = 1">
+                  <button type="button" class="btn btn-secondary btn-sm px-3" title="Ver Detalles" data-bs-toggle="modal" data-bs-target="#detailsModal" ng-click="ctrlVacancyManagement.getPostulant(postulant.postulant.id)"><i class="fa fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger btn-sm px-3" title="Rechazar" ng-if="postulant.status == 1" disabled><i class="fa-solid fa-cancel"></i></button>
+                  <button type="button" class="btn btn-success btn-sm px-3" title="Pasar a la Siguiente Etapa" ng-if="postulant.status == 1" disabled><i class="fa-solid fa-check-double"></i></button>
+                  <button type="button" class="btn btn-danger btn-sm px-3" title="Rechazar" ng-if="postulant.status == 2"><i class="fa-solid fa-cancel"></i></button>
+                  <button type="button" class="btn btn-success btn-sm px-3" title="Pasar a la Siguiente Etapa" ng-if="postulant.status == 2"><i class="fa-solid fa-check-double"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Detalles del Candidato</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div class="row">
+            <div class="col-6 mt-3">
+              <span class="text-wrap"><b>Nombre:</b> {{postulantModal.postulant.name}} {{postulantModal.postulant.lastname}} {{postulantModal.postulant.surname}}</span>
+            </div>
+            <div class="col-6 mt-3">
+              <span class="text-wrap"><b>Correo:</b> {{postulantModal.postulant.username}}</span>
+            </div>
+            <div class="col-12 mt-3">
+              <span class="text-wrap"><b>Descripción:</b> {{postulantModal.description}}</span>
+            </div>
+            <button ng-if="hasModal == 1">Tiene CV</button>
+            <button ng-if="hasModal == 0" ng-click="ctrlVacancyManagement.downloadCV(postulantModal)">No Tiene CV</button>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>
     </div>
-  </body>
+  </div>
+</div>

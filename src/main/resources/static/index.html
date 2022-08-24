@@ -53,7 +53,7 @@
                     </li>
                 </ul>
                 <a href="/#!/usuario/perfil/{{utils.id}}" ng-if="currentSession && utils.role === 'ROLE_CANDIDATO'">
-                    <img src="./img/uploads/profilePics/{{utils.img}}" width="43" height="43">
+                    <img src="./img/uploads/profilePics/{{utils.img}}" class="rounded-circle" style="margin-right: 20px;" width="43" height="43">
                 </a>
                 <a href="/#!/login" class="nav-link" ng-if="!currentSession">Iniciar Sesión / Registrarse</a>
                 <a style="color: red;" ng-click="logout()" ng-if="currentSession">Cerrar Sesión</a>
@@ -102,6 +102,7 @@
     <script src="./view/recruiter/TableVacancyController.js"></script>
     <script src="./view/general/TableVacancyGeneralController.js"></script>
     <script src="./view/postulant/TableVacancyPostulantController.js"></script>
+    <script src="./view/recruiter/VacancyManagementCtrl.js"></script>
 </body>
 
 </html>

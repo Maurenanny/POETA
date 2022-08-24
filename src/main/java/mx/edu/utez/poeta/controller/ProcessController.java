@@ -14,6 +14,7 @@ import mx.edu.utez.poeta.entity.GeneralTemplateResponse;
 import mx.edu.utez.poeta.entity.PostulantProcess;
 import mx.edu.utez.poeta.service.EmailService;
 import mx.edu.utez.poeta.service.PostulantProcessService;
+import mx.edu.utez.poeta.service.VacanciesService;
 
 @RestController
 @RequestMapping(path = "/process")
@@ -21,6 +22,9 @@ public class ProcessController {
 
     @Autowired
     private PostulantProcessService processService;
+
+    @Autowired
+    private VacanciesService vacanciesService;
 
     @Autowired
     private EmailService emailService;
@@ -45,7 +49,7 @@ public class ProcessController {
     @RequestMapping(value = "/save", method = { RequestMethod.POST })
     public GeneralTemplateResponse save(@RequestBody PostulantProcess obj, @RequestHeader HttpHeaders headers) {
         String token = String.valueOf(headers.get("authorization"));
-        if (authCheckPermission.checkPermission(token, "candidato")) {
+        if (authCheckPermission.checkPermission(token, "candidato") || authCheckPermission.checkPermission(token, "reclutador")) {
             try {
                 if (obj.getId() == null) {
                     emailService.sendEmail(processService.save(obj), 3);
@@ -109,6 +113,17 @@ public class ProcessController {
                 return new GeneralTemplateResponse(processService.findPostulantProcessesByFilter(id, type));
             } else {
                 return new GeneralTemplateResponse("No puedes consultar las vacantes de otros reclutadores desde aqui");
+            }
+        }
+        return new GeneralTemplateResponse();
+    }
+
+    @RequestMapping(value = "/management/{id}/{type}", method = {RequestMethod.GET})
+    public GeneralTemplateResponse findAllVacanciesProcessByVacancyId(@PathVariable("id") long id, @PathVariable("type") int type, @RequestHeader HttpHeaders headers) {
+        String token = String.valueOf(headers.get("authorization"));
+        if (authCheckPermission.checkPermission(token, "reclutador")) {
+            if (authCheckPermission.isLoguedUser(token, vacanciesService.findVacancieById(id).getRecruiter().getId())) {
+                return new GeneralTemplateResponse(processService.findAllProcessFromVacancy(id, type));
             }
         }
         return new GeneralTemplateResponse();
