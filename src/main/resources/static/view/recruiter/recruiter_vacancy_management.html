@@ -100,7 +100,7 @@
               <span class="text-wrap"><b>Descripción:</b> {{postulantModal.description}}</span>
             </div>
             
-            <a ng-if="hasModal == 1" class="btn btn-primary mt-3" target="_blank" href="../../img/uploads/CVs/{{postulantModal.uploadedCV}}">Ver Curriculum Vitae</a>
+            <a ng-if="hasModal == 1" class="btn btn-primary mt-3" target="_blank" href="../../img/uploads/CVs/{{postulantModal.uploadedCV}}" ng-click="ctrlVacancyManagement.updateStatus(postulant, 2, 1)">Ver Curriculum Vitae</a>
             <a ng-if="hasModal == 0" class="btn btn-primary mt-3" target="_blank" ng-click="ctrlVacancyManagement.downloadCV(postulantModal)">Ver Curriculum Vitae</a>
           </div>
       </div>
