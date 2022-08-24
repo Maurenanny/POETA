@@ -151,9 +151,7 @@
     }
   </style>
   <link href="https://fonts.googleapis.com/css?family=Rubik:400,700&display=swap" rel="stylesheet" type="text/css">
-
 </head>
-
 <body class="clean-body u_body"
   style="margin: 0;padding: 0;-webkit-text-size-adjust: 100%;background-color: #ffffff;color: #000000">
   <table
@@ -198,7 +196,7 @@
                                 <tr>
                                   <td class="v-text-align" style="padding-right: 0px;padding-left: 0px;" align="center">
                                     <img align="center" border="0"
-                                      src="https://www.programando.org/blog/2022/03/13/el-camino-del-backend-developer-nosql/featured.png"
+                                      src="https://confedi.org.ar/wp-content/uploads/2021/11/undraw_Web_search_re_efla.png"
                                       alt="Illustration" title="Illustration"
                                       style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 600px;"
                                       width="600" class="v-src-width v-src-max-width" />
@@ -239,9 +237,7 @@
                                     style="font-size: 16px; line-height: 25.6px;"><strong>¡Hola ${process.postulant.name}!</strong></span>
                                 </p>
                                 <p style="font-size: 14px; line-height: 160%;"> </p>
-                                <p style="font-size: 14px; line-height: 160%;">El equipo de trabajo de talenting ya ha
-                                  mandado tu informacion a la empresa que ofrece la vacante de <b>${process.vacant.title}</b>. Porfavor mientras mantente al
-                                  tanto de tu correo y tu plataforma Talenting. Ten un buen día.</p>
+                                <p style="font-size: 14px; line-height: 160%;">El reclutador a cargo de la vacante <b>${process.vacant.title}</b> ya ha visto tu Curriculum.<br>Recuerda estar pendiente de tu correo electrónico y plataforma talenting para estar al tanto del estado de esta vacante. ¡Buena Suerte!</p>
                               </div>
 
                             </td>
@@ -258,6 +254,9 @@
                             </td>
                           </tr>
                         </tbody>
+                      </table>
+                      <table id="u_content_text_3" style="font-family:'Rubik',sans-serif;" role="presentation"
+                        cellpadding="0" cellspacing="0" width="100%" border="0">
                       </table>
                     </div>
                   </div>
@@ -315,5 +314,4 @@
     </tbody>
   </table>
 </body>
-
 </html>

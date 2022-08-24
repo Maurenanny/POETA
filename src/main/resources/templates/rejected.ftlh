@@ -239,14 +239,13 @@
                               <div class="v-text-align v-line-height"
                                 style="line-height: 160%; text-align: justify; word-wrap: break-word;">
                                 <p style="font-size: 14px; line-height: 160%;"><span
-                                    style="font-size: 16px; line-height: 25.6px;"><strong>¡Hola Ulises!</strong></span>
+                                    style="font-size: 16px; line-height: 25.6px;"><strong>¡Hola ${process.postulant.name}!</strong></span>
                                 </p>
                                 <p style="font-size: 14px; line-height: 160%;"> </p>
                                 <p style="font-size: 14px; line-height: 160%;">En talenting lamentamos informarte que no
-                                  has sido seleccionado para el trabajo que has postulado. Por ello te invitamos a
+                                  has sido seleccionado para la vacante de <b>${process.vacant.title}</b>. Por ello te invitamos a
                                   entrar a nuestro sitio para seguir explorando alternativas.</p>
                               </div>
-
                             </td>
                           </tr>
                         </tbody>
@@ -258,41 +257,6 @@
                             <td class="v-container-padding-padding"
                               style="overflow-wrap:break-word;word-break:break-word;padding:10px 10px 25px 30px;font-family:'Rubik',sans-serif;"
                               align="left">
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <table id="u_content_heading_2" style="font-family:'Rubik',sans-serif;" role="presentation"
-                        cellpadding="0" cellspacing="0" width="100%" border="0">
-                        <tbody>
-                          <tr>
-                            <td class="v-container-padding-padding"
-                              style="overflow-wrap:break-word;word-break:break-word;padding:10px 30px 5px;font-family:'Rubik',sans-serif;"
-                              align="left">
-                              <h1 class="v-text-align v-line-height v-font-size"
-                                style="margin: 0px; line-height: 140%; text-align: left; word-wrap: break-word; font-weight: normal; font-family: 'Rubik',sans-serif; font-size: 16px;">
-                                <strong>Click en el boton para conluir con el proceso:</strong>
-                              </h1>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <table id="u_content_text_3" style="font-family:'Rubik',sans-serif;" role="presentation"
-                        cellpadding="0" cellspacing="0" width="100%" border="0">
-                        <tbody>
-                          <tr>
-                            <td class="v-container-padding-padding"
-                              style="overflow-wrap:break-word;word-break:break-word;padding:0px 10px 60px 30px;font-family:'Rubik',sans-serif;"
-                              align="left">
-                              <div class="v-text-align v-line-height"
-                                style="line-height: 160%; text-align: justify; word-wrap: break-word;">
-                                <a href="https://www.google.com" target="_blank" class="v-size-width"
-                                  style="box-sizing: border-box;display: inline-block;font-family:'Rubik',sans-serif;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #ffffff; background-color: #805997; border-radius: 4px;-webkit-border-radius: 4px; -moz-border-radius: 4px; width:39%; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;">
-                                  <span class="v-line-height"
-                                    style="display:block;padding:10px 20px;line-height:120%;"><strong><span
-                                        style="font-size: 14px; line-height: 16.8px;">Talenting</span></strong></span>
-                                </a>
-                              </div>
                             </td>
                           </tr>
                         </tbody>

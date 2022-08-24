@@ -1,13 +1,19 @@
 package mx.edu.utez.poeta.service;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import freemarker.template.TemplateException;
 import mx.edu.utez.poeta.entity.PostulantProcess;
+import mx.edu.utez.poeta.entity.Vacancies;
 import mx.edu.utez.poeta.repository.IPostulantProcessRepository;
+import mx.edu.utez.poeta.repository.IVacanciesRepository;
 
 @Service
 @Transactional
@@ -15,6 +21,12 @@ public class PostulantProcessService {
 
     @Autowired
     private IPostulantProcessRepository postulantProcessRepository;
+
+    @Autowired
+    private IVacanciesRepository vacanciesRepository;
+
+    @Autowired
+    private EmailService emailService;
 
     @Transactional(readOnly = true)
     public List<PostulantProcess> findAllProcesses() {
@@ -80,6 +92,22 @@ public class PostulantProcessService {
             return postulantProcessRepository.findAllAcceptedProcessesByUserId(id);
         }
         return null;
+    }
+
+    public boolean selectProcessWinner(long id) throws MessagingException, IOException, TemplateException {
+        PostulantProcess process = findProcessById(id);
+        Vacancies tmpVacancy = process.getVacant();
+        tmpVacancy.setStatus(false);
+        vacanciesRepository.save(tmpVacancy);
+        List<PostulantProcess> processList = postulantProcessRepository.findAllPostulantsForRejection(process.getVacant().getId(), process.getPostulant().getId());
+        for (PostulantProcess p : processList) {
+            emailService.sendEmail(p, 2);
+        }
+        postulantProcessRepository.CloseProcess(process.getVacant().getId(), process.getPostulant().getId());
+        emailService.sendEmail(process, 1);
+        process.setStatus(5);
+        save(process);
+        return true;
     }
     
 }

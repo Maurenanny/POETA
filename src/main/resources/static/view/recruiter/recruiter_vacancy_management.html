@@ -13,28 +13,33 @@
           <div class="col-6 mt-3">
             <span class="text-wrap"><b>Salario:</b> ${{vacancy.minSalary}} - ${{vacancy.maxSalary}}</span>
           </div>
-          <div class="col-6 mt-3 mb-3">
+          <div class="col-6 mt-3">
             <span class="text-wrap"><b>Fecha de Fin de la Vacante</b> {{vacancy.dateEnd | date:'dd/MMM/yyyy'}}</span>
           </div>
-          <div class="col-6 mt-3 mb-3">
+          <div class="col-6 mt-3">
             <span class="text-wrap"><b>Fecha de Inicio del Trabajo</b> {{vacancy.jobStartDate |
               date:'dd/MMM/yyyy'}}</span>
+          </div>
+          <div class="col-12 mt-3" ng-if="stage == 1">
+            <div class="alert alert-primary" role="alert">
+              <span class="text-wrap"><b>Recordatorio:</b> Para habilitar los botones de 'Rechazar' y 'Pasar a la Siguiente Etapa', primero debes ver el CV del Candidato</span>
+            </div>
           </div>
         </div>
       </li>
       <li class="list-group-item">
         <div class="row">
           <div class="col-3 d-grid">
-            <button class="btn btn-outline-primary">Postulados</button>
+            <button class="btn btn-outline-primary" ng-click="ctrlVacancyManagement.getProcessByStage(1)">Postulados</button>
           </div>
           <div class="col-3 d-grid">
-            <button class="btn btn-outline-primary">Listos Para Entrevista</button>
+            <button class="btn btn-outline-primary" ng-click="ctrlVacancyManagement.getProcessByStage(2)">Listos Para Entrevista</button>
           </div>
           <div class="col-3 d-grid">
-            <button class="btn btn-outline-primary">Idóneos</button>
+            <button class="btn btn-outline-primary" ng-click="ctrlVacancyManagement.getProcessByStage(3)">Idóneos</button>
           </div>
           <div class="col-3 d-grid">
-            <button class="btn btn-outline-primary">Seleccionado</button>
+            <button class="btn btn-outline-primary" ng-click="ctrlVacancyManagement.getProcessByStage(4)">Seleccionado</button>
           </div>
         </div>
         <div class="col-12 mt-3">
@@ -54,11 +59,18 @@
                 <td scope="col">{{postulant.postulant.name}} {{postulant.postulant.lastname}} {{postulant.postulant.surname}}</td>
                 <td scope="col">{{postulant.postulant.username}}</td>
                 <td scope="col" ng-if="stage = 1">
-                  <button type="button" class="btn btn-secondary btn-sm px-3" title="Ver Detalles" data-bs-toggle="modal" data-bs-target="#detailsModal" ng-click="ctrlVacancyManagement.getPostulant(postulant.postulant.id)"><i class="fa fa-eye"></i></button>
-                  <button type="button" class="btn btn-danger btn-sm px-3" title="Rechazar" ng-if="postulant.status == 1" disabled><i class="fa-solid fa-cancel"></i></button>
-                  <button type="button" class="btn btn-success btn-sm px-3" title="Pasar a la Siguiente Etapa" ng-if="postulant.status == 1" disabled><i class="fa-solid fa-check-double"></i></button>
-                  <button type="button" class="btn btn-danger btn-sm px-3" title="Rechazar" ng-if="postulant.status == 2"><i class="fa-solid fa-cancel"></i></button>
-                  <button type="button" class="btn btn-success btn-sm px-3" title="Pasar a la Siguiente Etapa" ng-if="postulant.status == 2"><i class="fa-solid fa-check-double"></i></button>
+                  <!-- Etapa 1 -->
+                  <button type="button" class="btn btn-secondary btn-sm px-3" title="Ver Detalles" data-bs-toggle="modal" data-bs-target="#detailsModal" ng-click="ctrlVacancyManagement.getPostulant(postulant.postulant.id, postulant, postulant.status)"><i class="fa fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger btn-sm px-3" title="Rechazar (Debes visualizar el Cv del Candidato)" ng-if="postulant.status == 1" disabled><i class="fa-solid fa-cancel"></i></button>
+                  <button type="button" class="btn btn-success btn-sm px-3" title="Pasar a la Siguiente Etapa (Debes visualizar el Cv del Candidato)" ng-if="postulant.status == 1" disabled><i class="fa-solid fa-check-double"></i></button>
+                  <button type="button" class="btn btn-danger btn-sm px-3" title="Rechazar" ng-if="postulant.status == 2" ng-click="ctrlVacancyManagement.updateStatus(postulant, 0, 1)"><i class="fa-solid fa-cancel"></i></button>
+                  <button type="button" class="btn btn-success btn-sm px-3" title="Pasar a la Siguiente Etapa" ng-if="postulant.status == 2" ng-click="ctrlVacancyManagement.updateStatus(postulant, 3, 1)"><i class="fa-solid fa-check-double"></i></button>
+                  <!-- Etapa 2 -->
+                  <button type="button" class="btn btn-danger btn-sm px-3" title="Rechazar" ng-if="postulant.status == 3" ng-click="ctrlVacancyManagement.updateStatus(postulant, 0, 1)"><i class="fa-solid fa-cancel"></i></button>
+                  <button type="button" class="btn btn-success btn-sm px-3" title="Pasar a la Siguiente Etapa" ng-if="postulant.status == 3" ng-click="ctrlVacancyManagement.updateStatus(postulant, (postulant.status+1), 1)"><i class="fa-solid fa-check-double"></i></button>
+                  <!-- Etapa 3 -->
+                  <button type="button" class="btn btn-danger btn-sm px-3" title="Rechazar" ng-if="postulant.status == 4" ng-click="ctrlVacancyManagement.updateStatus(postulant, 0, 1)"><i class="fa-solid fa-cancel"></i></button>
+                  <button type="button" class="btn btn-success btn-sm px-3" title="Seleccionar Candidato" ng-if="postulant.status == 4" ng-click="ctrlVacancyManagement.selectWinner(postulant)"><i class="fa-solid fa-check-double"></i></button>
                 </td>
               </tr>
             </tbody>
@@ -87,8 +99,9 @@
             <div class="col-12 mt-3">
               <span class="text-wrap"><b>Descripción:</b> {{postulantModal.description}}</span>
             </div>
-            <button ng-if="hasModal == 1">Tiene CV</button>
-            <button ng-if="hasModal == 0" ng-click="ctrlVacancyManagement.downloadCV(postulantModal)">No Tiene CV</button>
+            
+            <a ng-if="hasModal == 1" class="btn btn-primary mt-3" target="_blank" href="../../img/uploads/CVs/{{postulantModal.uploadedCV}}">Ver Curriculum Vitae</a>
+            <a ng-if="hasModal == 0" class="btn btn-primary mt-3" target="_blank" ng-click="ctrlVacancyManagement.downloadCV(postulantModal)">Ver Curriculum Vitae</a>
           </div>
       </div>
       <div class="modal-footer">

@@ -1,5 +1,9 @@
 package mx.edu.utez.poeta.controller;
 
+import java.io.IOException;
+
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import freemarker.template.TemplateException;
 import mx.edu.utez.poeta.config.AuthCheckPermission;
 import mx.edu.utez.poeta.entity.GeneralTemplateResponse;
 import mx.edu.utez.poeta.entity.PostulantProcess;
@@ -124,6 +129,17 @@ public class ProcessController {
         if (authCheckPermission.checkPermission(token, "reclutador")) {
             if (authCheckPermission.isLoguedUser(token, vacanciesService.findVacancieById(id).getRecruiter().getId())) {
                 return new GeneralTemplateResponse(processService.findAllProcessFromVacancy(id, type));
+            }
+        }
+        return new GeneralTemplateResponse();
+    }
+
+    @RequestMapping(value = "/selectWinner/{id}", method = {RequestMethod.GET})
+    public GeneralTemplateResponse selectWinner(@PathVariable("id") long id, @RequestHeader HttpHeaders headers) throws MessagingException, IOException, TemplateException {
+        String token = String.valueOf(headers.get("authorization"));
+        if (authCheckPermission.checkPermission(token, "reclutador")) {
+            if (authCheckPermission.isLoguedUser(token, processService.findProcessById(id).getVacant().getRecruiter().getId())) {
+                return new GeneralTemplateResponse(processService.selectProcessWinner(id));
             }
         }
         return new GeneralTemplateResponse();

@@ -37,6 +37,8 @@ public class EmailService {
             case 3: //register
             helper.setSubject("¡Todo listo!");
             break;
+            case 4:
+            helper.setSubject("¡Prepárate!");
         }
         helper.setTo(process.getPostulant().getUsername());
         String emailContent = getEmailContent(process, type);
@@ -58,6 +60,8 @@ public class EmailService {
             case 3: //register
             configuration.getTemplate("register.ftlh").process(model, stringWriter);
             break;
+            case 4: //cv
+            configuration.getTemplate("cv.ftlh").process(model, stringWriter);
         }
         return stringWriter.getBuffer().toString();
     }
